@@ -1,0 +1,18 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Boxy Theme",
+		"EditorConfig",
+		"Emmet",
+		"GitStatusBar",
+		"Package Control",
+		"SublimeLinter",
+		"SublimeLinter-eslint",
+		"SublimeLinter-flow",
+		"Vue Syntax Highlight"
+	]
+}
