@@ -128,13 +128,22 @@ set $ws9 "9"
 set $ws10 "10"
 
 workspace 1 gaps inner 0
+workspace 2 gaps inner 0
 hide_edge_borders both
 
-bindsym $mod+Ctrl+Left workspace prev
-bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Up workspace prev
+bindsym $mod+Ctrl+Down workspace next
 bindsym $mod+Ctrl+j workspace prev
 bindsym $mod+Ctrl+k workspace next
 
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
