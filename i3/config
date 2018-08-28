@@ -19,7 +19,7 @@ gaps inner 30
 # exec --no-startup-id compton -cfb -D 5 --shadow-exclude '_NET_WM_NAME@:s = "rofi"' -o 0.5
 exec --no-startup-id compton -cb --shadow-exclude '_NET_WM_NAME@:s = "rofi"' -o 1
 
-exec --no-startup-id polybar example
+exec --no-startup-id polybar top
 
 # 2
 for_window [class="^.*"] border pixel 3
