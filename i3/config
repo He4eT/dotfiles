@@ -11,13 +11,13 @@ client.focused_inactive #000000 #000000 #ffffff #ffffff   #000000
 client.unfocused        #000000 #000000 #999999 #ffffff   #000000
 client.urgent           #000000 #000000 #ffffff #ffffff   #000000
 client.placeholder      #000000 #000000 #ffffff #ffffff   #000000
- 
+
 client.background       #ffffff
 
 gaps inner 30
 
 # exec --no-startup-id compton -cfb -D 5 --shadow-exclude '_NET_WM_NAME@:s = "rofi"' -o 0.5
-exec --no-startup-id compton -cb --shadow-exclude '_NET_WM_NAME@:s = "rofi"' -o 1 --shadow-exclude 'x <= 0 && x2 >= 1920 && y <= 30 && y2 >= 1020' --backend glx --vsync opengl-swc --unredir-if-possible
+exec --no-startup-id ~/.local/bin/compton -cb --shadow-exclude '_NET_WM_NAME@:s = "rofi"' -o 1 --shadow-exclude 'x <= 0 && x2 >= 1920 && y <= 30 && y2 >= 1020' --backend glx --vsync opengl-swc --unredir-if-possible
 
 exec --no-startup-id polybar top
 
