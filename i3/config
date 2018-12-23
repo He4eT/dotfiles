@@ -6,11 +6,11 @@
 #
 
 # class                 border  backgr. text    indicator child_border b9b9b9
-client.focused          #000000 #000000 #ffffff #b9b9b9   #b9b9b9
-client.focused_inactive #000000 #000000 #ffffff #ffffff   #000000
-client.unfocused        #000000 #000000 #999999 #ffffff   #000000
-client.urgent           #000000 #000000 #ffffff #ffffff   #000000
-client.placeholder      #000000 #000000 #ffffff #ffffff   #000000
+client.focused          #000000 #ffffff #000000 #b9b9b9   #b9b9b9
+client.focused_inactive #000000 #b9b9b9 #000000 #ffffff   #000000
+client.unfocused        #000000 #b9b9b9 #000000 #ffffff   #000000
+client.urgent           #000000 #b9b9b9 #000000 #ffffff   #000000
+client.placeholder      #000000 #b9b9b9 #000000 #ffffff   #000000
 
 client.background       #ffffff
 
