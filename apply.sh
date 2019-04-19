@@ -21,3 +21,7 @@ ln -sv ~/dotfiles/rofi/paper-float.rasi ~/.config/rofi/paper-float.rasi
 # oomox
 mkdir -p ~/.config/oomox/colors
 ln -sv ~/dotfiles/oomox/colors/gray ~/.config/oomox/colors/gray
+
+# notifications
+mkdir -p ~/.themes/notifications/xfce-notify-4.0
+ln -sv ~/dotfiles/notifications/notifications.css ~/.themes/notifications/xfce-notify-4.0/gtk.css
