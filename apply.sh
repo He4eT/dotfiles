@@ -1,9 +1,13 @@
 # .Xresources
 ln -sv ~/dotfiles/root/.Xresources ~/.Xresources
 
-# .Xresources
+# .zshrc
 rm ~/.zshrc
 ln -sv ~/dotfiles/root/.zshrc ~/.zshrc
+
+# .vimrc
+rm ~/.vimrc
+ln -sv ~/dotfiles/root/.vimrc ~/.vimrc
 
 # i3
 mkdir -p ~/.config/i3
