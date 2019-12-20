@@ -6,11 +6,11 @@
 #
 
 # class                 border  backgr. text    indicator child_border b9b9b9
-client.focused          #000000 #ffffff #000000 #b9b9b9   #b9b9b9
-client.focused_inactive #000000 #b9b9b9 #000000 #ffffff   #000000
-client.unfocused        #000000 #b9b9b9 #000000 #ffffff   #000000
-client.urgent           #000000 #b9b9b9 #000000 #ffffff   #000000
-client.placeholder      #000000 #b9b9b9 #000000 #ffffff   #000000
+client.focused          #444444 #444444 #dfdfdf #b9b9b9   #b9b9b9
+client.focused_inactive #222222 #222222 #dfdfdf #ffffff   #000000
+client.unfocused        #222222 #222222 #dfdfdf #ffffff   #000000
+client.urgent           #222222 #222222 #dfdfdf #ffffff   #000000
+client.placeholder      #222222 #222222 #dfdfdf #ffffff   #000000
 
 client.background       #ffffff
 
@@ -22,6 +22,7 @@ exec --no-startup-id ~/.local/bin/compton -cb --shadow-exclude '_NET_WM_NAME@:s 
 exec --no-startup-id polybar top
 
 # 2
+for_window [class=".*"] title_format " %title "
 for_window [class="^.*"] border pixel 3
 # new_window 1pixel
 
@@ -33,8 +34,8 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-# font pango:monospace 8
-font pango:terminus 16
+# font pango:terminus 16
+font pango:NotoSans 11
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
