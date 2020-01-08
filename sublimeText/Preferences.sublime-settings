@@ -4,6 +4,7 @@
 	"color_scheme": "Packages/User/SublimeLinter/DarksideBoxy.tmTheme",
 	"enable_tab_scrolling": false,
 	"ensure_newline_at_eof_on_save": true,
+	"trim_trailing_white_space_on_save": true,
 	"folder_exclude_patterns":
 	[
 		"node_modules",
