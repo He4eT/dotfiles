@@ -12,6 +12,7 @@
 	],
 	"font_size": 10,
 	"highlight_line": true,
+	"show_definitions": false,
 	"ignored_packages":
 	[
 	],
