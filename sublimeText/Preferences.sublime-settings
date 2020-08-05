@@ -1,7 +1,7 @@
 {
 	"always_show_minimap_viewport": true,
 	"bold_folder_labels": true,
-	"color_scheme": "Packages/User/SublimeLinter/DarksideBoxy.tmTheme",
+	"color_scheme": "Packages/theme/base16-darkside.tmTheme",
 	"enable_tab_scrolling": false,
 	"ensure_newline_at_eof_on_save": true,
 	"trim_trailing_white_space_on_save": true,
