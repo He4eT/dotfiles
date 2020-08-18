@@ -123,7 +123,7 @@
 ;network
 [module/wlan]
 	type = internal/network
-	interface = wlp1s0
+	interface = wlp0s20f3
 	interval = 3.0
 
 	format-connected = <ramp-signal> <label-connected>
@@ -190,7 +190,7 @@
 ;battery
 [module/battery]
 	type = internal/battery
-	battery = BAT1
+	battery = BAT0
 	full-at = 98
 
 	format-charging = <animation-charging> <label-charging>
