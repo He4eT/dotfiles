@@ -6,9 +6,15 @@ sudo apt install \
   curl \
   htop \
   gimp \
-  node \
   rofi \
   git \
+  i3-gaps-wm \
+  polybar \
+  compton \
+  vlc \
+  vim \
+  ncdu \
+  light \
   mc
 
 sudo update-alternatives --config x-terminal-emulator
