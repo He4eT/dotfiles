@@ -17,9 +17,12 @@ client.background       #ffffff
 gaps inner 30
 
 # exec --no-startup-id compton -cfb -D 5 --shadow-exclude '_NET_WM_NAME@:s = "rofi"' -o 0.5
-exec --no-startup-id ~/.local/bin/compton -cb --shadow-exclude '_NET_WM_NAME@:s = "rofi"' -o 1 --shadow-exclude 'x <= 0 && x2 >= 1920 && y <= 30 && y2 >= 1020' --backend glx --vsync opengl-swc --unredir-if-possible
+# exec --no-startup-id ~/.local/bin/compton -cb --shadow-exclude '_NET_WM_NAME@:s = "rofi"' -o 1 --shadow-exclude 'x <= 0 && x2 >= 1920 && y <= 30 && y2 >= 1020' --backend glx --vsync opengl-swc --unredir-if-possible
+exec --no-startup-id compton -cb --shadow-exclude '_NET_WM_NAME@:s = "rofi"' -o 1 --shadow-exclude 'x <= 0 && x2 >= 1920 && y <= 30 && y2 >= 1020' --vsync --backend xr_glx_hybrid --vsync-use-glfinish
 
 exec --no-startup-id polybar top
+
+exec --no-startup-id setxkbmap -option 'grp:alt_space_toggle'
 
 # 2
 for_window [class=".*"] title_format " %title "
@@ -143,8 +146,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id "light -A 5 & notify-send -t 1 $(light)"
+bindsym XF86MonBrightnessDown exec --no-startup-id "light -U 5 & notify-send -t 1 $(light)"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
