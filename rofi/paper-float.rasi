@@ -1,9 +1,9 @@
 /**
- * A floating box version of the paper theme.
+ * A floating and a modified box version of the paper theme.
  *
- * User: Qball
  * Copyright: Dave Davenport
  */
+
 * {
     blue:  #0000FF;
     white: #FFFFFF;
@@ -14,6 +14,7 @@
     background-color: #00000000;
     border-color: #444444FF;
 }
+
 #window {
     transparency: "screenshot";
     background-color: #00000000;
@@ -22,22 +23,26 @@
     x-offset: 0;
     y-offset: 0;
 }
+
 #mainbox {
     padding: 0px;
     border: 0;
     spacing: 1%;
 }
+
 #message {
-    border: 2px; 
-    padding: 1em; 
-    background-color: @white; 
+    border: 2px;
+    padding: 1em;
+    background-color: @white;
     text-color: @back;
 }
+
 #textbox normal {
     text-color: #002B36FF;
     padding: 0;
     border: 0;
 }
+
 #listview {
     fixed-height: 1;
     border: 2px;
@@ -47,31 +52,38 @@
     columns: 1;
     background-color: @white;
 }
+
 #element {
     padding: 0.5em;
-    highlight: bold ;
+    highlight: bold;
 }
+
 #element normal.normal {
     text-color: @gray;
     background-color: #F5F5F500;
 }
+
 #element normal.urgent {
     text-color: #D75F00FF;
     background-color: #F5F5F5FF;
 }
+
 #element normal.active {
     text-color: @black;
     background-color: #F5F5F5FF;
 }
+
 #element selected.normal {
     text-color: #F5F5F5FF;
     text-color: @black;
     background-color: #D0D0D0FF;
 }
+
 #element selected.urgent {
     text-color: #F5F5F5FF;
     background-color: #D75F00FF;
 }
+
 #element selected.active {
     text-color: @black;
     background-color: #D0D0D0FF;
@@ -81,6 +93,7 @@
     border: 0;
     padding: 0;
 }
+
 #inputbar {
     spacing: 0;
     border: 2px;
@@ -89,6 +102,7 @@
     background-color: @grey;
     index: 0;
 }
+
 #inputbar normal {
     foreground-color: #002B36FF;
     background-color: #F5F5F500;

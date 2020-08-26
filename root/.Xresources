@@ -1,5 +1,4 @@
 ! RXVT Config. terminus font is required!
-! sudo update-alternatives --set x-terminal-emulator "$(which terminator)"
 
 URxvt.font: xft:Terminus:size=13
 

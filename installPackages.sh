@@ -1,20 +1,22 @@
 sudo apt install \
-  rxvt-unicode-256color \
   fonts-font-awesome \
   xfonts-terminus \
+  i3-gaps-wm \
+  compton \
+  polybar \
+  rofi \
   lxappearance \
+  gparted \
+  gimp \
+  vlc \
+  rxvt-unicode-256color \
+  light \
   curl \
   htop \
-  gimp \
-  rofi \
-  git \
-  i3-gaps-wm \
-  polybar \
-  compton \
-  vlc \
-  vim \
   ncdu \
-  light \
+  lynx \
+  vim \
+  git \
   mc
 
 sudo update-alternatives --config x-terminal-emulator
