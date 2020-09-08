@@ -1,0 +1,17 @@
+[
+	{ "keys": ["ctrl+ч"], "command": "cut" },
+	{ "keys": ["ctrl+с"], "command": "copy" },
+	{ "keys": ["ctrl+м"], "command": "paste" },
+	{ "keys": ["ctrl+shift+м"], "command": "paste_and_indent" },
+	{ "keys": ["ctrl+я"], "command": "undo" },
+	{ "keys": ["ctrl+shift+я"], "command": "redo" },
+	{ "keys": ["ctrl+т"], "command": "new_file" },
+	{ "keys": ["ctrl+ы"], "command": "save" },
+	{ "keys": ["ctrl+w"], "command": "close" },
+	{ "keys": ["ctrl+shift+ы"], "command": "prompt_save_as" },
+	{ "keys": ["ctrl+а"], "command": "show_panel", "args": {"panel": "find", "reverse": false} },
+	{ "keys": ["ctrl+shift+а"], "command": "show_panel", "args": {"panel": "find_in_files"} },
+	{ "keys": ["ctrl+р"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
+	{ "keys": ["ctrl+з"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} },
+	{ "keys": ["ctrl+shift+з"], "command": "show_overlay", "args": {"overlay": "command_palette"} },
+]
