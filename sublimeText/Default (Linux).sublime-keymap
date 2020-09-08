@@ -1,4 +1,6 @@
 [
+	{ "keys": ["ctrl+shift+o"], "command": "reveal_in_side_bar"},
+	{ "keys": ["ctrl+shift+щ"], "command": "reveal_in_side_bar"},
 	{ "keys": ["ctrl+ч"], "command": "cut" },
 	{ "keys": ["ctrl+с"], "command": "copy" },
 	{ "keys": ["ctrl+м"], "command": "paste" },
