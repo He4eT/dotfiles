@@ -17,6 +17,7 @@ sudo apt install \
   lynx \
   vim \
   git \
+  zsh \
   mc
 
 sudo update-alternatives --config x-terminal-emulator
