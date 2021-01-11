@@ -4,6 +4,7 @@
 
 # Bootstrap
 
+1. `git clone https://github.com/He4eT/dotfiles.git ~/.dotfiles`
 1. Add [ppa:kgilmer/speed-ricer](https://launchpad.net/~kgilmer/+archive/ubuntu/speed-ricer) to your system's Software Sources
 1. Run `./installPackages.sh`
 1. Run `./apply.sh`
