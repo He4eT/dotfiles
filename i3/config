@@ -190,6 +190,14 @@ mode "resize" {
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
+        # gaps size
+        bindsym 0 gaps inner current set 0
+        bindsym 1 gaps inner current set 10
+        bindsym 2 gaps inner current set 20
+        bindsym 3 gaps inner current set 30
+        bindsym 4 gaps inner current set 40
+        bindsym 5 gaps inner current set 50
+
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
