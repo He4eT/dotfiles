@@ -24,3 +24,9 @@ base0D: "68c244" # green
 base0E: "f08d24" # orange
 base0F: "1cc3e8" # blue
 ```
+
+## Bootstrap
+
+1. Install Package Manager;
+1. Copy Boxy Theme to `/home/odd/.config/sublime-text-3/Installed Packages/`;
+1. Add "Boxy Theme" to `installed packages` in `/home/odd/.config/sublime-text-3/Packages/User/Package Control.sublime-settings`;
