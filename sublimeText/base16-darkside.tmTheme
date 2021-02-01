@@ -509,7 +509,7 @@
 			<key>settings</key>
 			<dict>
 				<key>background</key>
-				<string>#FFFFFF</string>
+				<string>#e8341c</string>
 				<key>foreground</key>
 				<string>#ffffff</string>
 			</dict>
