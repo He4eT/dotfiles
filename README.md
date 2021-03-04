@@ -22,5 +22,6 @@
 
 1. Add `PATH="$HOME/apps/bin:$PATH"` to `~/.profile`
 1. Fix ugly Telegram FileChooser with adding `QT_QPA_PLATFORMTHEME=gtk3` to `/etc/environment`
+1. Or `XDG_CURRENT_DESKTOP=gnome`
 1. Replace ugly ● with awesome ▴ in `~/.oh-my-zsh/themes/minimal.zsh-theme`
 1. Create ~/.config/gtk-3.0/gtk.css: `* { outline-width: 0px; }`
