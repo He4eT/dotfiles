@@ -1,0 +1,34 @@
+{
+  "settingsVersion": "1.66",
+  "exclusionRules": [
+    {
+      "pattern": "https?://chriskempson.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://config.qmk.fm/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://zty.pe/*",
+      "passKeys": ""
+    }
+  ],
+  "filterLinkHints": false,
+  "waitForEnterForFilteredHints": false,
+  "hideHud": false,
+  "keyMappings": "# Insert your preferred key mappings here.\nmap [ goPrevious\nmap ] goNext",
+  "linkHintCharacters": "sadfjklervmuigh",
+  "linkHintNumbers": "0123456789",
+  "newTabUrl": "about:newtab",
+  "nextPatterns": "next,more,newer,>,›,→,»,≫,>>",
+  "previousPatterns": "prev,previous,back,older,<,‹,←,«,≪,<<",
+  "regexFindMode": false,
+  "ignoreKeyboardLayout": true,
+  "scrollStepSize": 60,
+  "smoothScroll": false,
+  "grabBackFocus": false,
+  "searchEngines": "w: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia\n\n# More examples.\n#\n# (Vimium supports search completion Wikipedia, as\n# above, and for these.)\n#\n# g: https://www.google.com/search?q=%s Google\n# l: https://www.google.com/search?q=%s&btnI I'm feeling lucky...\n# y: https://www.youtube.com/results?search_query=%s Youtube\n# gm: https://www.google.com/maps?q=%s Google maps\n# b: https://www.bing.com/search?q=%s Bing\n# d: https://duckduckgo.com/?q=%s DuckDuckGo\n# az: https://www.amazon.com/s/?field-keywords=%s Amazon\n# qw: https://www.qwant.com/?q=%s Qwant",
+  "searchUrl": "https://www.google.com/search?q=",
+  "userDefinedLinkHintCss": "/* linkhint boxes */\ndiv > .vimiumHintMarker {\n    background: #fff;\n    border-radius: 0;\n    border: 2px solid #000;\n}\n\n/* linkhint text */\ndiv > .vimiumHintMarker span {\n    color: black;\n    font-weight: bold;\n    font-size: 12px;\n}\n\n.vimiumReset,\ndiv.vimiumReset,\nspan.vimiumReset,\ntable.vimiumReset,\na.vimiumReset,\na:visited.vimiumReset,\na:link.vimiumReset,\na:hover.vimiumReset,\ntd.vimiumReset,\ntr.vimiumReset {\n    font-family: sans-serif;\n}\n\n\n#vomnibar {\n    border-radius: 0;\n    border: 0;\n    box-shadow: 0 2px 16px rgba(0,0,0,0.3);\n    color: #2d2d2d;\n    left: 50%;\n    margin-left: -320px;\n    max-width: 640px;\n    top: 18px;\n}\n\n#vomnibar .vomnibarSearchArea {\n    background: #F9FAF9;\n    border: 0;\n    border-radius: 0;\n    padding: 0;\n}\n\n#vomnibar input {\n    border-radius: 0;\n    border: 0;\n    box-shadow: none;\n    font-size: 24px;\n    height: initial;\n    padding: 16px 24px;\n}\n\n#vomnibar ul {\n    background: inherit;\n    border-radius: 0;\n    padding: 0;\n    margin: 0;\n}\n\n#vomnibar li {\n    border: 0;\n    color: #2d2d2d;\n    display: flex;\n    line-height: 1;\n}\n\n#vomnibar li .vomnibarTopHalf,\n#vomnibar li .vomnibarBottomHalf {\n    font-size: 13px;\n    margin: 0;\n    padding: 0;\n}\n\n#vomnibar li .vomnibarTopHalf {\n    display: flex;\n    flex: 0 0 67%;\n    margin-right: 16px;\n}\n\n#vomnibar li .vomnibarBottomHalf {\n    flex: 0 0 33%;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    color: transparent;\n}\n\n#vomnibar li .vomnibarSource.vomnibarNoInsertText,\n#vomnibar li .vomnibarSource.vomnibarInsertText {\n    display: none;\n}\n\n#vomnibar li .vomnibarSource,\n#vomnibar li .vomnibarUrl {\n    color: #979797;\n}\n\n#vomnibar li .vomnibarSource {\n    display: block;\n    flex-shrink: 0;\n    font-size: 13px;\n    line-height: 1.6;\n    margin-right: 12px;\n    text-transform: uppercase;\n}\n\n#vomnibar li .vomnibarTitle,\n#vomnibar li .vomnibarUrl {\n    line-height: 1.6;\n}\n\n#vomnibar li .vomnibarTitle {\n    color: #2d2d2d;\n    display: block;\n    margin: 0;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n}\n\n#vomnibar li .vomnibarMatch {\n    color: inherit;\n}\n\n#vomnibar li.vomnibarSelected {\n    background: #222222;\n}\n\n#vomnibar li.vomnibarSelected .vomnibarSource,\n#vomnibar li.vomnibarSelected .vomnibarUrl {\n    color: #ebebeb;\n}\n\n#vomnibar li.vomnibarSelected .vomnibarTitle {\n    color: #f4f4f4;\n}\n\n#vomnibar li.vomnibarSelected .vomnibarMatch {\n    color: inherit;\n}"
+}
