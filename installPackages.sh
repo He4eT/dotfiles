@@ -16,6 +16,7 @@ sudo apt install \
   ncdu \
   lynx \
   vim \
+  silversearcher-ag \
   git \
   zsh \
   mc
