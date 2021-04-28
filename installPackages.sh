@@ -17,6 +17,7 @@ sudo apt install \
   lynx \
   vim \
   silversearcher-ag \
+  xclip \
   git \
   zsh \
   mc
