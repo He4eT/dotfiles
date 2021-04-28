@@ -87,3 +87,7 @@
 
   nnoremap <C-f> :Ag<cr>
   nnoremap <C-g> :Ag <c-r><c-w><cr>
+
+""" Copy'n'paste
+
+  nnoremap <silent><C-c> :call system('xclip -i -selection clipboard', @@)<cr>
