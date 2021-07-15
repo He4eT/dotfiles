@@ -39,6 +39,8 @@ set $mod Mod4
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym Print exec xfce4-screenshooter
 
+bindsym $mod+t exec firefox --new-tab --url about:newtab && i3-msg workspace 0 && i3-msg workspace 1
+
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Tab exec rofi -show window
 
