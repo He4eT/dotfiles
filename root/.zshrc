@@ -68,6 +68,9 @@ plugins=(
   vi-mode
 )
 
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+MODE_INDICATOR="%F{yellow}#%f"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
