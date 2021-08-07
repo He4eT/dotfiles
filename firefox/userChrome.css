@@ -12,3 +12,7 @@
 #star-button-box {
   display: none;
 }
+
+* {
+  border-radius: 0 !important;
+}
