@@ -1,7 +1,9 @@
 # [Startup]
 
 exec --no-startup-id polybar top
-exec --no-startup-id setxkbmap -option 'grp:alt_space_toggle'
+
+# exec --no-startup-id setxkbmap -option 'grp:alt_space_toggle'
+exec --no-startup-id setxkbmap -option 'grp:caps_toggle'
 
 # compton: Xubuntu 20.04 ThinkPad E14
 exec --no-startup-id compton -cb --shadow-exclude '_NET_WM_NAME@:s = "rofi"' -o 1 --shadow-exclude 'x <= 0 && x2 >= 1920 && y <= 30 && y2 >= 1020' --vsync --backend xr_glx_hybrid --vsync-use-glfinish
@@ -37,17 +39,19 @@ set $mod Mod4
 # [Execute]
 
 bindsym $mod+Return exec i3-sensible-terminal
-bindsym Print exec xfce4-screenshooter
 
 bindsym $mod+t exec firefox --new-tab --url about:newtab && i3-msg '[urgent=latest] focus'
+
+bindsym Print exec xfce4-screenshooter
+bindsym XF86Tools exec xfce4-screenshooter --region --delay 0
 
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Tab exec rofi -show window
 
 # volume controls
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # screen brightness controls
