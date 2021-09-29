@@ -4,6 +4,7 @@
 	"caret_style": "smooth",
 	"vintage_use_clipboard": true,
 	"color_scheme": "Packages/theme/base16-darkside.tmTheme",
+	"draw_shadows": false,
 	"enable_tab_scrolling": false,
 	"ensure_newline_at_eof_on_save": true,
 	"trim_trailing_white_space_on_save": true,
