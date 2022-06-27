@@ -45,5 +45,5 @@ URxvt.internalBorder: 20
 *.color14:      #34e2e2
 
 ! white
-*.color7:       #707070
+*.color7:       #ffffff
 *.color15:      #c5c8c6
