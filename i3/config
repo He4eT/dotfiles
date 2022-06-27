@@ -14,11 +14,11 @@ exec --no-startup-id compton -cb -o 1 --vsync --backend xr_glx_hybrid --vsync-us
 # [Appearance]
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #444444 #444444 #dfdfdf #b9b9b9   #b9b9b9
-client.focused_inactive #222222 #222222 #dfdfdf #ffffff   #000000
-client.unfocused        #222222 #222222 #dfdfdf #ffffff   #000000
-client.urgent           #222222 #222222 #dfdfdf #ffffff   #000000
-client.placeholder      #222222 #222222 #dfdfdf #ffffff   #000000
+client.focused          #444444 #444444 #dfdfdf #bdbdbd   #bdbdbd
+client.focused_inactive #222222 #222222 #dfdfdf #222222   #000000
+client.unfocused        #222222 #222222 #dfdfdf #222222   #000000
+client.urgent           #222222 #222222 #dfdfdf #222222   #000000
+client.placeholder      #222222 #222222 #dfdfdf #222222   #000000
 client.background       #ffffff
 
 font pango:NotoSans 11

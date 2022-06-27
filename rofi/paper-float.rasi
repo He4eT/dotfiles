@@ -1,23 +1,15 @@
-/**
- * A floating and a modified box version of the paper theme.
- *
- * Copyright: Dave Davenport
- */
-
 * {
-    blue:  #0000FF;
     white: #FFFFFF;
     black: #000000;
     grey:  #eeeeee;
 
-    spacing: 2;
     background-color: #00000000;
     border-color: #444444FF;
+    spacing: 2;
 }
 
 #window {
     transparency: "screenshot";
-    background-color: #00000000;
     border: 0;
     padding: 0% 0% 1em 0%;
     x-offset: 0;
@@ -37,12 +29,6 @@
     text-color: @back;
 }
 
-#textbox normal {
-    text-color: #002B36FF;
-    padding: 0;
-    border: 0;
-}
-
 #listview {
     fixed-height: 1;
     border: 2px;
@@ -58,68 +44,22 @@
     highlight: bold;
 }
 
-#element normal.normal {
-    text-color: @gray;
-    background-color: #F5F5F500;
-}
-
-#element normal.urgent {
-    text-color: #D75F00FF;
-    background-color: #F5F5F5FF;
-}
-
-#element normal.active {
-    text-color: @black;
-    background-color: #F5F5F5FF;
-}
-
 #element selected.normal {
-    text-color: #F5F5F5FF;
     text-color: @black;
-    background-color: #D0D0D0FF;
-}
-
-#element selected.urgent {
-    text-color: #F5F5F5FF;
-    background-color: #D75F00FF;
+    background-color: #dfdfdf;
 }
 
 #element selected.active {
     text-color: @black;
-    background-color: #D0D0D0FF;
-}
-
-#scrollbar {
-    border: 0;
-    padding: 0;
+    background-color: #dfdfdf;
 }
 
 #inputbar {
     spacing: 0;
     border: 2px;
-    padding: 0.5em 1em;
     padding: 0.5em 0.4em;
     background-color: @grey;
     index: 0;
-}
-
-#inputbar normal {
-    foreground-color: #002B36FF;
-    background-color: #F5F5F500;
-}
-
-#sidebar {
-    border: 2px;
-    padding: 0.5em 1em;
-    background-color: @grey;
-    index: 10;
-}
-
-#button selected {
-    text-color: #4271AEFF;
-}
-
-inputbar {
     children: [ prompt, textbox-prompt-colon, entry, case-indicator ];
 }
 

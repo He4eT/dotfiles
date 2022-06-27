@@ -1,9 +1,8 @@
 [colors]
-	background = #222
-	background-alt = #444
+	background = #222222
+	background-alt = #444444
 	foreground = #dfdfdf
 	foreground-alt = #999
-	primary = #444
 
 [bar/top]
 	;monitor = ${env:MONITOR:HDMI-1}
@@ -53,7 +52,7 @@
 
 	label-mode-padding = 2
 	label-mode-foreground = ${colors.foreground}
-	label-mode-background = ${colors.primary}
+	label-mode-background = ${colors.background-alt}
 	label-mode-underline = ${colors.foreground}
 
 	; focused = Active workspace on focused monitor
@@ -157,7 +156,7 @@
 	label-volume = 
 	label-volume-foreground = ${root.foreground}
 
-	format-muted-foreground = #444
+	format-muted-foreground = ${colors.background-alt}
 	label-muted =   ═══════════════════
 
 	bar-volume-width = 20
@@ -175,7 +174,7 @@
 	bar-volume-fill-font = 1
 	bar-volume-empty = ═
 	bar-volume-empty-font = 1
-	bar-volume-empty-foreground = #444
+	bar-volume-empty-foreground = ${colors.background-alt}
 
 ;battery
 [module/battery]
