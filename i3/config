@@ -197,6 +197,7 @@ mode "resize" {
         bindsym Right resize grow width 10 px or 10 ppt
 
         # gaps size
+        bindsym r exec "i3-msg mode default; exec i3-msg gaps inner current set 0"
         bindsym 0 gaps inner current set 0
         bindsym 1 gaps inner current set 10
         bindsym 2 gaps inner current set 20
