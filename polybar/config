@@ -1,7 +1,7 @@
 [colors]
 	background = #222222
-	background-alt = #444444
-	foreground = #dfdfdf
+	background-alt = #383838
+	foreground = #cdcdcd
 	foreground-alt = #999
 
 [bar/top]
