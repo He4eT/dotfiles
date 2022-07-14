@@ -4,8 +4,6 @@
   set encoding=utf-8
 
   set number
-  "set relativenumber
-  "set rnu!
 
   set mouse=a
 
@@ -28,23 +26,26 @@
 
     """ Themes
     Plug 'tribela/vim-transparent'
-
     Plug 'Lokaltog/vim-monotone'
-    Plug 'lifepillar/vim-solarized8'
     Plug 'alexanderheldt/monokrom.vim'
 
-    """ Statusbar
-    Plug 'itchyny/lightline.vim'
+    """ Statusline
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
 
     """ fzf
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
 
+    """ Navigation
+    Plug 'justinmk/vim-sneak'
   call plug#end()
+
+  let g:sneak#label = 1
 
 """ Appearance
 
-  colorscheme monokrom
+  colorscheme monotone
 
   set cursorline
   set ttimeoutlen=10
@@ -55,24 +56,12 @@
 
   highlight EndOfBuffer ctermfg=16
 
-""" Lightline
+""" Statusline
 
-  let g:lightline = {
-    \ 'colorscheme': 'jellybeans',
-    \ 'mode_map': {
-      \ 'n' : '',
-      \ 'i' : 'I',
-      \ 'R' : 'R',
-      \ 'v' : 'V',
-      \ 'V' : 'L',
-      \ "\<C-v>": 'B',
-      \ 'c' : 'C',
-      \ 's' : 'S',
-      \ 'S' : 'SL',
-      \ "\<C-s>": 'SB',
-      \ 't': 'T',
-    \ },
-  \ }
+  let g:airline_theme='minimalist'
+  let g:airline_section_x = airline#section#create(['%l:%v'])
+  let g:airline_section_y = airline#section#create([''])
+  let g:airline_section_z = airline#section#create(['%p%%'])
 
   set laststatus=2
   set noshowmode
