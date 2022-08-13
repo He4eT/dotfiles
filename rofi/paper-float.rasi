@@ -1,71 +1,39 @@
 * {
-    white: #FFFFFF;
-    black: #000000;
-    grey:  #eeeeee;
+    bg: #222222;
+    fg: #cdcdcd;
+    selection:  #444444;
 
-    background-color: #00000000;
-    border-color: #444444FF;
-    spacing: 2;
+    inner-padding: 0.8em;
+    border-width: 2px;
+
+    border-color: @selection;
+    background-color: @bg;
+    text-color: @fg;
 }
 
 #window {
-    transparency: "screenshot";
-    border: 0;
-    padding: 0% 0% 1em 0%;
-    x-offset: 0;
-    y-offset: 0;
-}
-
-#mainbox {
-    padding: 0px;
-    border: 0;
-    spacing: 1%;
-}
-
-#message {
-    border: 2px;
-    padding: 1em;
-    background-color: @white;
-    text-color: @back;
-}
-
-#listview {
-    fixed-height: 1;
-    border: 2px;
-    padding: 0em;
-    reverse: false;
-
-    columns: 1;
-    background-color: @white;
+    border: @border-width;
 }
 
 #element {
-    padding: 0.5em;
+    padding: @inner-padding;
     highlight: bold;
 }
 
 #element selected.normal {
-    text-color: @black;
-    background-color: #dfdfdf;
+    background-color: @selection;
 }
 
 #element selected.active {
-    text-color: @black;
-    background-color: #dfdfdf;
+    background-color: @selection;
 }
 
 #inputbar {
-    spacing: 0;
-    border: 2px;
-    padding: 0.5em 0.4em;
-    background-color: @grey;
-    index: 0;
+    padding: @inner-padding;
     children: [ prompt, textbox-prompt-colon, entry, case-indicator ];
 }
 
 textbox-prompt-colon {
-    text-color: inherit;
     expand: false;
-    margin: 0 0.3em 0em 0em;
-    str: ":";
+    str: ": ";
 }

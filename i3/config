@@ -6,7 +6,7 @@ exec --no-startup-id polybar top
 exec --no-startup-id setxkbmap -option 'grp:caps_toggle'
 
 # compton: Xubuntu 20.04 ThinkPad E14
-exec --no-startup-id compton -cb -o 1 --vsync --backend xr_glx_hybrid --vsync-use-glfinish --shadow-exclude 'x <= 0 && x2 >= 1920 && y <= 30 && y2 >= 1020' --shadow-exclude '_NET_WM_NAME@:s = "rofi"' --shadow-exclude='class_g ?= "i3-frame"'
+exec --no-startup-id compton -cb -o 1 --vsync --backend xr_glx_hybrid --vsync-use-glfinish --shadow-exclude 'x <= 0 && x2 >= 1920 && y <= 30 && y2 >= 1020' --shadow-exclude='class_g ?= "i3-frame"'
 
 # compton: Xubuntu 18.04 Samsung [backup]
 # exec --no-startup-id ~/.local/bin/compton -cb --shadow-exclude '_NET_WM_NAME@:s = "rofi"' -o 1 --shadow-exclude 'x <= 0 && x2 >= 1920 && y <= 30 && y2 >= 1020' --backend glx --vsync opengl-swc --unredir-if-possible
