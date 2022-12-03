@@ -66,6 +66,7 @@ CASE_SENSITIVE="false"
 plugins=(
   git
   vi-mode
+  fancy-ctrl-z
 )
 
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
@@ -104,7 +105,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias ga.='ga . && gst'
 alias fakemsg='echo "$(curl -s http://whatthecommit.com/index.txt)"'
-alias gcmsgrnd='git commit -m "$(curl -s http://whatthecommit.com/index.txt)"'
+alias gcmsgrnd='git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
