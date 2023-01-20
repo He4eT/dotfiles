@@ -28,6 +28,7 @@
     """ Themes
     Plug 'tribela/vim-transparent'
     Plug 'pgdouyon/vim-yin-yang'
+    Plug 'widatama/vim-phoenix'
     """ Plug 'Lokaltog/vim-monotone'
     """ Plug 'alexanderheldt/monokrom.vim'
 
