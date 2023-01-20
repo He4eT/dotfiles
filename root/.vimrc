@@ -7,6 +7,7 @@
 
   set mouse=a
 
+  set nowrap
   set autoindent
   set expandtab
   set smarttab
@@ -26,17 +27,13 @@
 
     """ Themes
     Plug 'tribela/vim-transparent'
+    Plug 'pgdouyon/vim-yin-yang'
     """ Plug 'Lokaltog/vim-monotone'
     """ Plug 'alexanderheldt/monokrom.vim'
-    Plug 'pgdouyon/vim-yin-yang'
 
     """ Statusline
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-
-    """ fzf
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
 
     """ Navigation
     Plug 'justinmk/vim-sneak'
@@ -70,17 +67,6 @@
 
   set laststatus=2
   set noshowmode
-
-""" fzf
-
-  let $FZF_DEFAULT_OPTS='--preview-window sharp'
-
-  nnoremap <C-o> :Buffers<cr>
-  nnoremap <C-p> :Files<cr>
-  nnoremap <C-e> :Explore<cr>
-
-  nnoremap <C-f> :Ag<cr>
-  nnoremap <C-g> :Ag <c-r><c-w><cr>
 
 """ Copy'n'paste
 
