@@ -26,8 +26,9 @@
 
     """ Themes
     Plug 'tribela/vim-transparent'
-    Plug 'Lokaltog/vim-monotone'
-    Plug 'alexanderheldt/monokrom.vim'
+    """ Plug 'Lokaltog/vim-monotone'
+    """ Plug 'alexanderheldt/monokrom.vim'
+    Plug 'pgdouyon/vim-yin-yang'
 
     """ Statusline
     Plug 'vim-airline/vim-airline'
@@ -45,7 +46,11 @@
 
 """ Appearance
 
-  colorscheme monotone
+  """ colorscheme monotone
+  autocmd ColorScheme * hi Sneak guifg=black guibg=white ctermfg=black ctermbg=white
+  autocmd ColorScheme * hi SneakScope guifg=black guibg=white ctermfg=black ctermbg=white
+  autocmd ColorScheme * hi SneakLabel guifg=black guibg=white ctermfg=black ctermbg=white
+  colorscheme yin
 
   set cursorline
   set ttimeoutlen=10
