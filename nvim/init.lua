@@ -179,6 +179,7 @@ require('nvim-treesitter.configs').setup {
 -- Window managment
 
 vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true })
+vim.keymap.set('n', '<leader>j', '<C-w>w', { remap = true })
 vim.keymap.set('n', '<leader>q', ':bd<CR>')
 
 -- Diagnostic keymaps
