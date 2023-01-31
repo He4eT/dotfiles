@@ -1,4 +1,5 @@
 -- Install packer
+
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -10,22 +11,27 @@ end
 -- stylua: ignore start
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
-  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Add git related info in the signs columns and popups
+
+  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
+  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Add git related info in the signs columns and popups
+  use { 'L3MON4D3/LuaSnip', requires = { 'saadparwaiz1/cmp_luasnip' } } -- Snippet Engine and Snippet Expansion
+
   use 'nvim-treesitter/nvim-treesitter' -- Highlight, edit, and navigate code
+
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'williamboman/nvim-lsp-installer' -- Automatically install language servers to stdpath
   use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp' } } -- Autocompletion
-  use { 'L3MON4D3/LuaSnip', requires = { 'saadparwaiz1/cmp_luasnip' } } -- Snippet Engine and Snippet Expansion
-  use 'mjlbach/onedark.nvim' -- Theme inspired by Atom
-  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
-  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
-  use 'ggandor/lightspeed.nvim'
-  use 'tpope/vim-repeat' --fixup dot-repeat for lightspeed
+
+  use 'ggandor/leap.nvim' -- Motion plugin
+  use 'tpope/vim-repeat' -- Fixup dot-repeat
+
   use 'ibhagwan/fzf-lua' -- Performant and lightweight fzf client
-  use { 'junegunn/fzf',
-    run = "./install --bin"
-  }
+  use { 'junegunn/fzf', run = "./install --bin" }
+
+  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+
+  use 'mjlbach/onedark.nvim' -- Theme inspired by Atom
   use 'rktjmp/lush.nvim'
   use 'He4eT/desolate.nvim'
 
@@ -99,7 +105,7 @@ vim.o.completeopt = 'menuone,noselect'
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
 -- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+-- NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -127,7 +133,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    -- theme = 'onedark',
     component_separators = '|',
     section_separators = '',
     globalstatus = true,
@@ -162,9 +167,6 @@ require('nvim-treesitter.configs').setup {
     keymaps = {
       init_selection = '<c-space>',
       node_incremental = '<c-space>',
-      -- TODO: I'm not sure for this one.
-      scope_incremental = '<c-s>',
-      node_decremental = '<c-backspace>',
     },
   },
   rainbow = {
@@ -174,9 +176,13 @@ require('nvim-treesitter.configs').setup {
   }
 }
 
+-- Window managment
+
 vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true })
 vim.keymap.set('n', '<leader>q', ':bd<CR>')
+
 -- Diagnostic keymaps
+
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
@@ -201,12 +207,7 @@ local on_attach = function(_, bufnr)
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]tion')
-
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  -- nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-  -- nmap('gr', require('telescope.builtin').lsp_references)
-  -- nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  -- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -244,6 +245,10 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "solid",
+})
+
 -- Example custom configuration for lua
 --
 -- Make runtime files discoverable to the server
@@ -270,11 +275,8 @@ require('lspconfig').sumneko_lua.setup {
   },
 }
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "solid",
-})
-
 -- nvim-cmp setup
+
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
@@ -319,7 +321,8 @@ if cmp ~= nil then
   }
 end
 
--- fzf {{{
+-- FZF
+
 local fzf = require('fzf-lua')
 
 fzf.setup({
@@ -367,8 +370,6 @@ vim.keymap.set({ 'n' }, '<leader>fg', fzf.live_grep)
 vim.keymap.set({ 'n' }, '<leader>fd', fzf.git_status)
 
 vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin)
--- vim.keymap.set({ 'n' }, '<leader>fh', fzf.help_tags)
--- vim.keymap.set({ 'n' }, '<leader>fc', fzf.commands)
 vim.keymap.set({ 'n' }, '<leader>f:', fzf.command_history)
 vim.keymap.set({ 'n' }, '<leader>f/', fzf.search_history)
 vim.keymap.set({ 'n' }, "<leader>f'", fzf.registers)
@@ -380,22 +381,15 @@ vim.keymap.set({ 'n' }, '<leader>fW', fzf.grep_cWORD)
 vim.keymap.set({ 'n' }, '<leader>/', fzf.blines)
 vim.keymap.set({ 'n' }, '<leader>b', fzf.buffers)
 
--- }}} fzf
+-- Leap Motion
 
-require('lightspeed').setup {
-  ignore_case = true,
-  jump_to_unique_chars = false,
-  safe_labels = {},
-  labels = nil,
-  repeat_ft_with_target_char = false,
-}
--- silent! unmap f
--- vim.api.nvim_set_keymap('n', 'f', 'f', { noremap = true})
--- vim.api.nvim_set_keymap('n', 'F', 'F', { noremap = true})
--- vim.api.nvim_set_keymap('n', 't', 't', { noremap = true})
--- vim.api.nvim_set_keymap('n', 'T', 'T', { noremap = true})
--- vim.api.nvim_set_keymap('n', ';', ';', { noremap = true})
--- vim.api.nvim_set_keymap('n', ',', ',', { noremap = true})
+require('leap').add_default_mappings()
+require('leap').opts.highlight_unlabeled_phase_one_targets = true
+require('leap').opts.safe_labels = {}
+
+vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
+vim.api.nvim_set_hl(0, 'LeapLabelPrimary', { link = 'Cursor' })
+vim.api.nvim_set_hl(0, 'LeapMatch', { link = 'Identifier' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
