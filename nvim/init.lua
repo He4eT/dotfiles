@@ -20,8 +20,8 @@ require('packer').startup(function(use)
   use 'nvim-treesitter/nvim-treesitter' -- Highlight, edit, and navigate code
 
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
-  use { "williamboman/mason.nvim" } -- Automatically install language servers to stdpath
-  use { "williamboman/mason-lspconfig.nvim" }
+  use 'williamboman/mason.nvim' -- Automatically install language servers to stdpath
+  use 'williamboman/mason-lspconfig.nvim'
   use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp' } } -- Autocompletion
 
   use 'ggandor/leap.nvim' -- Motion plugin
@@ -180,7 +180,7 @@ require('nvim-treesitter.configs').setup {
 -- Window managment
 
 vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true })
-vim.keymap.set('n', '<leader>j', '<C-w>w', { remap = true })
+vim.keymap.set('n', '<leader>k', '<C-w>w', { remap = true })
 vim.keymap.set('n', '<leader>q', ':bd<CR>')
 
 -- Diagnostic keymaps
