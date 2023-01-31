@@ -10,6 +10,11 @@ ln -sv ~/.dotfiles/root/.zshrc ~/.zshrc
 rm ~/.vimrc
 ln -sv ~/.dotfiles/root/.vimrc ~/.vimrc
 
+# neovim
+mkdir -p ~/.config/nvim
+rm ~/.config/nvim/init.lua
+ln -sv ~/.dotfiles/nvim/init.lua ~/.config/nvim/init.lua
+
 # i3
 mkdir -p ~/.config/i3
 rm ~/.config/i3/config
