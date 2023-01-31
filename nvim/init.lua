@@ -20,7 +20,8 @@ require('packer').startup(function(use)
   use 'nvim-treesitter/nvim-treesitter' -- Highlight, edit, and navigate code
 
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
-  use 'williamboman/nvim-lsp-installer' -- Automatically install language servers to stdpath
+  use { "williamboman/mason.nvim" } -- Automatically install language servers to stdpath
+  use { "williamboman/mason-lspconfig.nvim" }
   use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp' } } -- Autocompletion
 
   use 'ggandor/leap.nvim' -- Motion plugin
@@ -235,7 +236,8 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 local servers = { 'tsserver', 'sumneko_lua' }
 
 -- Ensure the servers above are installed
-require('nvim-lsp-installer').setup {
+require("mason").setup {}
+require("mason-lspconfig").setup {
   ensure_installed = servers,
 }
 
