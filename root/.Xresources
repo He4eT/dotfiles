@@ -6,6 +6,7 @@ URxvt*transparent: true
 URxvt*tintColor: White
 URxvt*shading: 40
 URxvt*scrollBar: false
+URxvt*print-pipe:  cat > $HOME/urxvt.log
 URxvt.internalBorder: 20
 
 ! terminal.sexy
