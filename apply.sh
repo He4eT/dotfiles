@@ -10,6 +10,11 @@ ln -sv ~/.dotfiles/root/.zshrc ~/.zshrc
 rm ~/.vimrc
 ln -sv ~/.dotfiles/root/.vimrc ~/.vimrc
 
+# kitty
+mkdir -p ~/.config/kitty
+rm ~/.config/kitty/kitty.conf
+ln -sv ~/.dotfiles/kitty/kitty.conf ~/.config/kitty/kitty.conf
+
 # neovim
 mkdir -p ~/.config/nvim
 rm ~/.config/nvim/init.lua
