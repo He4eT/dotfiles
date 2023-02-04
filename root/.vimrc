@@ -14,6 +14,9 @@
   set tabstop=2
   set shiftwidth=2
 
+  let mapleader = ' '
+  nnoremap <SPACE> <Nop>
+
   filetype plugin indent on
 
 """ Plugins
@@ -65,10 +68,12 @@
   let g:airline_section_x = airline#section#create(['%l:%v'])
   let g:airline_section_y = airline#section#create([''])
   let g:airline_section_z = airline#section#create(['%p%%'])
+  let g:airline#extensions#whitespace#enabled = 1
 
   set laststatus=2
   set noshowmode
 
 """ Copy'n'paste
 
-  nnoremap <silent><C-c> :call system('xclip -i -selection clipboard', @@)<cr>
+  nnoremap <silent><leader>y :call system('xclip -i -selection clipboard', @@)<cr>
+  vnoremap <silent><leader>y y:call system('xclip -i -selection clipboard', @@)<cr>
