@@ -183,6 +183,11 @@ vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true })
 vim.keymap.set('n', '<leader>k', '<C-w>w', { remap = true })
 vim.keymap.set('n', '<leader>q', ':bd<CR>')
 
+-- Copy'n'Paste
+
+vim.keymap.set('n', '<leader>y', ':call system("xclip -i -selection clipboard", @@)<cr>')
+vim.keymap.set('v', '<leader>y', '"+y')
+
 -- Diagnostic keymaps
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
