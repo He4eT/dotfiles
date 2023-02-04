@@ -9,6 +9,11 @@ URxvt*scrollBar: false
 URxvt*print-pipe:  cat > $HOME/urxvt.log
 URxvt.internalBorder: 20
 
+URxvt*iso14755: False
+URxvt*iso14755_52: False
+URxvt.keysym.C-S-0x43: eval:selection_to_clipboard
+URxvt.keysym.C-S-0x56: eval:paste_clipboard
+
 ! terminal.sexy
 ! tango on hybrid
 
