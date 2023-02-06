@@ -340,7 +340,15 @@ fzf.setup({
   border = 'single',
   fullscreen = true,
 
+  previewers = {
+    builtin = {
+      syntax = true,
+      syntax_limit_b = 1024*64, -- syntax limit (bytes), 0=nolimit
+    }
+  },
+
   grep = {
+    rg_opts = "--vimgrep --smart-case --max-columns=512",
     file_ignore_patterns = {
       "^node_modules/",
       "/node_modules/",
@@ -350,7 +358,7 @@ fzf.setup({
   },
 
   fzf_opts = {
-    ['--border'] = false
+    ['--border'] = 'none'
   },
   fzf_colors = {
       ["fg"]          = { "fg", "CursorLine" },
