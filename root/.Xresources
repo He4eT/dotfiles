@@ -6,7 +6,7 @@ URxvt*transparent: true
 URxvt*tintColor: White
 URxvt*shading: 40
 URxvt*scrollBar: false
-URxvt*print-pipe:  cat > $HOME/urxvt.log
+URxvt*print-pipe: cat > /tmp/urxvt-screen-content.txt
 URxvt.internalBorder: 20
 
 URxvt*iso14755: False
