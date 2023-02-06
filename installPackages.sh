@@ -16,7 +16,7 @@ sudo apt install \
   ncdu \
   lynx \
   vim \
-  silversearcher-ag \
+  ripgrep \
   xclip \
   git \
   zsh \
