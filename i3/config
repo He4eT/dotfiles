@@ -39,6 +39,8 @@ workspace 2 gaps inner 0
 for_window [class=".*"] title_format " %title "
 for_window [class="^.*"] border pixel 3
 
+for_window [title=" is sharing your screen.$"] border none, sticky enable, move position 0 px 0 px
+
 # [Keyboard shortcuts]
 
 set $mod Mod4
