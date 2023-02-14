@@ -182,9 +182,9 @@ require('nvim-treesitter.configs').setup {
 vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true })
 vim.keymap.set('n', '<leader>k', '<C-w>w', { remap = true })
 vim.keymap.set('n', '<leader>K', ':vs<CR>')
-vim.keymap.set('n', '<leader>h', ':bp<CR>')
-vim.keymap.set('n', '<leader>l', ':bn<CR>')
-vim.keymap.set('n', '<leader>q', ':bd<CR>')
+vim.keymap.set('n', '<leader>q', ':b#|bd#<CR>')
+vim.keymap.set('n', '<leader>h', '<C-o>')
+vim.keymap.set('n', '<leader>l', '<C-i>')
 
 -- Copy'n'Paste
 
