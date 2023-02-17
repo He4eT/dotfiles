@@ -89,7 +89,7 @@
 	label-layout-padding = 2
 	label-layout-underline = ${colors.foreground}
 	label-indicator-font = 1
-	label-indicator = 
+	label-indicator-on = 
 	label-indicator-underline = ${colors.foreground}
 
 ;cpu
@@ -150,14 +150,14 @@
 ;backlight
 ;volume
 [module/volume]
-	type = internal/volume
+	type = internal/alsa
 
 	format-volume = <label-volume>   <bar-volume>
 	label-volume = 
 	label-volume-foreground = ${colors.foreground}
 
 	format-muted-foreground = ${colors.background-alt}
-	label-muted =   ═══════════════════
+	label-muted =    ═══════════════════
 
 	bar-volume-width = 20
 	bar-volume-foreground-0 = #555
@@ -186,8 +186,8 @@
 	format-discharging = <ramp-capacity> <label-discharging>
 	format-full = <ramp-capacity> <label-full>
 
-	ramp-capacity-0 = 
-	ramp-capacity-0-foreground = ${colors.foreground}
+	ramp-capacity-0 = 
+	ramp-capacity-0-foreground = #cc0403
 	ramp-capacity-1 = 
 	ramp-capacity-2 = 
 	ramp-capacity-3 = 
