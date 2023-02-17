@@ -159,7 +159,7 @@ require('gitsigns').setup {
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'help', 'lua', 'typescript', 'javascript', 'vue', 'html', 'css', 'scss' },
+  ensure_installed = { 'help', 'lua', 'typescript', 'tsx', 'javascript', 'vue', 'html', 'css', 'scss' },
 
   highlight = { enable = true },
   indent = { enable = true },
