@@ -33,8 +33,7 @@ require('packer').startup(function(use)
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
 
   use 'mjlbach/onedark.nvim' -- Theme inspired by Atom
-  use 'rktjmp/lush.nvim'
-  use 'He4eT/desolate.nvim'
+  use { 'He4eT/desolate.nvim', requires = { 'rktjmp/lush.nvim' } }
 
   if is_bootstrap then
     require('packer').sync()
@@ -394,11 +393,12 @@ vim.keymap.set({ 'n' }, '<leader>fd', fzf.git_status)
 vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin)
 vim.keymap.set({ 'n' }, '<leader>f:', fzf.command_history)
 vim.keymap.set({ 'n' }, '<leader>f/', fzf.search_history)
-vim.keymap.set({ 'n' }, "<leader>f'", fzf.registers)
 vim.keymap.set({ 'n' }, '<leader>f?', fzf.keymaps)
 vim.keymap.set({ 'n' }, '<leader>f.', fzf.resume)
 vim.keymap.set({ 'n' }, '<leader>fw', fzf.grep_cword)
 vim.keymap.set({ 'n' }, '<leader>fW', fzf.grep_cWORD)
+
+vim.keymap.set({ 'n' }, '<leader>p', fzf.registers)
 
 vim.keymap.set({ 'n' }, '<leader>/', fzf.blines)
 vim.keymap.set({ 'n' }, '<leader>b', fzf.buffers)
