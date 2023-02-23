@@ -97,6 +97,9 @@ vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 vim.o.termguicolors = true
+vim.g.desolate_error = '#ff4242'
+vim.g.desolate_warning = '#ffad29'
+vim.g.desolate_success = '#74af68'
 vim.cmd [[colorscheme desolate]]
 
 -- Set completeopt to have a better completion experience
