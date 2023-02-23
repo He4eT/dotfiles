@@ -187,7 +187,7 @@
 	format-full = <ramp-capacity> <label-full>
 
 	ramp-capacity-0 = 
-	ramp-capacity-0-foreground = #cc0403
+	ramp-capacity-0-foreground = #ff4242
 	ramp-capacity-1 = 
 	ramp-capacity-2 = 
 	ramp-capacity-3 = 
