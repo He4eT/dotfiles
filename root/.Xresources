@@ -14,42 +14,32 @@ URxvt*iso14755_52: False
 URxvt.keysym.C-S-0x43: eval:selection_to_clipboard
 URxvt.keysym.C-S-0x56: eval:paste_clipboard
 
-! terminal.sexy
-! tango on hybrid
+! Misterioso.colorscheme
 
-! special
-*.foreground:   #c5c8c6
-*.background:   #1d1f21
-*.cursorColor:  #c5c8c6
+*.foreground: #c5c8c6
+*.background: #1d1f21
+*.cursorColor: #c5c8c6
 
-! black
-*.color0:       #2e3436
-*.color8:       #555753
+*.color0: #000000
+*.color1: #ff4242
 
-! red
-*.color1:       #cc0000
-*.color9:       #ef2929
+*.color2: #74af68
+*.color3: #ffad29
 
-! green
-*.color2:       #4e9a06
-*.color10:      #8ae234
+*.color4: #338f86
+*.color5: #9414e6
 
-! yellow
-*.color3:       #c4a000
-*.color11:      #fce94f
+*.color6: #23d7d7
+*.color7: #e1e1e0
 
-! blue
-*.color4:       #3465a4
-*.color12:      #729fcf
+*.color8: #555555
+*.color9: #ff3242
 
-! magenta
-*.color5:       #75507b
-*.color13:      #ad7fa8
+*.color10: #74cd68
+*.color11: #ffb929
 
-! cyan
-*.color6:       #06989a
-*.color14:      #34e2e2
+*.color12: #23d7d7
+*.color13: #ff37ff
 
-! white
-*.color7:       #ffffff
-*.color15:      #c5c8c6
+*.color14: #00ede1
+*.color15: #ffffff
