@@ -97,9 +97,25 @@ vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 vim.o.termguicolors = true
+vim.o.background = 'dark'
+
+vim.g.desolate_h = 0
+vim.g.desolate_s = 0
+vim.g.desolate_l = 70
+vim.g.desolate_contrast = 120
+
+vim.g.desolate_fg = '#cdcdcd'
+vim.g.desolate_bg = '#383838'
+
+vim.g.desolate_constant = '#ffd700'
+vim.g.desolate_identifier = '#ffc812'
+vim.g.desolate_statement = '#ffffff'
+
 vim.g.desolate_error = '#ff4242'
 vim.g.desolate_warning = '#ffad29'
 vim.g.desolate_success = '#74af68'
+vim.g.desolate_info = '#ffffff'
+
 vim.cmd [[colorscheme desolate]]
 
 -- Set completeopt to have a better completion experience
@@ -411,10 +427,6 @@ vim.keymap.set({ 'n' }, '<leader>b', fzf.buffers)
 require('leap').add_default_mappings()
 require('leap').opts.highlight_unlabeled_phase_one_targets = true
 require('leap').opts.safe_labels = {}
-
-vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
-vim.api.nvim_set_hl(0, 'LeapLabelPrimary', { link = 'Identifier' })
-vim.api.nvim_set_hl(0, 'LeapMatch', { link = 'Constant' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
