@@ -3,12 +3,17 @@
     fg: #cdcdcd;
     selection:  #444444;
 
-    inner-padding: 0.8em;
+    inner-padding: 0.5em;
     border-width: 2px;
 
     border-color: @selection;
     background-color: @bg;
     text-color: @fg;
+}
+
+element-text {
+  background-color: inherit;
+  text-color: inherit;
 }
 
 #window {

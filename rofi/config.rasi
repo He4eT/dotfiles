@@ -1,0 +1,4 @@
+configuration {
+ font: "NotoSans-Regular 11";
+}
+@theme "./paper-float.rasi"
