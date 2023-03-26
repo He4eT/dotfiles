@@ -1,5 +1,7 @@
 # [Startup]
 
+exec --no-startup-id feh --bg-scale ~/dotfiles/wallpaper.png
+
 exec --no-startup-id polybar top
 
 # exec --no-startup-id setxkbmap -option 'grp:alt_space_toggle'
