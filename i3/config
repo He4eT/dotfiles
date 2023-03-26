@@ -49,7 +49,7 @@ set $mod Mod4
 
 # [Execute]
 
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec urxvt
 
 bindsym $mod+t exec firefox --new-tab --url about:newtab && i3-msg '[urgent=latest] focus'
 
