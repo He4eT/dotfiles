@@ -1,0 +1,26 @@
+sudo dnf install \
+  fontawesome-fonts \
+  terminus-fonts \
+  i3 \
+  picom \
+  polybar \
+  rofi \
+  lxappearance \
+  gparted \
+  gimp \
+  vlc \
+  rxvt-unicode \
+  NetworkManager-tui \
+  light \
+  htop \
+  ncdu \
+  lynx \
+  vim \
+  neovim \
+  ripgrep \
+  xclip \
+  git \
+  zsh \
+  mc \
+  ranger \
+  telegram-desktop \
