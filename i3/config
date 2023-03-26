@@ -8,10 +8,9 @@ exec --no-startup-id polybar top
 exec --no-startup-id setxkbmap -option 'grp:caps_toggle'
 
 # compton: Xubuntu 20.04 ThinkPad E14
-exec --no-startup-id compton \
+exec --no-startup-id picom \
   -cb -o 1 \
-  --vsync --backend xr_glx_hybrid \
-  --vsync-use-glfinish \
+  --vsync \
   --shadow-exclude='x <= 0 && x2 >= 1920 && y <= 30 && y2 >= 1020' \
   --shadow-exclude='class_g ?= "i3-frame"' \
   --shadow-exclude='class_g = "firefox" && argb' \
