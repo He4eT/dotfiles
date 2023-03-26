@@ -3,7 +3,7 @@
     fg: #cdcdcd;
     selection:  #444444;
 
-    inner-padding: 0.5em;
+    inner-padding: 0.6em;
     border-width: 2px;
 
     border-color: @selection;
@@ -14,10 +14,13 @@
 element-text {
   background-color: inherit;
   text-color: inherit;
+  highlight: bold;
 }
 
 #window {
     border: @border-width;
+    width: 800px;
+    height: 519px;
 }
 
 #element {
