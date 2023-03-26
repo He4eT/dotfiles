@@ -2,6 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/apps/bin:$PATH
 
+export EDITOR="/usr/bin/vim"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/odd/.oh-my-zsh"
