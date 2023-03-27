@@ -150,7 +150,7 @@
 ;backlight
 ;volume
 [module/volume]
-	type = internal/alsa
+	type = internal/pulseaudio
 
 	format-volume = <label-volume>   <bar-volume>
 	label-volume = 
