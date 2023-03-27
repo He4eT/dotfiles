@@ -24,7 +24,7 @@ ln -sv ~/dotfiles/nvim/init.lua ~/.config/nvim/init.lua
 mkdir -p ~/.config/i3
 rm ~/.config/i3/config
 ln -sv ~/dotfiles/i3/config ~/.config/i3/config
-sudo cp ~/dotfiles/i3/i3-gaps.desktop /usr/share/xsessions/i3-gaps.desktop
+# sudo cp ~/dotfiles/i3/i3-gaps.desktop /usr/share/xsessions/i3-gaps.desktop
 
 # polybar
 mkdir -p ~/.config/polybar
