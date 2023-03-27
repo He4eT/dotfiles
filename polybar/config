@@ -152,6 +152,8 @@
 [module/volume]
 	type = internal/pulseaudio
 
+	click-right = pavucontrol
+
 	format-volume = <label-volume>   <bar-volume>
 	label-volume = 
 	label-volume-foreground = ${colors.foreground}
