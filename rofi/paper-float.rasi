@@ -3,7 +3,7 @@
     fg: #cdcdcd;
     selection:  #444444;
 
-    inner-padding: 0.6em;
+    inner-padding: 0.5em;
     border-width: 2px;
 
     border-color: @selection;
@@ -20,7 +20,7 @@ element-text {
 #window {
     border: @border-width;
     width: 800px;
-    height: 519px;
+    height: 518px;
 }
 
 #element {
