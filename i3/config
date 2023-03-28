@@ -69,8 +69,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 
 # screen brightness controls
 
-bindsym XF86MonBrightnessUp exec --no-startup-id "light -A 5 & notify-send -t 1 $(light)"
-bindsym XF86MonBrightnessDown exec --no-startup-id "light -U 5 & notify-send -t 1 $(light)"
+bindsym XF86MonBrightnessUp exec --no-startup-id "light -A 5 & sleep 0.1 & dunstify Brightness -h int:value:`light`"
+bindsym XF86MonBrightnessDown exec --no-startup-id "light -U 5 & sleep 0.1 & dunstify Brightness -h int:value:`light`"
 
 # i3
 
