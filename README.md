@@ -4,7 +4,7 @@
 
 # Bootstrap
 
-1. `git clone https://github.com/He4eT/dotfiles.git ~/.dotfiles`
+1. `git clone https://github.com/He4eT/dotfiles.git ~/dotfiles`
 1. Add [ppa:kgilmer/speed-ricer](https://launchpad.net/~kgilmer/+archive/ubuntu/speed-ricer) to your system's Software Sources
 1. Run `./installPackages.sh`
 1. Run `./apply.sh`
@@ -17,6 +17,11 @@
 1. Locate profile with `about:profiles`
 1. Copy `firefox/userChrome.css` to `{Root Directory}/chrome/userChrome.css`
 1. Customize interface
+
+# git
+
+1. `git config --global core.pager 'less -S'`
+1. `git config --global pull.rebase true`
 
 # etc
 
