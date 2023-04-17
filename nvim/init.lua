@@ -3,8 +3,8 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Install package manager
---    https://github.com/folke/lazy.nvim
---    `:help lazy.nvim.txt` for more info
+-- https://github.com/folke/lazy.nvim
+--`:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -27,7 +27,7 @@ require('lazy').setup({
     'He4eT/desolate.nvim',
     dependencies = {
       'rktjmp/lush.nvim',
-    }
+    },
   },
   { -- `gc` to comment visual regions/lines
     'numToStr/Comment.nvim',
@@ -37,7 +37,7 @@ require('lazy').setup({
     'ggandor/leap.nvim',
     dependencies = {
       'tpope/vim-repeat',
-    }
+    },
   },
   { -- FZF
     'ibhagwan/fzf-lua',
@@ -297,32 +297,43 @@ end
 
 -- fzf keymaps
 
-vim.keymap.set({ 'n' }, 'gr', fzf.lsp_references)
+vim.keymap.set({ 'n' }, 'gr', fzf.lsp_references, { desc = 'LSP: [G]o to [R]eference list' })
 
-vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin)
-vim.keymap.set({ 'n' }, '<leader>f.', fzf.resume)
+vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin, { desc = '[F]zf: [p]allete' })
+vim.keymap.set({ 'n' }, '<leader>f.', fzf.resume, { desc = '[F]zf: Resume' })
 
-vim.keymap.set({ 'n' }, '<leader>b', fzf.buffers)
+vim.keymap.set({ 'n' }, '<leader>b', fzf.buffers, { desc = '[F]zf: [B]uffers' })
 
-vim.keymap.set({ 'n' }, '<leader>fF', fzf_files)
-vim.keymap.set({ 'n' }, '<leader>ff', fzf.git_files)
-vim.keymap.set({ 'n' }, '<leader>fd', fzf.git_status)
+vim.keymap.set({ 'n' }, '<leader>fF', fzf_files, { desc = '[F]zf: all [F]iles' })
+vim.keymap.set({ 'n' }, '<leader>ff', fzf.git_files, { desc = '[F]zf: git [f]iles' })
+vim.keymap.set({ 'n' }, '<leader>fd', fzf.git_status, { desc = '[F]zf: git [d]iff' })
 
-vim.keymap.set({ 'n' }, '<leader>fg', fzf.live_grep)
-vim.keymap.set({ 'n' }, '<leader>fw', fzf.grep_cword)
-vim.keymap.set({ 'n' }, '<leader>fW', fzf.grep_cWORD)
+vim.keymap.set({ 'n' }, '<leader>fg', fzf.live_grep, { desc = '[F]zf: [g]rep' })
+vim.keymap.set({ 'n' }, '<leader>fw', fzf.grep_cword, { desc = '[F]zf: grep [w]' })
+vim.keymap.set({ 'n' }, '<leader>fW', fzf.grep_cWORD, { desc = '[F]zf: grep [W]' })
 
-vim.keymap.set({ 'n' }, '<leader>p', fzf.registers)
-vim.keymap.set({ 'n' }, '<leader>/', fzf.blines)
-vim.keymap.set({ 'n' }, '<leader>f?', fzf.keymaps)
-vim.keymap.set({ 'n' }, '<leader>f/', fzf.search_history)
-vim.keymap.set({ 'n' }, '<leader>f:', fzf.command_history)
+vim.keymap.set({ 'n' }, '<leader>p', fzf.registers, { desc = '[F]zf: [p]aste' })
+vim.keymap.set({ 'n' }, '<leader>/', fzf.blines, { desc = '[F]zf: buffer lines' })
+vim.keymap.set({ 'n' }, '<leader>f?', fzf.keymaps, { desc = '[F]zf: keymaps' })
+vim.keymap.set({ 'n' }, '<leader>f/', fzf.search_history, { desc = '[F]zf: search history' })
+vim.keymap.set({ 'n' }, '<leader>f:', fzf.command_history, { desc = '[F]zf: command history' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.configs').setup({
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'vim', 'vimdoc', 'lua', 'typescript', 'tsx', 'javascript', 'vue', 'html', 'css', 'scss' },
+  ensure_installed = {
+    'vim',
+    'vimdoc',
+    'lua',
+    'javascript',
+    'typescript',
+    'tsx',
+    'vue',
+    'html',
+    'css',
+    'scss',
+  },
   auto_install = true,
 
   highlight = { enable = true },
@@ -380,7 +391,7 @@ require('nvim-treesitter.configs').setup {
       },
     },
   },
-}
+})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -453,9 +464,9 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
 
-mason_lspconfig.setup {
+mason_lspconfig.setup({
   ensure_installed = vim.tbl_keys(servers),
-}
+})
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = 'solid',
@@ -463,16 +474,16 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
 
 mason_lspconfig.setup_handlers {
   function(server_name)
-    require('lspconfig')[server_name].setup {
+    require('lspconfig')[server_name].setup({
       capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
-    }
+    })
   end,
 }
 
 -- tsserver 'Go to definition' workaround
-require('lspconfig').tsserver.setup {
+require('lspconfig').tsserver.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   handlers = {
@@ -482,15 +493,15 @@ require('lspconfig').tsserver.setup {
       vim.lsp.handlers['textDocument/definition'](err, result, ...)
     end,
   }
-}
+})
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
-luasnip.config.setup {}
+luasnip.config.setup({})
 
-cmp.setup {
+cmp.setup({
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -527,7 +538,7 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
-}
+})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
