@@ -51,7 +51,8 @@
   autocmd ColorScheme * hi Sneak guifg=black guibg=white ctermfg=black ctermbg=white
   autocmd ColorScheme * hi SneakScope guifg=black guibg=white ctermfg=black ctermbg=white
   autocmd ColorScheme * hi SneakLabel guifg=black guibg=white ctermfg=black ctermbg=white
-  colorscheme yin
+  colorscheme phoenix
+  PhoenixOrange
 
   set cursorline
   set ttimeoutlen=10
