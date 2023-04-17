@@ -313,6 +313,18 @@ require('lspconfig').lua_ls.setup {
   },
 }
 
+require('lspconfig').tsserver.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  handlers = {
+    -- https://github.com/holoiii/nvim/commit/73a4db74fe463f5064346ba63870557fedd134ad
+    ["textDocument/definition"] = function(err, result, ...)
+      result = vim.tbl_islist(result) and result[1] or result
+      vim.lsp.handlers["textDocument/definition"](err, result, ...)
+    end,
+  }
+}
+
 -- nvim-cmp setup
 
 local cmp = require 'cmp'
