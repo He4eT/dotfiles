@@ -41,7 +41,7 @@
 
     gap_size = 0
 
-    separator_height = 3
+    separator_height = 2
     separator_color = "#cdcdcd"
 
     # Paddings
@@ -109,16 +109,16 @@
 [urgency_low]
     background = "#222222"
     foreground = "#cdcdcd"
-    timeout = 3
+    timeout = 5
 
 [urgency_normal]
     background = "#222222"
     foreground = "#cdcdcd"
-    timeout = 5
+    timeout = 8
 
 [urgency_critical]
-    background = "#383838"
-    foreground = "#ffffff"
+    background = "#444444"
+    foreground = "#cdcdcd"
     timeout = 0
 
 [change-format]
