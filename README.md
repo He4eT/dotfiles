@@ -30,3 +30,4 @@
 1. Or `XDG_CURRENT_DESKTOP=gnome`
 1. Replace ugly ● with awesome ▴ in `~/.oh-my-zsh/themes/minimal.zsh-theme`
 1. Create ~/.config/gtk-3.0/gtk.css: `* { outline-width: 0px; }`
+1. [Apply](https://wiki.archlinux.org/title/Cursor_themes) the [Quintom cursor theme](https://gitlab.com/Burning_Cube/quintom-cursor-theme/-/tree/master/)
