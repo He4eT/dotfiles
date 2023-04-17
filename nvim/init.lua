@@ -499,7 +499,11 @@ require('lspconfig').tsserver.setup({
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
-luasnip.config.setup({})
+luasnip.config.setup({
+  -- https://stackoverflow.com/questions/70366949/
+  region_check_events = "CursorHold,InsertLeave",
+  delete_check_events = "TextChanged,InsertEnter",
+})
 
 cmp.setup({
   snippet = {
