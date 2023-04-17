@@ -61,6 +61,11 @@ bindsym XF86Tools exec xfce4-screenshooter --region --delay 0
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Tab exec rofi -show window
 
+# notifications
+
+bindsym $mod+grave exec --no-startup-id dunstctl history-pop
+bindsym $mod+BackSpace exec --no-startup-id dunstctl close-all
+
 # volume controls
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
