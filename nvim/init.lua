@@ -231,6 +231,17 @@ vim.keymap.set('n', '<leader>l', '<C-i>')
 vim.keymap.set('n', '<leader>y', ':call system("xclip -i -selection clipboard", @@)<cr>')
 vim.keymap.set('v', '<leader>y', '"+y')
 
+-- Diagnostic
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>E', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- Gitsigns
+vim.keymap.set('n', '[g', ':Gitsigns prev_hunk<CR>', { desc = 'Go to previous git hunk' })
+vim.keymap.set('n', ']g', ':Gitsigns next_hunk<CR>', { desc = 'Go to next git hunk' })
+vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show git blame' })
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -297,7 +308,7 @@ end
 
 -- fzf keymaps
 
-vim.keymap.set({ 'n' }, 'gr', fzf.lsp_references, { desc = 'LSP: [G]o to [R]eference list' })
+vim.keymap.set({ 'n' }, 'gr', fzf.lsp_references, { desc = 'LSP: [G]o to fzf [R]eference list' })
 
 vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin, { desc = '[F]zf: [p]allete' })
 vim.keymap.set({ 'n' }, '<leader>f.', fzf.resume, { desc = '[F]zf: Resume' })
@@ -393,12 +404,6 @@ require('nvim-treesitter.configs').setup({
   },
 })
 
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>E', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-
 -- [[ LSP settings ]]
 -- This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
@@ -468,10 +473,6 @@ mason_lspconfig.setup({
   ensure_installed = vim.tbl_keys(servers),
 })
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = 'solid',
-})
-
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup({
@@ -481,6 +482,10 @@ mason_lspconfig.setup_handlers {
     })
   end,
 }
+
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = 'solid',
+})
 
 require('lspconfig').tsserver.setup({
   on_attach = on_attach,
