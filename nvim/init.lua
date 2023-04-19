@@ -482,11 +482,22 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
--- tsserver 'Go to definition' workaround
 require('lspconfig').tsserver.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   handlers = {
+    -- Usually gets called after a code action
+    -- like in moving an anonymous function to outer scope
+    -- https://github.com/jose-elias-alvarez/typescript.nvim/issues/17
+    ['_typescript.rename'] = function(_, result)
+      local line = result.position.line
+      local character = result.position.character
+      local column = vim.str_byteindex(vim.fn.getline('.'), character, true)
+      vim.api.nvim_win_set_cursor(0, {line + 1, column})
+      vim.lsp.buf.rename()
+      return result
+    end,
+    -- 'Go to definition' workaround
     -- https://github.com/holoiii/nvim/commit/73a4db74fe463f5064346ba63870557fedd134ad
     ['textDocument/definition'] = function(err, result, ...)
       result = vim.tbl_islist(result) and result[1] or result
