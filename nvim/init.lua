@@ -51,14 +51,11 @@ require('lazy').setup({
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
-      {
+      { -- Automatically install LSPs to stdpath for neovim
         'williamboman/mason.nvim',
-        config = true
+        config = true,
       },
       'williamboman/mason-lspconfig.nvim',
-      -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
     },
   },
   { -- Autocompletion
@@ -458,9 +455,6 @@ local servers = {
     },
   },
 }
-
--- Setup neovim lua configuration
-require('neodev').setup()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
