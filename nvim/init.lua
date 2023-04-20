@@ -76,7 +76,10 @@ require('lazy').setup({
         delete = { text = '_' },
         topdelete = { text = '‾' },
         changedelete = { text = '│' },
-     },
+      },
+      preview_config = {
+        border = 'solid',
+      },
     },
   },
   { -- Set lualine as statusline
