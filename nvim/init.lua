@@ -1,10 +1,11 @@
 -- Leader keymaps
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.keymap.set({'n', 'v'}, '<CR>', ' ', { silent = true, remap = true })
 
 -- Install package manager
 -- https://github.com/folke/lazy.nvim
---`:help lazy.nvim.txt` for more info
+-- See `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
