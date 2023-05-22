@@ -1,7 +1,11 @@
 -- Leader keymaps
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-vim.keymap.set({'n', 'v'}, '<CR>', ' ', { silent = true, remap = true })
+local leader = ' '
+vim.g.mapleader = leader
+vim.g.maplocalleader = leader
+
+-- Use the Enter key as the second Leader
+vim.keymap.set({'n', 'v'}, '<CR>', leader, { silent = true, remap = true })
+vim.keymap.set({'n', 'v'}, '<CR><CR>', '<CR>', { silent = true, remap = false })
 
 -- Install package manager
 -- https://github.com/folke/lazy.nvim
@@ -170,6 +174,9 @@ vim.o.timeout = false
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
+
+-- Keeps the same screen lines in all split windows
+vim.o.splitkeep = 'screen'
 
 -- [[ Appearance ]]
 
