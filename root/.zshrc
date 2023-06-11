@@ -68,6 +68,7 @@ plugins=(
   git
   vi-mode
   fancy-ctrl-z
+  fzf
 )
 
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
