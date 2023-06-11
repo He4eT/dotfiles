@@ -2,6 +2,7 @@
 local leader = ' '
 vim.g.mapleader = leader
 vim.g.maplocalleader = leader
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Use the Enter key as the second Leader
 vim.keymap.set({'n', 'v'}, '<CR>', leader, { silent = true, remap = true })
@@ -216,13 +217,13 @@ end
 
 -- [[ Basic Keymaps ]]
 
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- Remap PgUp/PgDown to C-u/C-d
+vim.keymap.set('n', '<PageDown>', '<C-d>', { silent = true })
+vim.keymap.set('n', '<PageUp>', '<C-u>', { silent = true })
 
 -- Escaping Terminal mode
 vim.keymap.set({ 't' }, ';;', '<C-\\><C-n>', { silent = true })
