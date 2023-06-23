@@ -208,6 +208,9 @@ vim.g.desolate_info = '#ffffff'
 -- Set colorscheme
 vim.cmd.colorscheme 'desolate'
 
+-- Disable line numbers for terminal buffers
+vim.api.nvim_create_autocmd({ 'TermOpen' }, { pattern = { '*' }, command = 'setlocal nonumber'})
+
 -- Tune diagnostic signs
 local signs = { Error = '■ ', Warn = '■ ', Hint = '■ ', Info = '■ ' }
 for type, icon in pairs(signs) do
