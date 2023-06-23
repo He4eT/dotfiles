@@ -35,6 +35,8 @@ require('lazy').setup({
       'rktjmp/lush.nvim',
     },
   },
+  -- Color highlighter
+  'norcalli/nvim-colorizer.lua',
   { -- `gc` to comment visual regions/lines
     'numToStr/Comment.nvim',
     opts = {},
