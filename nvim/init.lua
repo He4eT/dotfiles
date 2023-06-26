@@ -5,8 +5,8 @@ vim.g.maplocalleader = leader
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Use the Enter key as the second Leader
-vim.keymap.set({'n', 'v'}, '<CR>', leader, { silent = true, remap = true })
-vim.keymap.set({'n', 'v'}, '<CR><CR>', '<CR>', { silent = true, remap = false })
+vim.keymap.set({ 'n', 'v' }, '<CR>', leader, { silent = true, remap = true })
+vim.keymap.set({ 'n', 'v' }, '<CR><CR>', '<CR>', { silent = true, remap = false })
 
 -- Install package manager
 -- https://github.com/folke/lazy.nvim
@@ -211,7 +211,7 @@ vim.g.desolate_info = '#ffffff'
 vim.cmd.colorscheme 'desolate'
 
 -- Disable line numbers for terminal buffers
-vim.api.nvim_create_autocmd({ 'TermOpen' }, { pattern = { '*' }, command = 'setlocal nonumber'})
+vim.api.nvim_create_autocmd({ 'TermOpen' }, { pattern = { '*' }, command = 'setlocal nonumber' })
 
 -- Tune diagnostic signs
 local signs = { Error = '■ ', Warn = '■ ', Hint = '■ ', Info = '■ ' }
@@ -282,7 +282,7 @@ fzf.setup({
   previewers = {
     builtin = {
       syntax = true,
-      syntax_limit_b = 1024*64, -- syntax limit (bytes), 0=nolimit
+      syntax_limit_b = 1024 * 64, -- syntax limit (bytes), 0=nolimit
     }
   },
 
@@ -300,19 +300,19 @@ fzf.setup({
     ['--border'] = 'none',
   },
   fzf_colors = {
-      ['fg']          = { 'fg', 'CursorLine' },
-      ['bg']          = { 'bg', 'Normal' },
-      ['hl']          = { 'fg', 'Comment' },
-      ['fg+']         = { 'fg', 'Normal' },
-      ['bg+']         = { 'bg', 'CursorLine' },
-      ['hl+']         = { 'fg', 'Statement' },
-      ['info']        = { 'fg', 'PreProc' },
-      ['prompt']      = { 'fg', 'Conditional' },
-      ['pointer']     = { 'fg', 'Exception' },
-      ['marker']      = { 'fg', 'Keyword' },
-      ['spinner']     = { 'fg', 'Label' },
-      ['header']      = { 'fg', 'Comment' },
-      ['gutter']      = { 'bg', 'Normal' },
+    ['fg']      = { 'fg', 'CursorLine' },
+    ['bg']      = { 'bg', 'Normal' },
+    ['hl']      = { 'fg', 'Comment' },
+    ['fg+']     = { 'fg', 'Normal' },
+    ['bg+']     = { 'bg', 'CursorLine' },
+    ['hl+']     = { 'fg', 'Statement' },
+    ['info']    = { 'fg', 'PreProc' },
+    ['prompt']  = { 'fg', 'Conditional' },
+    ['pointer'] = { 'fg', 'Exception' },
+    ['marker']  = { 'fg', 'Keyword' },
+    ['spinner'] = { 'fg', 'Label' },
+    ['header']  = { 'fg', 'Comment' },
+    ['gutter']  = { 'bg', 'Normal' },
   },
 })
 
@@ -509,7 +509,7 @@ require('lspconfig').tsserver.setup({
       local line = result.position.line
       local character = result.position.character
       local column = vim.str_byteindex(vim.fn.getline('.'), character, true)
-      vim.api.nvim_win_set_cursor(0, {line + 1, column})
+      vim.api.nvim_win_set_cursor(0, { line + 1, column })
       vim.lsp.buf.rename()
       return result
     end,
