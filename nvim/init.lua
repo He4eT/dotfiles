@@ -276,28 +276,28 @@ require('leap').opts.safe_labels = {}
 local fzf = require('fzf-lua')
 
 fzf.setup({
-  border = 'single',
-  fullscreen = true,
-
-  previewers = {
-    builtin = {
-      syntax = true,
-      syntax_limit_b = 1024 * 64, -- syntax limit (bytes), 0=nolimit
-    }
-  },
-
-  grep = {
-    rg_opts = '--vimgrep --smart-case --max-columns=512',
-    file_ignore_patterns = {
-      '^node_modules/',
-      '/node_modules/',
-      '^.git/',
-      '^.yarn/'
+  winopts = {
+    border = 'single',
+    fullscreen = true,
+    previewers = {
+      builtin = {
+        syntax = true,
+        syntax_limit_b = 1024 * 64, -- syntax limit (bytes), 0=nolimit
+      }
+    },
+    grep = {
+      rg_opts = '--vimgrep --smart-case --max-columns=512',
+      file_ignore_patterns = {
+        '^node_modules/',
+        '/node_modules/',
+        '^.git/',
+        '^.yarn/'
+      },
     },
   },
-
   fzf_opts = {
     ['--border'] = 'none',
+    ['--preview-window'] = 'border-sharp',
   },
   fzf_colors = {
     ['fg']      = { 'fg', 'CursorLine' },
@@ -306,7 +306,7 @@ fzf.setup({
     ['fg+']     = { 'fg', 'Normal' },
     ['bg+']     = { 'bg', 'CursorLine' },
     ['hl+']     = { 'fg', 'Statement' },
-    ['info']    = { 'fg', 'PreProc' },
+    ['info']    = { 'fg', 'Normal' },
     ['prompt']  = { 'fg', 'Conditional' },
     ['pointer'] = { 'fg', 'Exception' },
     ['marker']  = { 'fg', 'Keyword' },
