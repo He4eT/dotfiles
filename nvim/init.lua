@@ -285,14 +285,19 @@ fzf.setup({
         syntax_limit_b = 1024 * 64, -- syntax limit (bytes), 0=nolimit
       }
     },
-    grep = {
-      rg_opts = '--vimgrep --smart-case --max-columns=512',
-      file_ignore_patterns = {
-        '^node_modules/',
-        '/node_modules/',
-        '^.git/',
-        '^.yarn/'
-      },
+  },
+  grep = {
+    rg_opts = '--vimgrep --smart-case --max-columns=512' ..
+      ' --color=ansi' ..
+      ' --colors path:fg:yellow' ..
+      ' --colors line:fg:green' ..
+      ' --colors column:fg:blue' ..
+      ' --colors match:fg:red';
+    file_ignore_patterns = {
+      '^node_modules/',
+      '/node_modules/',
+      '^.git/',
+      '^.yarn/'
     },
   },
   fzf_opts = {
