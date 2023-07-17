@@ -155,6 +155,9 @@ vim.o.breakindent = false
 -- Disable line wrapping
 vim.o.wrap = false
 
+-- Break lines at word
+vim.o.linebreak = true
+
 -- Show cursorline
 vim.o.cursorline = true
 
