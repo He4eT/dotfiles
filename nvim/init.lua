@@ -233,13 +233,16 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '<PageDown>', '<C-d>', { silent = true })
 vim.keymap.set('n', '<PageUp>', '<C-u>', { silent = true })
 
+-- Open terminal
+vim.keymap.set({ 'n' }, '<leader>t', ':terminal<CR>i', { silent = true })
+
 -- Escaping Terminal mode
 vim.keymap.set({ 't' }, ';;', '<C-\\><C-n>', { silent = true })
 
 -- Window managment
 vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true })
 vim.keymap.set('n', '<leader>k', '<C-w>w', { remap = true })
-vim.keymap.set('n', '<leader>K', ':vs<CR>')
+vim.keymap.set('n', '<leader>K', ':vs<CR><C-w>w')
 vim.keymap.set('n', '<leader>q', ':b#|bd#<CR>')
 vim.keymap.set('n', '<leader>h', '<C-o>')
 vim.keymap.set('n', '<leader>l', '<C-i>')
