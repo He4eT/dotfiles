@@ -109,6 +109,27 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
+  {
+    'Exafunction/codeium.vim',
+    keys = { { '<C-h>', mode = 'i' } },
+    config = function()
+      vim.g.codeium_manual = 1
+      vim.g.codeium_disable_bindings = 1
+      vim.keymap.set('i', '<C-h>', function() return vim.fn['codeium#Complete']() end, { expr = true })
+      vim.keymap.set('i', '<C-l>', function() return vim.fn['codeium#Accept']() end, { expr = true })
+      vim.keymap.set('i', '<C-u>', function() return vim.fn['codeium#Clear']() end, { expr = true })
+
+      vim.keymap.set('i', '<C-j>', function()
+        vim.fn['codeium#CycleCompletions'](1)
+        print(vim.fn['codeium#GetStatusString']())
+      end, { expr = true })
+
+      vim.keymap.set('i', '<C-k>', function()
+        vim.fn['codeium#CycleCompletions'](-1)
+        print(vim.fn['codeium#GetStatusString']())
+      end, { expr = true })
+    end,
+  },
 }, {
   ui = {
     size = { width = 0.85, height = 0.7 },
