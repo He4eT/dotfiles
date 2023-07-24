@@ -131,6 +131,7 @@ require('lazy').setup({
     end,
   },
 }, {
+  -- Lazy options
   ui = {
     size = { width = 0.85, height = 0.7 },
     border = 'solid',
@@ -315,11 +316,11 @@ fzf.setup({
   },
   grep = {
     rg_opts = '--vimgrep --smart-case --max-columns=512' ..
-      ' --color=ansi' ..
-      ' --colors path:fg:yellow' ..
-      ' --colors line:fg:green' ..
-      ' --colors column:fg:blue' ..
-      ' --colors match:fg:red';
+        ' --color=ansi' ..
+        ' --colors path:fg:yellow' ..
+        ' --colors line:fg:green' ..
+        ' --colors column:fg:blue' ..
+        ' --colors match:fg:red',
     file_ignore_patterns = {
       '^node_modules/',
       '/node_modules/',
