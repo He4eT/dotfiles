@@ -54,7 +54,6 @@
   colorscheme phoenix
   PhoenixOrange
 
-  set cursorline
   set ttimeoutlen=10
 
   let &t_SI.="\e[5 q"
