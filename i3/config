@@ -233,3 +233,37 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+# mouse mode
+mode "mouse" {
+        # clicks
+        bindsym j exec xdotool click 1
+        bindsym k exec xdotool click 3
+        bindsym l exec xdotool click 2
+
+        # wheel
+        bindsym t exec xdotool click 4
+        bindsym g exec xdotool click 5
+
+        # wheel
+        bindsym y exec xdotool click 4
+        bindsym h exec xdotool click 5
+
+        # movement
+        bindsym e exec xdotool mousemove_relative -- 0 -32
+        bindsym s exec xdotool mousemove_relative -- -32 0
+        bindsym d exec xdotool mousemove_relative -- 0 32
+        bindsym f exec xdotool mousemove_relative -- 32 0
+
+        # slow movement
+        bindsym Shift+e exec xdotool mousemove_relative -- 0 -1
+        bindsym Shift+s exec xdotool mousemove_relative -- -1 0
+        bindsym Shift+d exec xdotool mousemove_relative -- 0 1
+        bindsym Shift+f exec xdotool mousemove_relative -- 1 0
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+m mode "mouse"
