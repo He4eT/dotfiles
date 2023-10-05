@@ -20,6 +20,7 @@ sudo dnf install \
   neovim \
   ripgrep \
   xclip \
+  xdotool \
   git \
   zsh \
   mc \

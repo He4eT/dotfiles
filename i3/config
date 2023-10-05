@@ -61,6 +61,9 @@ bindsym XF86Tools exec xfce4-screenshooter --region --delay 0
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Tab exec rofi -show window
 
+bindsym $mod+g exec xdotool mousemove 0 1080
+bindsym $mod+Shift+g exec xdotool mousemove 960 0
+
 # notifications
 
 bindsym $mod+grave exec --no-startup-id dunstctl history-pop
