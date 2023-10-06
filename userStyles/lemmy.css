@@ -4,6 +4,11 @@
   border-radius: 0 !important;
 }
 
+/* Some air for post text. */
+#postContent {
+  line-height: 1.5;
+}
+
 /* Tuning for https://lemmy.cafe */
 #navbar {
   margin-block-start: 16px;
