@@ -9,6 +9,10 @@
   line-height: 1.5;
 }
 
+.post-listing {
+  line-height: 2;
+}
+
 /* Tuning for https://lemmy.cafe */
 #navbar {
   margin-block-start: 16px;
