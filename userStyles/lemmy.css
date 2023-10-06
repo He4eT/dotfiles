@@ -1,0 +1,19 @@
+/* Turn off border radius. */
+*,
+.rounded {
+  border-radius: 0 !important;
+}
+
+/* Tuning for https://lemmy.cafe */
+#navbar {
+  margin-block-start: 16px;
+}
+
+#tagline {
+  display: none;
+  margin-block-end: 32px;
+}
+
+.post-listings {
+  margin-block-start: 48px;
+}
