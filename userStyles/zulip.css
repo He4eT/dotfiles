@@ -1,0 +1,77 @@
+/* Turn off colors for stream icons. */
+.stream-privacy {
+  color: #7f807f !important;
+}
+
+/* Turn off border radius. */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+}
+
+/* Turn off border-radius for the compose stream selector. */
+.compose_table #compose-recipient.compose-recipient-direct-selected #compose_select_recipient_widget {
+  border-radius: 0 !important;
+}
+
+/* Background color for compose block. */
+#compose-content {
+  background-color: #efebeb !important;
+}
+
+/* Background color for submit button. */
+.animated-purple-button {
+  background-color: hsl(0, 0%, 50%) !important;
+}
+
+/* Add border to avatars in recent conversations. */
+.recent_topics_container #recent_topics_table .recent_topics_participant_avatar, .recent_topics_container #recent_topics_table .recent_topics_participant_overflow {
+  outline: 2px solid #e0e0e0;
+  outline-offset: -2px;
+}
+
+/* Color for stream names and topics in recent conversations. */
+.table.table-responsive a {
+  color: #212121 !important;
+}
+
+/* Color for focus indicator. */
+.recent_topics_container #recent_topics_table .recent_topics_focusable:focus-within {
+  box-shadow: 0 3px 0 #212121 !important;
+}
+
+/* Color for sidebar active item. */
+li.active-filter, li.active-sub-filter {
+  background-color: hsl(0, 0%, 85%) !important;
+}
+
+/* Color for sidebar hovered item. */
+.bottom_left_row:not(.active-sub-filter):hover, .top_left_row:not(.active-sub-filter):hover {
+  background-color: hsl(0, 0%, 85%) !important;
+}
+
+/* Hide "Subscribe to more streams". */
+#subscribe-to-more-streams > a {
+  opacity: 0;
+}
+
+/* Dim logo. */
+#realm-logo {
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+
+/* Hide toolbar buttons. */
+.compose_bottom_bottom_container,
+#navbar-middle .search_closed,
+#userlist-toggle,
+#settings-dropdown {
+  opacity: 0 !important;
+}
+.compose_bottom_bottom_container:hover,
+#navbar-middle:hover .search_closed,
+#userlist-toggle:hover,
+#settings-dropdown:hover {
+  opacity: 1 !important;
+}
