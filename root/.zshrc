@@ -40,6 +40,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Aliases
 
+alias :q='exit'
 alias fakemsg='echo "$(curl -s https://whatthecommit.com/index.txt)"'
 alias ncdu='ncdu --color off'
 
