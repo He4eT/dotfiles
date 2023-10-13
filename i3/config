@@ -14,6 +14,7 @@ exec --no-startup-id picom \
   --shadow-exclude='x <= 0 && x2 >= 1920 && y <= 30 && y2 >= 1020' \
   --shadow-exclude='class_g ?= "i3-frame"' \
   --shadow-exclude='class_g = "firefox" && argb' \
+  --shadow-exclude='class_g = "thunderbird" && argb' \
   --shadow-exclude='class_g = "TelegramDesktop" && argb' \
 
 # compton: Xubuntu 18.04 Samsung [backup]
