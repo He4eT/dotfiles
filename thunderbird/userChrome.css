@@ -1,0 +1,32 @@
+* {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+
+  --selected-item-color: #9e9e9e !important;
+  --selected-item-text-color: #212121 !important;
+
+  --treeitem-background-active: #9e9e9e !important;
+
+  --viewHighlightBorderColor: #9e9e9e !important;
+  --viewHighlightTextColor: #212121 !important;
+}
+
+#folderTree .icon {
+  --icon-color: #212121 !important;
+}
+
+.calendar-notification-bar {
+  background-color: #f4f4f5 !important;
+}
+
+#calSidebar #primaryButtonSidePanel {
+  display: none !important;
+}
+
+#tabs-toolbar {
+  display: none;
+}
+
+.tab-line {
+  display: none;
+}
