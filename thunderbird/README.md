@@ -1,8 +1,8 @@
 # Thunderbird
 
-- Place userChrome.css in `/home/[user]/.thunderbird/[random letters and numbers].default/chrome/`.
-- Set Thunderbird Start Page to `file:///home/odd/dotfiles/thunderbird/newTab.html`.
-- Set tbkeys-lite bindings.
+- Place `userChrome.css` in `~/.thunderbird/[random letters and numbers].default/chrome/`.
+- Set *Thunderbird Start Page* to `file:///home/odd/dotfiles/thunderbird/newTab.html`.
+- Set `tbkeys-lite` bindings on the extension preferences page.
 
 ## tbkeys-lite Bindings
 
