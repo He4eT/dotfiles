@@ -21,6 +21,7 @@ sudo dnf install \
   ripgrep \
   xclip \
   xdotool \
+  xdpyinfo \
   git \
   zsh \
   mc \
