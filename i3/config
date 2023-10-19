@@ -251,10 +251,10 @@ mode "mouse" {
         bindsym h exec xdotool click 5
 
         # movement
-        bindsym e exec xdotool mousemove_relative -- 0 -32
-        bindsym s exec xdotool mousemove_relative -- -32 0
-        bindsym d exec xdotool mousemove_relative -- 0 32
-        bindsym f exec xdotool mousemove_relative -- 32 0
+        bindsym e exec "~/dotfiles/i3/scripts/binSeekCursor.sh up"
+        bindsym s exec "~/dotfiles/i3/scripts/binSeekCursor.sh left"
+        bindsym d exec "~/dotfiles/i3/scripts/binSeekCursor.sh down"
+        bindsym f exec "~/dotfiles/i3/scripts/binSeekCursor.sh right"
 
         # slow movement
         bindsym Shift+e exec xdotool mousemove_relative -- 0 -1
