@@ -251,6 +251,7 @@ mode "mouse" {
         bindsym h exec xdotool click 5
 
         # movement
+        bindsym a exec "~/dotfiles/i3/scripts/binSeekCursor.sh reset"
         bindsym e exec "~/dotfiles/i3/scripts/binSeekCursor.sh up"
         bindsym s exec "~/dotfiles/i3/scripts/binSeekCursor.sh left"
         bindsym d exec "~/dotfiles/i3/scripts/binSeekCursor.sh down"
