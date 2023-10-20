@@ -1,15 +1,20 @@
 #!/bin/bash
 
+temp_file="/tmp/binSeekCursor"
+
+# Reset working area
+
+if [ "$1" == "reset" ]; then
+  rm $temp_file
+  exit 0
+fi
+
 # Fail fast: Check 'direction' parameter
 
 if [ "$1" != "up" ] && [ "$1" != "right" ] && [ "$1" != "down" ] && [ "$1" != "left" ]; then
   echo "Invalid or missing direction. It must be 'up', 'right', 'down', or 'left'."
   exit 1
 fi
-
-# Init 
-
-temp_file="/tmp/binSeekCursor"
 
 # Current cursor position: $X and $Y
 
@@ -51,6 +56,7 @@ move_cursor_to_horizontal_center() {
 }
 
 # Set the working area borders based on the direction
+
 case "$1" in
   "up")
     working_area_down=$Y
@@ -71,6 +77,7 @@ case "$1" in
 esac
 
 # Write timestamp and working area to the temporary file
+
 echo "" > $temp_file
 echo "working_area_left=$working_area_left" >> $temp_file
 echo "working_area_top=$working_area_top" >> $temp_file
