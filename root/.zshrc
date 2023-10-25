@@ -55,6 +55,11 @@ alias here-http='hostname -I && python3 -m http.server'
 alias here-http-cors='npx http-server -p 8080 --cors'
 alias here-https='PORT=8080 npx https-localhost'
 
+## Ollama
+
+alias summon='clear && docker exec -it ollama ollama run'
+alias summonable='docker exec -it ollama ollama list'
+
 ## Copy from terminal
 # See .XResources
 
