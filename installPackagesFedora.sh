@@ -16,6 +16,7 @@ sudo dnf install \
   htop \
   ncdu \
   lynx \
+  sen \
   vim \
   neovim \
   ripgrep \
