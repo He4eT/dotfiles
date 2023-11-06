@@ -11,8 +11,11 @@ sudo dnf install \
   gimp \
   vlc \
   rxvt-unicode \
+  cbonsai \
+  cmatrix \
   NetworkManager-tui \
   light \
+  btop \
   htop \
   ncdu \
   lynx \
