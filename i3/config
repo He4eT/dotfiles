@@ -55,6 +55,7 @@ set $mod Mod4
 bindsym $mod+Return exec urxvt
 
 bindsym $mod+t exec firefox --new-tab --url about:newtab && i3-msg '[urgent=latest] focus'
+bindsym $mod+o exec "~/dotfiles/i3/scripts/tabToLastWorkspace.sh"
 
 bindsym Print exec xfce4-screenshooter
 bindsym XF86Tools exec xfce4-screenshooter --region --delay 0
