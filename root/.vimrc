@@ -3,6 +3,7 @@
   set encoding=utf-8
   set nocompatible
   set mouse=a
+  set scrolloff=0
 
   set number
   set fillchars=eob:\  " No more ~
@@ -72,9 +73,10 @@
   set statusline=
   set statusline+=%#StatusLine#
   set statusline+=%{mode()}
+  set statusline+=\ " Space
 
   set statusline+=%#LineNr#
-  set statusline+=\ %y
+  set statusline+=%y
 
   set statusline+=%#StatusLine#
   set statusline+=\ %f
@@ -83,7 +85,7 @@
   set statusline+=%=
 
   set statusline+=%#LineNr#
-  set statusline+=\ %{&fileformat}
+  set statusline+=%{&fileformat}
   set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 
   set statusline+=%#StatusLine#
