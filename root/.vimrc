@@ -1,11 +1,11 @@
 """ Common
 
-  set nocompatible
   set encoding=utf-8
+  set nocompatible
+  set mouse=a
 
   set number
-
-  set mouse=a
+  set fillchars=eob:\  " No more ~
 
   set nowrap
   set autoindent
@@ -15,7 +15,11 @@
   set shiftwidth=2
 
   let mapleader = ' '
+  set ttimeoutlen=10
+
   nnoremap <SPACE> <Nop>
+
+  nnoremap <Esc> :nohl<CR>
 
   filetype plugin indent on
 
@@ -30,48 +34,62 @@
 
     """ Themes
     Plug 'tribela/vim-transparent'
-    Plug 'pgdouyon/vim-yin-yang'
     Plug 'widatama/vim-phoenix'
-    """ Plug 'Lokaltog/vim-monotone'
-    """ Plug 'alexanderheldt/monokrom.vim'
 
-    """ Statusline
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+    Plug 'Lokaltog/vim-monotone'
+    Plug 'alexanderheldt/monokrom.vim'
+    Plug 'pgdouyon/vim-yin-yang'
 
     """ Navigation
     Plug 'justinmk/vim-sneak'
   call plug#end()
 
+""" Sneak
+
   let g:sneak#label = 1
-
-""" Appearance
-
-  """ colorscheme monotone
   autocmd ColorScheme * hi Sneak guifg=black guibg=white ctermfg=black ctermbg=white
   autocmd ColorScheme * hi SneakScope guifg=black guibg=white ctermfg=black ctermbg=white
   autocmd ColorScheme * hi SneakLabel guifg=black guibg=white ctermfg=black ctermbg=white
+
+""" Appearance
+
   colorscheme phoenix
   PhoenixOrange
 
-  set ttimeoutlen=10
-
+  " Cursor
   let &t_SI.="\e[5 q"
   let &t_SR.="\e[3 q"
   let &t_EI.="\e[2 q"
 
-  highlight EndOfBuffer ctermfg=16
 
 """ Statusline
 
-  let g:airline_theme='minimalist'
-  let g:airline_section_x = airline#section#create(['%l:%v'])
-  let g:airline_section_y = airline#section#create([''])
-  let g:airline_section_z = airline#section#create(['%p%%'])
-  let g:airline#extensions#whitespace#enabled = 1
+  hi StatusLine ctermbg=none ctermfg=white cterm=bold
 
-  set laststatus=2
   set noshowmode
+  set laststatus=2
+
+  set statusline=
+  set statusline+=%#StatusLine#
+  set statusline+=%{mode()}
+
+  set statusline+=%#LineNr#
+  set statusline+=\ %y
+
+  set statusline+=%#StatusLine#
+  set statusline+=\ %f
+  set statusline+=\ %m
+
+  set statusline+=%=
+
+  set statusline+=%#LineNr#
+  set statusline+=\ %{&fileformat}
+  set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+
+  set statusline+=%#StatusLine#
+  set statusline+=\ %l:%c
+  set statusline+=\ %p%%
+
 
 """ Copy'n'paste
 
