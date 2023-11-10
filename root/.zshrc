@@ -19,15 +19,13 @@ clear
 # ZSH settings
 
 export ZSH="/home/odd/.oh-my-zsh"
-# ZSH_CUSTOM=/path/to/new-custom-folder
+ZSH_CUSTOM="/home/odd/dotfiles/zsh"
 
-ZSH_THEME="minimal"
+ZSH_THEME="custom-minimal"
+MODE_INDICATOR="%F{yellow}█%f"
+VI_MODE_CURSOR_INSERT=2
 
 CASE_SENSITIVE="false"
-
-MODE_INDICATOR="%F{yellow}#%f"
-VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
-# VI_MODE_CURSOR_INSERT=2
 
 plugins=(
   git

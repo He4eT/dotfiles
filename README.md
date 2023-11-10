@@ -6,7 +6,6 @@
 1. Run `./installPackagesFedora.sh`
 1. Run `./apply.sh`
 1. Install [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh#basic-installation)
-1. Replace ugly ● with awesome ▴ in `~/.oh-my-zsh/themes/minimal.zsh-theme`
 1. Export gtk-theme and icons with `oomox` and apply them with `lxappearance`
 1. [Apply](https://wiki.archlinux.org/title/Cursor_themes) the [Quintom cursor theme](https://gitlab.com/Burning_Cube/quintom-cursor-theme/-/tree/master/) as `Quintom_Snow`
 
