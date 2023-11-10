@@ -61,7 +61,12 @@ alias summonable='docker exec -it ollama ollama list'
 ## Copy from terminal
 # See .XResources
 
-alias last-terminal-screenshot='vim -c "norm G" /tmp/urxvt-screen-content.txt'
+alias last-terminal-screenshot='\
+  vim \
+  -c "norm G" \
+  -c "set relativenumber" \
+  /tmp/urxvt-screen-content.txt
+'
 alias yank='\
   xdotool keydown shift keydown Print ;\
   xdotool keyup Print keyup shift ;\
