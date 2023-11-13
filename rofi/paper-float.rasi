@@ -20,7 +20,7 @@ element-text {
 #window {
     border: @border-width;
     width: 800px;
-    height: 518px;
+    height: 496px;
 }
 
 #element {
