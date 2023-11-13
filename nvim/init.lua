@@ -115,9 +115,15 @@ require('lazy').setup({
     config = function()
       vim.g.codeium_manual = 1
       vim.g.codeium_disable_bindings = 1
-      vim.keymap.set('i', '<C-h>', function() return vim.fn['codeium#Complete']() end, { expr = true })
-      vim.keymap.set('i', '<C-l>', function() return vim.fn['codeium#Accept']() end, { expr = true })
-      vim.keymap.set('i', '<C-u>', function() return vim.fn['codeium#Clear']() end, { expr = true })
+      vim.keymap.set('i', '<C-h>', function()
+        return vim.fn['codeium#Complete']()
+      end, { expr = true })
+      vim.keymap.set('i', '<C-l>', function()
+        return vim.fn['codeium#Accept']()
+      end, { expr = true })
+      vim.keymap.set('i', '<C-u>', function()
+        return vim.fn['codeium#Clear']()
+      end, { expr = true })
 
       vim.keymap.set('i', '<C-j>', function()
         vim.fn['codeium#CycleCompletions'](1)
@@ -301,9 +307,9 @@ require('leap').opts.highlight_unlabeled_phase_one_targets = true
 require('leap').opts.safe_labels = {}
 
 -- [[ Configure fzf-lua ]]
-local fzf = require('fzf-lua')
+local fzf = require 'fzf-lua'
 
-fzf.setup({
+fzf.setup {
   winopts = {
     border = 'single',
     fullscreen = true,
@@ -311,21 +317,21 @@ fzf.setup({
       builtin = {
         syntax = true,
         syntax_limit_b = 1024 * 64, -- syntax limit (bytes), 0=nolimit
-      }
+      },
     },
   },
   grep = {
-    rg_opts = '--vimgrep --smart-case --max-columns=512' ..
-        ' --color=ansi' ..
-        ' --colors path:fg:yellow' ..
-        ' --colors line:fg:green' ..
-        ' --colors column:fg:blue' ..
-        ' --colors match:fg:red',
+    rg_opts = '--vimgrep --smart-case --max-columns=512'
+      .. ' --color=ansi'
+      .. ' --colors path:fg:yellow'
+      .. ' --colors line:fg:green'
+      .. ' --colors column:fg:blue'
+      .. ' --colors match:fg:red',
     file_ignore_patterns = {
       '^node_modules/',
       '/node_modules/',
       '^.git/',
-      '^.yarn/'
+      '^.yarn/',
     },
   },
   fzf_opts = {
@@ -333,24 +339,24 @@ fzf.setup({
     ['--preview-window'] = 'border-sharp',
   },
   fzf_colors = {
-    ['fg']      = { 'fg', 'CursorLine' },
-    ['bg']      = { 'bg', 'Normal' },
-    ['hl']      = { 'fg', 'Comment' },
-    ['fg+']     = { 'fg', 'Normal' },
-    ['bg+']     = { 'bg', 'CursorLine' },
-    ['hl+']     = { 'fg', 'Statement' },
-    ['info']    = { 'fg', 'Normal' },
-    ['prompt']  = { 'fg', 'Conditional' },
+    ['fg'] = { 'fg', 'CursorLine' },
+    ['bg'] = { 'bg', 'Normal' },
+    ['hl'] = { 'fg', 'Comment' },
+    ['fg+'] = { 'fg', 'Normal' },
+    ['bg+'] = { 'bg', 'CursorLine' },
+    ['hl+'] = { 'fg', 'Statement' },
+    ['info'] = { 'fg', 'Normal' },
+    ['prompt'] = { 'fg', 'Conditional' },
     ['pointer'] = { 'fg', 'Exception' },
-    ['marker']  = { 'fg', 'Keyword' },
+    ['marker'] = { 'fg', 'Keyword' },
     ['spinner'] = { 'fg', 'Label' },
-    ['header']  = { 'fg', 'Comment' },
-    ['gutter']  = { 'bg', 'Normal' },
+    ['header'] = { 'fg', 'Comment' },
+    ['gutter'] = { 'bg', 'Normal' },
   },
-})
+}
 
 local fzf_files = function()
-  fzf.files({ fd_opts = '--no-ignore --hidden' })
+  fzf.files { fd_opts = '--no-ignore --hidden' }
 end
 
 -- fzf keymaps
@@ -379,7 +385,7 @@ vim.keymap.set({ 'n' }, '<leader>f:', fzf.command_history, { desc = '[F]zf: comm
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
-require('nvim-treesitter.configs').setup({
+require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = {
     'vim',
@@ -450,7 +456,7 @@ require('nvim-treesitter.configs').setup({
       },
     },
   },
-})
+}
 
 -- [[ LSP settings ]]
 -- This function gets run when an LSP connects to a particular buffer.
@@ -497,8 +503,7 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  tsserver = {
-  },
+  tsserver = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -514,17 +519,17 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
 
-mason_lspconfig.setup({
+mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
-})
+}
 
 mason_lspconfig.setup_handlers {
   function(server_name)
-    require('lspconfig')[server_name].setup({
+    require('lspconfig')[server_name].setup {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
-    })
+    }
   end,
 }
 
@@ -532,7 +537,7 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = 'solid',
 })
 
-require('lspconfig').tsserver.setup({
+require('lspconfig').tsserver.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   handlers = {
@@ -542,7 +547,7 @@ require('lspconfig').tsserver.setup({
     ['_typescript.rename'] = function(_, result)
       local line = result.position.line
       local character = result.position.character
-      local column = vim.str_byteindex(vim.fn.getline('.'), character, true)
+      local column = vim.str_byteindex(vim.fn.getline '.', character, true)
       vim.api.nvim_win_set_cursor(0, { line + 1, column })
       vim.lsp.buf.rename()
       return result
@@ -553,20 +558,20 @@ require('lspconfig').tsserver.setup({
       result = vim.tbl_islist(result) and result[1] or result
       vim.lsp.handlers['textDocument/definition'](err, result, ...)
     end,
-  }
-})
+  },
+}
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
-luasnip.config.setup({
+luasnip.config.setup {
   -- https://stackoverflow.com/questions/70366949/
-  region_check_events = "CursorHold,InsertLeave",
-  delete_check_events = "TextChanged,InsertEnter",
-})
+  region_check_events = 'CursorHold,InsertLeave',
+  delete_check_events = 'TextChanged,InsertEnter',
+}
 
-cmp.setup({
+cmp.setup {
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -603,7 +608,9 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
-})
+}
+
+-- npx @johnnymorganz/stylua-bin ./init.lua
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
