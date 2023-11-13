@@ -1,4 +1,8 @@
 configuration {
- font: "NotoSans-Regular 11";
+  /* fc-list for full list */
+  /* fc-match for check */
+  font: "Noto Sans 11";
+  window-format: "{w}&#09;{c}&#09;{t}";
 }
+
 @theme "./paper-float.rasi"

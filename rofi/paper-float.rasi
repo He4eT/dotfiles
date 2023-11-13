@@ -1,3 +1,5 @@
+/* https://davatorium.github.io/rofi/current/rofi-theme.5/#layout */
+
 * {
     bg: #222222;
     fg: #cdcdcd;
@@ -11,16 +13,20 @@
     text-color: @fg;
 }
 
-element-text {
-  background-color: inherit;
-  text-color: inherit;
-  highlight: bold;
-}
-
 #window {
     border: @border-width;
     width: 800px;
-    height: 496px;
+    height: 518px;
+}
+
+#inputbar {
+    padding: @inner-padding;
+    children: [ prompt, textbox-prompt-colon, entry, case-indicator ];
+}
+
+#textbox-prompt-colon {
+    expand: false;
+    str: ": ";
 }
 
 #element {
@@ -36,12 +42,9 @@ element-text {
     background-color: @selection;
 }
 
-#inputbar {
-    padding: @inner-padding;
-    children: [ prompt, textbox-prompt-colon, entry, case-indicator ];
-}
-
-textbox-prompt-colon {
-    expand: false;
-    str: ": ";
+#element-text {
+    background-color: inherit;
+    text-color: inherit;
+    highlight: bold;
+    tab-stops: [50px, 200px];
 }
