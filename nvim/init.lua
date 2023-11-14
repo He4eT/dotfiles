@@ -458,9 +458,35 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+local prevent_lsp_conflicts = function(starting_client)
+  -- Note: check autostart parameter in server config.
+  -- https://www.reddit.com/r/neovim/comments/10n795v/comment/j689u7k/
+  local active_clients = vim.lsp.get_active_clients()
+
+  -- Stop 'tsserver' when 'volar' starts
+  if starting_client.name == 'volar' then
+    for _, active_client in pairs(active_clients) do
+      if active_client.name == 'tsserver' then
+        active_client.stop()
+      end
+    end
+  end
+
+  -- Do not start 'tsserver' if 'volar' is running
+  if starting_client.name == 'tsserver' then
+    for _, active_client in pairs(active_clients) do
+      if active_client.name == 'volar' then
+        starting_client.stop()
+      end
+    end
+  end
+end
+
 -- [[ LSP settings ]]
 -- This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
+  prevent_lsp_conflicts(client)
+
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -503,7 +529,6 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  tsserver = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -512,7 +537,7 @@ local servers = {
         -- Get the language server to recognize the `vim` global
         globals = {
           'vim',
-          'require'
+          'require',
         },
       },
     },
@@ -566,6 +591,13 @@ require('lspconfig').tsserver.setup {
       vim.lsp.handlers['textDocument/definition'](err, result, ...)
     end,
   },
+}
+
+require('lspconfig').volar.setup {
+  autostart = false,
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
 }
 
 -- nvim-cmp setup
