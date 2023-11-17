@@ -359,9 +359,17 @@ local fzf_files = function()
   fzf.files { fd_opts = '--no-ignore --hidden' }
 end
 
+local fzf_grep_current_file = function ()
+  fzf.grep({ search = vim.fn.expand('%:t') })
+end
+
+local fzf_git_history = function ()
+  fzf.files({ cmd = "git log --name-only --pretty=\"\" | sed -e '/^\\s*$/d' | awk '!seen[$0]++'" })
+end
 -- fzf keymaps
 
 vim.keymap.set({ 'n' }, 'gr', fzf.lsp_references, { desc = 'LSP: [G]o to fzf [R]eference list' })
+vim.keymap.set({ 'n' }, '<leader>fu', fzf_grep_current_file, { desc = '[F]zf: current file [U]sage' })
 
 vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin, { desc = '[F]zf: [p]allete' })
 vim.keymap.set({ 'n' }, '<leader>f.', fzf.resume, { desc = '[F]zf: Resume' })
@@ -372,6 +380,7 @@ vim.keymap.set({ 'n' }, '<BS>', fzf.buffers, { desc = '[F]zf: [B]uffers' })
 vim.keymap.set({ 'n' }, '<leader>fF', fzf_files, { desc = '[F]zf: all [F]iles' })
 vim.keymap.set({ 'n' }, '<leader>ff', fzf.git_files, { desc = '[F]zf: git [f]iles' })
 vim.keymap.set({ 'n' }, '<leader>fd', fzf.git_status, { desc = '[F]zf: git [d]iff' })
+vim.keymap.set({ 'n' }, '<leader>fh', fzf_git_history, { desc = '[F]zf: git [h]istory' })
 
 vim.keymap.set({ 'n' }, '<leader>fg', fzf.live_grep, { desc = '[F]zf: [g]rep' })
 vim.keymap.set({ 'n' }, '<leader>fw', fzf.grep_cword, { desc = '[F]zf: grep [w]' })
@@ -457,6 +466,12 @@ require('nvim-treesitter.configs').setup {
     },
   },
 }
+
+vim.filetype.add({
+  extension = {
+    pcss = 'css',
+  }
+})
 
 local prevent_lsp_conflicts = function(starting_client)
   -- Note: check autostart parameter in server config.
