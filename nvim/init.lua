@@ -359,17 +359,17 @@ local fzf_files = function()
   fzf.files { fd_opts = '--no-ignore --hidden' }
 end
 
-local fzf_grep_current_file = function ()
-  fzf.grep({ search = vim.fn.expand('%:t') })
+local fzf_grep_filename = function()
+  fzf.grep { search = vim.fn.expand '%:t' }
 end
 
-local fzf_git_history = function ()
-  fzf.files({ cmd = "git log --name-only --pretty=\"\" | sed -e '/^\\s*$/d' | awk '!seen[$0]++'" })
+local fzf_git_history = function()
+  fzf.files { cmd = "git log --name-only --pretty=\"\" | sed -e '/^\\s*$/d' | awk '!seen[$0]++'" }
 end
 -- fzf keymaps
 
 vim.keymap.set({ 'n' }, 'gr', fzf.lsp_references, { desc = 'LSP: [G]o to fzf [R]eference list' })
-vim.keymap.set({ 'n' }, '<leader>fu', fzf_grep_current_file, { desc = '[F]zf: current file [U]sage' })
+vim.keymap.set({ 'n' }, '<leader>fu', fzf_grep_filename, { desc = '[F]zf: current file [U]sages' })
 
 vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin, { desc = '[F]zf: [p]allete' })
 vim.keymap.set({ 'n' }, '<leader>f.', fzf.resume, { desc = '[F]zf: Resume' })
@@ -467,11 +467,11 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
-vim.filetype.add({
+vim.filetype.add {
   extension = {
     pcss = 'css',
-  }
-})
+  },
+}
 
 local prevent_lsp_conflicts = function(starting_client)
   -- Note: check autostart parameter in server config.
