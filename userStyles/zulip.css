@@ -25,6 +25,11 @@
   background-color: hsl(0, 0%, 50%) !important;
 }
 
+/* Recent conversations hover item. */
+.recent_topics_container #recent_topics_table tr:hover {
+  background-color: hsl(0, 0%, 85%) !important;
+}
+
 /* Add border to avatars in recent conversations. */
 .recent_topics_container #recent_topics_table .recent_topics_participant_avatar, .recent_topics_container #recent_topics_table .recent_topics_participant_overflow {
   outline: 2px solid #e0e0e0;
