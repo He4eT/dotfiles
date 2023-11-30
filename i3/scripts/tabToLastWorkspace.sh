@@ -1,6 +1,6 @@
 #!/bin/bash
 
-delay="0.3"
+delay="0.5"
 
 # Press Alt + Shift + 0
 sleep $delay
@@ -20,9 +20,7 @@ xdotool keyup 0 keyup shift keyup Super_L
 # Press Win + 0
 xdotool keydown Super_L keydown 0
 xdotool keyup 0 keyup Super_L
-# sleep $delay
 
 # Press Win + Shift + Space
 xdotool keydown Super_L keydown shift keydown space
 xdotool keyup space keyup shift keyup Super_L
-# sleep $delay
