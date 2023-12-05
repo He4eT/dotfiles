@@ -32,6 +32,7 @@ plugins=(
   vi-mode
   fancy-ctrl-z
   fzf
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh

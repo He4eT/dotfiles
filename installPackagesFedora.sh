@@ -31,3 +31,6 @@ sudo dnf install \
   mc \
   ranger \
   telegram-desktop \
+
+mkdir ./zsh/plugins
+git clone git@github.com:zsh-users/zsh-autosuggestions.git ./zsh/plugins/zsh-autosuggestions2
