@@ -33,4 +33,4 @@ sudo dnf install \
   telegram-desktop \
 
 mkdir ./zsh/plugins
-git clone git@github.com:zsh-users/zsh-autosuggestions.git ./zsh/plugins/zsh-autosuggestions2
+git clone git@github.com:zsh-users/zsh-autosuggestions.git ~/dotfiles/zsh/plugins/zsh-autosuggestions
