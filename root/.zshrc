@@ -60,6 +60,9 @@ alias here-https='PORT=8080 npx https-localhost'
 alias summon='clear && docker exec -it ollama ollama run'
 alias summonable='docker exec -it ollama ollama list'
 
+## Music
+alias somafm='npx ~/trash/fuzzsoma'
+
 ## Copy from terminal
 # See .XResources
 
