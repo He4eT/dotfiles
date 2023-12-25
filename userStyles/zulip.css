@@ -21,25 +21,17 @@
 }
 
 /* Background color for send button. */
-#message-send-controls-container,
-.message-send-controls {
+#message-send-controls-container {
   filter: grayscale(1);
 }
 
-/* Background color for submit button. */
-.animated-purple-button {
-  background-color: hsl(0, 0%, 50%) !important;
-}
-
 /* Recent conversations hover item. */
-.recent_view_container #recent_view_table tr:hover,
-.recent_topics_container #recent_topics_table tr:hover {
+.recent_view_container #recent_view_table tr:hover {
   background-color: hsl(0, 0%, 85%) !important;
 }
 
 /* Add border to avatars in recent conversations. */
-.recent_view_participant_avatar,
-.recent_topics_container #recent_topics_table .recent_topics_participant_avatar, .recent_topics_container #recent_topics_table .recent_topics_participant_overflow {
+.recent_view_participant_avatar {
   outline: 2px solid #e0e0e0;
   outline-offset: -2px;
 }
@@ -50,8 +42,7 @@
 }
 
 /* Color for focus indicator. */
-.recent_view_container #recent_view_table .recent_view_focusable:focus-within,
-.recent_topics_container #recent_topics_table .recent_topics_focusable:focus-within {
+.recent_view_container #recent_view_table .recent_view_focusable:focus-within {
   box-shadow: 0 3px 0 #212121 !important;
 }
 
@@ -77,17 +68,13 @@ li.active-filter, li.active-sub-filter {
 }
 
 /* Hide toolbar buttons. */
-.compose_bottom_bottom_container,
 #help-menu,
-#navbar-middle .search_closed,
 #searchbox_form,
 #userlist-toggle,
 #settings-dropdown {
   opacity: 0 !important;
 }
-.compose_bottom_bottom_container:hover,
 #help-menu:hover,
-#navbar-middle:hover .search_closed,
 #searchbox_form:hover,
 #searchbox_form:focus-within,
 #userlist-toggle:hover,
