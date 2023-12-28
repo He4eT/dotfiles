@@ -31,6 +31,24 @@ require('lazy').setup({
   'navarasu/onedark.nvim',
   { -- Main colorscheme
     'He4eT/desolate.nvim',
+    config = function()
+      vim.g.desolate_h = 0
+      vim.g.desolate_s = 0
+      vim.g.desolate_l = 70
+      vim.g.desolate_contrast = 120
+
+      vim.g.desolate_fg = '#cdcdcd'
+      vim.g.desolate_bg = '#383838'
+
+      vim.g.desolate_constant = '#ffd700'
+      vim.g.desolate_identifier = '#ffc812'
+      vim.g.desolate_statement = '#ffffff'
+
+      vim.g.desolate_error = '#ff4242'
+      vim.g.desolate_warning = '#ffad29'
+      vim.g.desolate_success = '#74af68'
+      vim.g.desolate_info = '#ffffff'
+    end,
     dependencies = {
       'rktjmp/lush.nvim',
     },
@@ -219,24 +237,6 @@ vim.o.termguicolors = true
 
 -- Set dark background
 vim.o.background = 'dark'
-
--- Set colorscheme options
-vim.g.desolate_h = 0
-vim.g.desolate_s = 0
-vim.g.desolate_l = 70
-vim.g.desolate_contrast = 120
-
-vim.g.desolate_fg = '#cdcdcd'
-vim.g.desolate_bg = '#383838'
-
-vim.g.desolate_constant = '#ffd700'
-vim.g.desolate_identifier = '#ffc812'
-vim.g.desolate_statement = '#ffffff'
-
-vim.g.desolate_error = '#ff4242'
-vim.g.desolate_warning = '#ffad29'
-vim.g.desolate_success = '#74af68'
-vim.g.desolate_info = '#ffffff'
 
 -- Set colorscheme
 vim.cmd.colorscheme 'desolate'
