@@ -1,7 +1,6 @@
 * {
   box-shadow: none !important;
   border-radius: 0 !important;
-
   --selected-item-color: #9e9e9e !important;
   --selected-item-text-color: #212121 !important;
   --listbox-selected-bg: #9e9e9e !important;
@@ -44,9 +43,21 @@
 }
 
 #tabs-toolbar {
-  display: none;
+  background: none !important;
+  padding: 0;
+  padding-inline: 3px;
 }
 
-.tab-line {
-  display: none;
+.tab-line[selected="true"] {
+  background: none !important;
 }
+
+.tabmail-tab {
+  margin-bottom: 3px;
+}
+
+tabs > arrowscrollbox,
+tabs > arrowscrollbox > * {
+  --tab-max-width: 200px;
+}
+
