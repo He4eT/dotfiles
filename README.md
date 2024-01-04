@@ -9,17 +9,12 @@
 1. Export gtk-theme and icons with `oomox` and apply them with `lxappearance`
 1. [Apply](https://wiki.archlinux.org/title/Cursor_themes) the [Quintom cursor theme](https://gitlab.com/Burning_Cube/quintom-cursor-theme/-/tree/master/) as `Quintom_Snow`
 
-## Firefox
-
-1. Set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true` with `about:config`
-1. Locate profile with `about:profiles`
-1. Copy `firefox/userChrome.css` to `{Root Directory}/chrome/userChrome.css`
-1. Customize interface
-
 ## git
 
 1. `git config --global core.pager 'less -S'`
 1. `git config --global pull.rebase true`
+1. `git config user.email 'email'`
+1. `git config user.name 'name'`
 
 ## Telegram
 
