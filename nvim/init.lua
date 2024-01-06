@@ -137,13 +137,19 @@ require('lazy').setup({
       {
         '<leader>j',
         ":Ollama<CR>",
-        desc = 'ollama prompt',
+        desc = 'Ollama Menu',
         mode = { 'v' },
+      },
+      {
+        '<leader>j',
+        ":lua require('ollama').prompt('Generate_Code')<cr>",
+        desc = 'Ollama Code Generation',
+        mode = { 'n' },
       },
     },
     opts = {
       model = 'mistral',
-      url = 'http://ollama.internal:11434',
+      url = 'http://ollama.internal:11434', -- see /etc/hosts
       prompts = {
         Ask_About_Code = false,
         Simplify_Code = false,
