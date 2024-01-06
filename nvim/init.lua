@@ -128,31 +128,23 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
   {
-    'Exafunction/codeium.vim',
-    keys = { { '<C-h>', mode = 'i' } },
-    config = function()
-      vim.g.codeium_manual = 1
-      vim.g.codeium_disable_bindings = 1
-      vim.keymap.set('i', '<C-h>', function()
-        return vim.fn['codeium#Complete']()
-      end, { expr = true })
-      vim.keymap.set('i', '<C-l>', function()
-        return vim.fn['codeium#Accept']()
-      end, { expr = true })
-      vim.keymap.set('i', '<C-u>', function()
-        return vim.fn['codeium#Clear']()
-      end, { expr = true })
-
-      vim.keymap.set('i', '<C-j>', function()
-        vim.fn['codeium#CycleCompletions'](1)
-        print(vim.fn['codeium#GetStatusString']())
-      end, { expr = true })
-
-      vim.keymap.set('i', '<C-k>', function()
-        vim.fn['codeium#CycleCompletions'](-1)
-        print(vim.fn['codeium#GetStatusString']())
-      end, { expr = true })
-    end,
+    'nomnivore/ollama.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    cmd = { 'Ollama', 'OllamaModel' },
+    keys = {
+      {
+        '<leader>j',
+        ":<c-u>lua require('ollama').prompt()<cr>",
+        desc = 'ollama prompt',
+        mode = { 'n', 'v' },
+      },
+    },
+    opts = {
+      model = 'mistral',
+      url = 'http://ollama.internal:11434',
+    },
   },
 }, {
   -- Lazy options
