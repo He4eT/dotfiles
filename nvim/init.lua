@@ -136,7 +136,7 @@ require('lazy').setup({
     keys = {
       {
         '<leader>j',
-        ":Ollama<CR>",
+        ':Ollama<CR>',
         desc = 'Ollama Menu',
         mode = { 'v' },
       },
@@ -154,20 +154,19 @@ require('lazy').setup({
         Ask_About_Code = false,
         Simplify_Code = false,
         Improve_Text = {
-          prompt = "Make this text simple and readable. Respond with improved version of this text: ```$sel```",
+          prompt = 'Make this text simple and readable. Respond with improved version of this text: ```$sel```',
           extract = false,
-          action = "replace",
+          action = 'replace',
         },
         Modify_Text = {
-          prompt = "Modify this text in the following way: $input\n\n"
-            .. "```$sel```",
+          prompt = 'Modify this text in the following way: $input\n\n' .. '```$sel```',
           extract = false,
-          action = "replace",
+          action = 'replace',
         },
         Use_selection_as_prompt = {
-          prompt = "$sel",
+          prompt = '$sel',
           extract = false,
-          action = "replace",
+          action = 'replace',
         },
       },
     },
