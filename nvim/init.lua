@@ -136,14 +136,34 @@ require('lazy').setup({
     keys = {
       {
         '<leader>j',
-        ":<c-u>lua require('ollama').prompt()<cr>",
+        ":Ollama<CR>",
         desc = 'ollama prompt',
-        mode = { 'n', 'v' },
+        mode = { 'v' },
       },
     },
     opts = {
       model = 'mistral',
       url = 'http://ollama.internal:11434',
+      prompts = {
+        Ask_About_Code = false,
+        Simplify_Code = false,
+        Improve_Text = {
+          prompt = "Make this text simple and readable. Respond with improved version of this text: ```$sel```",
+          extract = false,
+          action = "replace",
+        },
+        Modify_Text = {
+          prompt = "Modify this text in the following way: $input\n\n"
+            .. "```$sel```",
+          extract = false,
+          action = "replace",
+        },
+        Use_selection_as_prompt = {
+          prompt = "$sel",
+          extract = false,
+          action = "replace",
+        },
+      },
     },
   },
 }, {
