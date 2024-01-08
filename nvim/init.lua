@@ -204,7 +204,7 @@ vim.o.titlestring = '%F'
 vim.o.showmode = false
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
@@ -307,6 +307,9 @@ vim.keymap.set('n', '[g', ':Gitsigns prev_hunk<CR>', { desc = 'Go to previous gi
 vim.keymap.set('n', ']g', ':Gitsigns next_hunk<CR>', { desc = 'Go to next git hunk' })
 vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show git blame' })
 
+-- Highlight
+vim.keymap.set({ 'n' }, '<BS>', ':nohl<CR>', { desc = 'Turn off highlight' })
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -392,7 +395,6 @@ vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin, { desc = '[F]zf: [p]allete' }
 vim.keymap.set({ 'n' }, '<leader>f.', fzf.resume, { desc = '[F]zf: Resume' })
 
 vim.keymap.set({ 'n' }, '<leader>b', fzf.buffers, { desc = '[F]zf: [B]uffers' })
-vim.keymap.set({ 'n' }, '<BS>', fzf.buffers, { desc = '[F]zf: [B]uffers' })
 
 vim.keymap.set({ 'n' }, '<leader>fF', fzf_files, { desc = '[F]zf: all [F]iles' })
 vim.keymap.set({ 'n' }, '<leader>ff', fzf.git_files, { desc = '[F]zf: git [f]iles' })
