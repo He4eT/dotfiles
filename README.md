@@ -19,4 +19,4 @@
 ## Telegram
 
 1. Tinted theme: `#707070`
-1. Fix ugly FileChooser with adding `QT_QPA_PLATFORMTHEME=gtk3` of `XDG_CURRENT_DESKTOP=gnome` to `/etc/environment`
+1. Fix ugly FileChooser with adding `QT_QPA_PLATFORMTHEME=gtk3` or `XDG_CURRENT_DESKTOP=gnome` to `/etc/environment`
