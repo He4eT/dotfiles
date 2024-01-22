@@ -1,0 +1,59 @@
+{
+  "__ConfigsMigration__userValeusSameToDefaultAreCleared": true,
+  "animation": false,
+  "autoAttachOnAnyOtherTrigger": 0,
+  "autoAttachOnContextNewTabCommand": 6,
+  "autoAttachOnNewTabButtonAccelClick": 6,
+  "autoAttachOnNewTabButtonMiddleClick": 6,
+  "autoAttachOnNewTabCommand": 0,
+  "autoAttachOnOpenedFromExternal": 0,
+  "autoAttachOnOpenedWithOwner": 6,
+  "autoAttachSameSiteOrphan": 0,
+  "autoGroupNewTabsFromPinned": false,
+  "cachedExternalAddons": [
+    "@tst-search"
+  ],
+  "chunkedUserStyleRules0": "Lm5ld3RhYi1idXR0b24gewogZGlzcGxheTogbm9uZTsKfQoKLmNvdW50ZXIgewogIGZvbnQtd2VpZ2h0OiBib2xkOwp9CgouY291bnRlcjo6YmVmb3JlIHsKICBjb250ZW50OiAnJzsKfQoKLmNvdW50ZXI6OmFmdGVyIHsKICBjb250ZW50OiAnJzsKfQoKLnR3aXN0eSB7CiAgb3BhY2l0eTogMDsKfQoKLnRhYiB7CiAgYm94LXNoYWRvdzogbm9uZSAhaW1wb3J0YW50Owp9Cgojc3VicGFuZWwtY29udGFpbmVyIHsKICBkaXNwbGF5OiBub25lOwogIG9wYWNpdHk6IDA7CiAgdHJhbnNpdGlvbjogb3BhY2l0eSAwLjNzIGVhc2U7Cn0KI3N1YnBhbmVsLWNvbnRhaW5lcjpob3ZlciB7CiAgb3BhY2l0eTogMTsKfQojdGFiYmFyLWNvbnRhaW5lciB7CiAgYm90dG9tOiAwOwp9Cgp0YWItaXRlbS5hY3RpdmUgLmJhY2tncm91bmQgewogIGJhY2tncm91bmQtY29sb3I6ICNlOGU4ZTg7Cn0KCi8qIHB1dCBzY3JvbGxiYXIgcmlnaHRzaWRlICovCjpyb290LmxlZnQgI3RhYmJhciB7IGRpcmVjdGlvbjogbHRyOyB9",
+  "closeParentBehaviorMode": 1,
+  "configsVersion": 30,
+  "context_sendTreeToDevice": true,
+  "faviconizePinnedTabs": false,
+  "inheritContextualIdentityToSameSiteOrphanMode": 0,
+  "insertNewChildAt": 0,
+  "insertNewTabFromPinnedTabAt": 1,
+  "labelOverflowStyle": "crop",
+  "lastSelectedSubPanelProviderId": "@tst-search",
+  "notifiedFeaturesVersion": 9,
+  "optionsExpandedSections": [
+    "section-appearance",
+    "section-newTabWithOwner",
+    "section-newTab",
+    "section-treeBehavior",
+    "section-advanced",
+    "section-debug"
+  ],
+  "parentTabOperationBehaviorMode": 1,
+  "shiftTabsForScrollbarDistance": "0.0em",
+  "showAutoGroupOptionHint": false,
+  "showExpertOptions": true,
+  "showNewTabActionSelector": false,
+  "sidebarPosition": 1,
+  "sidebarPositionRighsideNotificationShown": true,
+  "sidebarScrollbarPosition": 2,
+  "style": "photon",
+  "syncDevices": {
+    "device-1679911263898-61773": {
+      "id": "device-1679911263898-61773",
+      "name": "Firefox on Linux",
+      "icon": "device-desktop",
+      "timestamp": 1705885297972
+    }
+  },
+  "treeDoubleClickBehavior": 1,
+  "useCachedTree": false,
+  "userStyleRules": "",
+  "userStyleRulesFieldHeight": "484px",
+  "warnOnCloseTabs": false,
+  "warnOnCloseTabsByClosebox": false,
+  "workaroundForBug1548949DroppedTabs": "1705953808086-64887/24"
+}
