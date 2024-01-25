@@ -19,9 +19,16 @@
 
 /* Addressbar */
 
-#urlbar-background {
-  background-color: #e0e0e0 !important;
-  border-color: #adadad !important;
+#main-window:not([privatebrowsingmode="temporary"]) #urlbar-background {
+  /* --toolbar-field-border-color: #adadad; */
+  border-color: var(--button-active-bgcolor) !important;
+  background-color: Field !important;
+}
+
+@media (-moz-bool-pref: "browser.urlbar.richSuggestions.featureGate") {
+  #urlbar:not(.searchButton) > #urlbar-input-container > #identity-box[pageproxystate="invalid"] > .identity-box-button {
+    padding-inline: var(--urlbar-icon-padding) !important;
+  }
 }
 
 #star-button-box {
