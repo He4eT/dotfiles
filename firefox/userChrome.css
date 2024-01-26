@@ -26,7 +26,7 @@
 }
 
 @media (-moz-bool-pref: "browser.urlbar.richSuggestions.featureGate") {
-  #urlbar:not(.searchButton) > #urlbar-input-container > #identity-box[pageproxystate="invalid"] > .identity-box-button {
+  #urlbar:not(.searchButton) > #urlbar-input-container .identity-box-button {
     padding-inline: var(--urlbar-icon-padding) !important;
   }
 }
