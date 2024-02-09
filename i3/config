@@ -11,6 +11,7 @@ exec --no-startup-id setxkbmap -option 'grp:caps_toggle'
 exec --no-startup-id picom \
   -cb -o 1 \
   --vsync \
+  --backend glx \
   --shadow-exclude='x <= 0 && x2 >= 1920 && y <= 30 && y2 >= 1020' \
   --shadow-exclude='class_g ?= "i3-frame"' \
   --shadow-exclude='class_g = "firefox" && argb' \
