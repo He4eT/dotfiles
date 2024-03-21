@@ -1,43 +1,77 @@
-.newtab-button {
- display: none;
+:root {
+  --tab-size: 2.3em;
+  --tab-highlighter-size: 4px;
 }
 
+/* No new tab button */
+.newtab-button {
+  display: none;
+}
+
+/* Counter tunning */
 .counter {
   font-weight: bold;
 }
-
 .counter::before {
   content: '';
 }
-
 .counter::after {
   content: '';
 }
 
-.twisty {
-  opacity: 0;
-}
-
-.tab {
-  box-shadow: none !important;
-}
-
-#subpanel-container {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-#subpanel-container:hover {
-  opacity: 1;
-}
-#tabbar-container {
-  bottom: 0;
-}
-
-tab-item.active .background {
-  background-color: #e8e8e8;
-  background-color: var(--face-highlight-lighter);
-}
-
-/* put scrollbar rightside */
+/* Put scrollbar rightside */
 :root.left #tabbar { direction: ltr; }
+
+/* Scrollbar width */
+#pinned-tabs-container, #normal-tabs-container {
+  scrollbar-width: unset;
+}
+
+/* Common background */
+#background {
+  background: color-mix(in srgb, -moz-dialog 85%, white);
+}
+
+/* Pined tabs container */
+#pinned-tabs-container {
+  border-bottom: 1px solid rgb(173, 173, 173);
+}
+
+/* Tabs */
+
+tab-item,
+tab-item-substance {
+  justify-content: center;
+}
+
+tab-item-substance {
+  padding: 0.3em;
+  border: 1px solid rgb(173, 173, 173);
+  border-right: none;
+}
+
+.tab, .tab.pinned {
+  height: var(--tab-size);
+  margin-top: -1px;
+}
+
+.tab:hover > tab-item-substance,
+.tab.active > tab-item-substance {
+  background: var(--face-highlight-more-more-lighter);
+}
+
+.tab .label {
+  margin-left: 0.4em;
+  line-height: var(--tab-size);
+}
+
+.tab .closebox {
+  margin-left: 0.2em;
+  margin-right: 0.1em;
+}
+
+tab-item tab-favicon,
+tab-item tab-favicon * {
+  vertical-align: top;
+}
+
