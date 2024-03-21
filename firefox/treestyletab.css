@@ -1,0 +1,43 @@
+.newtab-button {
+ display: none;
+}
+
+.counter {
+  font-weight: bold;
+}
+
+.counter::before {
+  content: '';
+}
+
+.counter::after {
+  content: '';
+}
+
+.twisty {
+  opacity: 0;
+}
+
+.tab {
+  box-shadow: none !important;
+}
+
+#subpanel-container {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+#subpanel-container:hover {
+  opacity: 1;
+}
+#tabbar-container {
+  bottom: 0;
+}
+
+tab-item.active .background {
+  background-color: #e8e8e8;
+  background-color: var(--face-highlight-lighter);
+}
+
+/* put scrollbar rightside */
+:root.left #tabbar { direction: ltr; }
