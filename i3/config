@@ -85,6 +85,8 @@ bindsym XF86MonBrightnessDown exec --no-startup-id "light -U 5 & sleep 0.1 & dun
 
 # i3
 
+# screen locker
+bindsym $mod+F4 exec "i3lock -c 000000"
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
