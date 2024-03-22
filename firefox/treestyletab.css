@@ -76,3 +76,7 @@ tab-item tab-favicon * {
   vertical-align: top;
 }
 
+.highlighter::before {
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
