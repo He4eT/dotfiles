@@ -209,6 +209,91 @@ require('lazy').setup({
         build = './install --bin',
       },
     },
+    config = function ()
+      local fzf = require 'fzf-lua'
+
+      fzf.setup {
+        winopts = {
+          border = 'single',
+          fullscreen = true,
+          previewers = {
+            builtin = {
+              syntax = true,
+              syntax_limit_b = 1024 * 64, -- syntax limit (bytes), 0=nolimit
+            },
+          },
+        },
+        grep = {
+          rg_opts = '--vimgrep --smart-case --max-columns=512'
+            .. ' --color=ansi'
+            .. ' --colors path:fg:yellow'
+            .. ' --colors line:fg:green'
+            .. ' --colors column:fg:blue'
+            .. ' --colors match:fg:red',
+          file_ignore_patterns = {
+            '^node_modules/',
+            '/node_modules/',
+            '^.git/',
+            '^.yarn/',
+          },
+        },
+        fzf_opts = {
+          ['--border'] = 'none',
+          ['--preview-window'] = 'border-sharp',
+        },
+        fzf_colors = {
+          ['fg'] = { 'fg', 'CursorLine' },
+          ['bg'] = { 'bg', 'Normal' },
+          ['hl'] = { 'fg', 'Comment' },
+          ['fg+'] = { 'fg', 'Normal' },
+          ['bg+'] = { 'bg', 'CursorLine' },
+          ['hl+'] = { 'fg', 'Statement' },
+          ['info'] = { 'fg', 'Normal' },
+          ['prompt'] = { 'fg', 'Conditional' },
+          ['pointer'] = { 'fg', 'Exception' },
+          ['marker'] = { 'fg', 'Keyword' },
+          ['spinner'] = { 'fg', 'Label' },
+          ['header'] = { 'fg', 'Comment' },
+          ['gutter'] = { 'bg', 'Normal' },
+        },
+      }
+
+      local fzf_files = function()
+        fzf.files { fd_opts = '--no-ignore --hidden' }
+      end
+
+      local fzf_grep_filename = function()
+        fzf.grep { search = vim.fn.expand '%:t' }
+      end
+
+      local fzf_git_history = function()
+        fzf.files { cmd = "git log --name-only --pretty=\"\" | sed -e '/^\\s*$/d' | awk '!seen[$0]++'" }
+      end
+
+      -- fzf keymaps
+      vim.keymap.set({ 'n' }, 'gr', fzf.lsp_references, { desc = 'LSP: [G]o to fzf [R]eference list' })
+      vim.keymap.set({ 'n' }, '<leader>fu', fzf_grep_filename, { desc = '[F]zf: current file [U]sages' })
+
+      vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin, { desc = '[F]zf: [p]allete' })
+      vim.keymap.set({ 'n' }, '<leader>f.', fzf.resume, { desc = '[F]zf: Resume' })
+
+      vim.keymap.set({ 'n' }, '<leader>b', fzf.buffers, { desc = '[F]zf: [B]uffers' })
+
+      vim.keymap.set({ 'n' }, '<leader>fF', fzf_files, { desc = '[F]zf: all [F]iles' })
+      vim.keymap.set({ 'n' }, '<leader>ff', fzf.git_files, { desc = '[F]zf: git [f]iles' })
+      vim.keymap.set({ 'n' }, '<leader>fd', fzf.git_status, { desc = '[F]zf: git [d]iff' })
+      vim.keymap.set({ 'n' }, '<leader>fh', fzf_git_history, { desc = '[F]zf: git [h]istory' })
+
+      vim.keymap.set({ 'n' }, '<leader>fg', fzf.live_grep, { desc = '[F]zf: [g]rep' })
+      vim.keymap.set({ 'n' }, '<leader>fw', fzf.grep_cword, { desc = '[F]zf: grep [w]' })
+      vim.keymap.set({ 'n' }, '<leader>fW', fzf.grep_cWORD, { desc = '[F]zf: grep [W]' })
+
+      vim.keymap.set({ 'n' }, '<leader>p', fzf.registers, { desc = '[F]zf: [p]aste' })
+      vim.keymap.set({ 'n' }, '<leader>/', fzf.blines, { desc = '[F]zf: buffer lines' })
+      vim.keymap.set({ 'n' }, '<leader>f?', fzf.keymaps, { desc = '[F]zf: keymaps' })
+      vim.keymap.set({ 'n' }, '<leader>f/', fzf.search_history, { desc = '[F]zf: search history' })
+      vim.keymap.set({ 'n' }, '<leader>f:', fzf.command_history, { desc = '[F]zf: command history' })
+    end
   },
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -328,91 +413,6 @@ require('lazy').setup({
     },
   },
 })
-
--- [[ Configure fzf-lua ]]
-local fzf = require 'fzf-lua'
-
-fzf.setup {
-  winopts = {
-    border = 'single',
-    fullscreen = true,
-    previewers = {
-      builtin = {
-        syntax = true,
-        syntax_limit_b = 1024 * 64, -- syntax limit (bytes), 0=nolimit
-      },
-    },
-  },
-  grep = {
-    rg_opts = '--vimgrep --smart-case --max-columns=512'
-      .. ' --color=ansi'
-      .. ' --colors path:fg:yellow'
-      .. ' --colors line:fg:green'
-      .. ' --colors column:fg:blue'
-      .. ' --colors match:fg:red',
-    file_ignore_patterns = {
-      '^node_modules/',
-      '/node_modules/',
-      '^.git/',
-      '^.yarn/',
-    },
-  },
-  fzf_opts = {
-    ['--border'] = 'none',
-    ['--preview-window'] = 'border-sharp',
-  },
-  fzf_colors = {
-    ['fg'] = { 'fg', 'CursorLine' },
-    ['bg'] = { 'bg', 'Normal' },
-    ['hl'] = { 'fg', 'Comment' },
-    ['fg+'] = { 'fg', 'Normal' },
-    ['bg+'] = { 'bg', 'CursorLine' },
-    ['hl+'] = { 'fg', 'Statement' },
-    ['info'] = { 'fg', 'Normal' },
-    ['prompt'] = { 'fg', 'Conditional' },
-    ['pointer'] = { 'fg', 'Exception' },
-    ['marker'] = { 'fg', 'Keyword' },
-    ['spinner'] = { 'fg', 'Label' },
-    ['header'] = { 'fg', 'Comment' },
-    ['gutter'] = { 'bg', 'Normal' },
-  },
-}
-
-local fzf_files = function()
-  fzf.files { fd_opts = '--no-ignore --hidden' }
-end
-
-local fzf_grep_filename = function()
-  fzf.grep { search = vim.fn.expand '%:t' }
-end
-
-local fzf_git_history = function()
-  fzf.files { cmd = "git log --name-only --pretty=\"\" | sed -e '/^\\s*$/d' | awk '!seen[$0]++'" }
-end
-
--- fzf keymaps
-vim.keymap.set({ 'n' }, 'gr', fzf.lsp_references, { desc = 'LSP: [G]o to fzf [R]eference list' })
-vim.keymap.set({ 'n' }, '<leader>fu', fzf_grep_filename, { desc = '[F]zf: current file [U]sages' })
-
-vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin, { desc = '[F]zf: [p]allete' })
-vim.keymap.set({ 'n' }, '<leader>f.', fzf.resume, { desc = '[F]zf: Resume' })
-
-vim.keymap.set({ 'n' }, '<leader>b', fzf.buffers, { desc = '[F]zf: [B]uffers' })
-
-vim.keymap.set({ 'n' }, '<leader>fF', fzf_files, { desc = '[F]zf: all [F]iles' })
-vim.keymap.set({ 'n' }, '<leader>ff', fzf.git_files, { desc = '[F]zf: git [f]iles' })
-vim.keymap.set({ 'n' }, '<leader>fd', fzf.git_status, { desc = '[F]zf: git [d]iff' })
-vim.keymap.set({ 'n' }, '<leader>fh', fzf_git_history, { desc = '[F]zf: git [h]istory' })
-
-vim.keymap.set({ 'n' }, '<leader>fg', fzf.live_grep, { desc = '[F]zf: [g]rep' })
-vim.keymap.set({ 'n' }, '<leader>fw', fzf.grep_cword, { desc = '[F]zf: grep [w]' })
-vim.keymap.set({ 'n' }, '<leader>fW', fzf.grep_cWORD, { desc = '[F]zf: grep [W]' })
-
-vim.keymap.set({ 'n' }, '<leader>p', fzf.registers, { desc = '[F]zf: [p]aste' })
-vim.keymap.set({ 'n' }, '<leader>/', fzf.blines, { desc = '[F]zf: buffer lines' })
-vim.keymap.set({ 'n' }, '<leader>f?', fzf.keymaps, { desc = '[F]zf: keymaps' })
-vim.keymap.set({ 'n' }, '<leader>f/', fzf.search_history, { desc = '[F]zf: search history' })
-vim.keymap.set({ 'n' }, '<leader>f:', fzf.command_history, { desc = '[F]zf: command history' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
