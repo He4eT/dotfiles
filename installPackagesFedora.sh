@@ -14,6 +14,7 @@ sudo dnf install \
   cbonsai \
   cmatrix \
   NetworkManager-tui \
+  arandr \
   light \
   btop \
   htop \
