@@ -113,6 +113,7 @@ vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show git
 
 -- Highlight
 vim.keymap.set({ 'n' }, '<BS>', ':nohl<CR>', { desc = 'Turn off highlight' })
+vim.keymap.set({ 'n' }, '<ESC>', ':nohl<CR>', { desc = 'Turn off highlight' })
 
 -- Filetypes
 vim.filetype.add {
