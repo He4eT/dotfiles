@@ -8,6 +8,131 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<CR>', leader, { silent = true, remap = true })
 vim.keymap.set({ 'n', 'v' }, '<CR><CR>', '<CR>', { silent = true, remap = false })
 
+-- [[ Setting options ]]
+-- See `:help vim.o`
+
+-- Set window title
+vim.o.title = true
+vim.o.titlestring = '%F'
+
+-- Hide mode in cmd
+vim.o.showmode = false
+
+-- Set highlight on search
+vim.o.hlsearch = true
+
+-- Make line numbers default
+vim.wo.number = true
+
+-- Enable mouse mode
+vim.o.mouse = 'a'
+
+-- Enable break indent
+vim.o.breakindent = false
+
+-- Disable line wrapping
+vim.o.wrap = false
+
+-- Break lines at word
+vim.o.linebreak = true
+
+-- Show cursorline
+vim.o.cursorline = true
+
+-- Keep signcolumn on by default
+vim.wo.signcolumn = 'yes'
+
+-- Hide tildes on unused lines
+vim.o.fillchars = 'eob: '
+
+-- Save undo history
+vim.o.undofile = true
+
+-- Case insensitive searching UNLESS /C or capital in search
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
+-- Decrease update time
+vim.o.updatetime = 250
+vim.o.timeout = false
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'
+
+-- Keeps the same screen lines in all split windows
+vim.o.splitkeep = 'screen'
+
+-- Disable line numbers for terminal buffers
+vim.api.nvim_create_autocmd({ 'TermOpen' }, { pattern = { '*' }, command = 'setlocal nonumber' })
+
+-- Tune diagnostic signs
+local signs = { Error = '■ ', Warn = '■ ', Hint = '■ ', Info = '■ ' }
+for type, icon in pairs(signs) do
+  local hl = 'DiagnosticSign' .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+-- [[ Basic Keymaps ]]
+
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- Remap PgUp/PgDown to C-u/C-d
+vim.keymap.set('n', '<PageDown>', '<C-d>', { silent = true })
+vim.keymap.set('n', '<PageUp>', '<C-u>', { silent = true })
+
+-- Open terminal
+vim.keymap.set({ 'n' }, '<leader>t', ':terminal<CR>i', { silent = true })
+
+-- Escaping Terminal mode
+vim.keymap.set({ 't' }, ';;', '<C-\\><C-n>', { silent = true })
+
+-- Window managment
+vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true })
+vim.keymap.set('n', '<leader>k', '<C-w>w', { remap = true })
+vim.keymap.set('n', '<leader>K', ':vs<CR><C-w>w')
+vim.keymap.set('n', '<leader>q', ':b#|bd#<CR>')
+vim.keymap.set('n', '<leader>h', '<C-o>')
+vim.keymap.set('n', '<leader>l', '<C-i>')
+
+-- Copy'n'Paste
+vim.keymap.set('n', '<leader>y', ':call system("xclip -i -selection clipboard", @@)<cr>')
+vim.keymap.set('v', '<leader>y', '"+y')
+
+-- Diagnostic
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating [d]iagnostic message' })
+vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostics list' })
+
+-- Gitsigns
+vim.keymap.set('n', '[g', ':Gitsigns prev_hunk<CR>', { desc = 'Go to previous git hunk' })
+vim.keymap.set('n', ']g', ':Gitsigns next_hunk<CR>', { desc = 'Go to next git hunk' })
+vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show git blame' })
+
+-- Highlight
+vim.keymap.set({ 'n' }, '<BS>', ':nohl<CR>', { desc = 'Turn off highlight' })
+
+-- Filetypes
+vim.filetype.add {
+  extension = {
+    pcss = 'css',
+  },
+}
+
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
+
+-- [[ Lazy ]]
 -- Install package manager
 -- https://github.com/folke/lazy.nvim
 -- See `:help lazy.nvim.txt` for more info
@@ -48,6 +173,10 @@ require('lazy').setup({
       vim.g.desolate_warning = '#ffad29'
       vim.g.desolate_success = '#74af68'
       vim.g.desolate_info = '#ffffff'
+
+      vim.o.termguicolors = true
+      vim.o.background = 'dark'
+      vim.cmd.colorscheme 'desolate'
     end,
     dependencies = {
       'rktjmp/lush.nvim',
@@ -191,134 +320,6 @@ require('lazy').setup({
       lazy = '[lazy]',
     },
   },
-})
-
--- [[ Setting options ]]
--- See `:help vim.o`
-
--- Set window title
-vim.o.title = true
-vim.o.titlestring = '%F'
-
--- Hide mode in cmd
-vim.o.showmode = false
-
--- Set highlight on search
-vim.o.hlsearch = true
-
--- Make line numbers default
-vim.wo.number = true
-
--- Enable mouse mode
-vim.o.mouse = 'a'
-
--- Enable break indent
-vim.o.breakindent = false
-
--- Disable line wrapping
-vim.o.wrap = false
-
--- Break lines at word
-vim.o.linebreak = true
-
--- Show cursorline
-vim.o.cursorline = true
-
--- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
-
--- Hide tildes on unused lines
-vim.o.fillchars = 'eob: '
-
--- Save undo history
-vim.o.undofile = true
-
--- Case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
--- Decrease update time
-vim.o.updatetime = 250
-vim.o.timeout = false
-
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
-
--- Keeps the same screen lines in all split windows
-vim.o.splitkeep = 'screen'
-
--- [[ Appearance ]]
-
--- NOTE: You should make sure your terminal supports this
-vim.o.termguicolors = true
-
--- Set dark background
-vim.o.background = 'dark'
-
--- Set colorscheme
-vim.cmd.colorscheme 'desolate'
-
--- Disable line numbers for terminal buffers
-vim.api.nvim_create_autocmd({ 'TermOpen' }, { pattern = { '*' }, command = 'setlocal nonumber' })
-
--- Tune diagnostic signs
-local signs = { Error = '■ ', Warn = '■ ', Hint = '■ ', Info = '■ ' }
-for type, icon in pairs(signs) do
-  local hl = 'DiagnosticSign' .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
--- [[ Basic Keymaps ]]
-
--- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
--- Remap PgUp/PgDown to C-u/C-d
-vim.keymap.set('n', '<PageDown>', '<C-d>', { silent = true })
-vim.keymap.set('n', '<PageUp>', '<C-u>', { silent = true })
-
--- Open terminal
-vim.keymap.set({ 'n' }, '<leader>t', ':terminal<CR>i', { silent = true })
-
--- Escaping Terminal mode
-vim.keymap.set({ 't' }, ';;', '<C-\\><C-n>', { silent = true })
-
--- Window managment
-vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true })
-vim.keymap.set('n', '<leader>k', '<C-w>w', { remap = true })
-vim.keymap.set('n', '<leader>K', ':vs<CR><C-w>w')
-vim.keymap.set('n', '<leader>q', ':b#|bd#<CR>')
-vim.keymap.set('n', '<leader>h', '<C-o>')
-vim.keymap.set('n', '<leader>l', '<C-i>')
-
--- Copy'n'Paste
-vim.keymap.set('n', '<leader>y', ':call system("xclip -i -selection clipboard", @@)<cr>')
-vim.keymap.set('v', '<leader>y', '"+y')
-
--- Diagnostic
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating [d]iagnostic message' })
-vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostics list' })
-
--- Gitsigns
-vim.keymap.set('n', '[g', ':Gitsigns prev_hunk<CR>', { desc = 'Go to previous git hunk' })
-vim.keymap.set('n', ']g', ':Gitsigns next_hunk<CR>', { desc = 'Go to next git hunk' })
-vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show git blame' })
-
--- Highlight
-vim.keymap.set({ 'n' }, '<BS>', ':nohl<CR>', { desc = 'Turn off highlight' })
-
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
 })
 
 -- [[ Configure Leap ]]
@@ -483,12 +484,6 @@ require('nvim-treesitter.configs').setup {
         ['<leader>A'] = '@parameter.inner',
       },
     },
-  },
-}
-
-vim.filetype.add {
-  extension = {
-    pcss = 'css',
   },
 }
 
