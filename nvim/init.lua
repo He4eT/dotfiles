@@ -531,6 +531,10 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
+-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -538,81 +542,67 @@ end
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {
-          'vim',
-          'require',
+    settings = {
+      Lua = {
+        workspace = { checkThirdParty = false },
+        telemetry = { enable = false },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {
+            'vim',
+            'require',
+          },
         },
       },
+    },
+  },
+  tsserver = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    init_options = {
+      plugins = {
+        {
+          name = '@vue/typescript-plugin',
+          location = require('mason-registry')
+            .get_package('vue-language-server')
+            :get_install_path() .. '/node_modules/@vue/language-server',
+          languages = { 'vue' },
+        },
+      },
+    },
+    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+    handlers = {
+      -- Usually gets called after a code action
+      -- like in moving an anonymous function to outer scope
+      -- https://github.com/jose-elias-alvarez/typescript.nvim/issues/17
+      ['_typescript.rename'] = function(_, result)
+        return result
+      end,
+      -- 'Go to definition' workaround
+      -- https://github.com/holoiii/nvim/commit/73a4db74fe463f5064346ba63870557fedd134ad
+      ['textDocument/definition'] = function(err, result, ...)
+        result = vim.tbl_islist(result) and result[1] or result
+        vim.lsp.handlers['textDocument/definition'](err, result, ...)
+      end,
     },
   },
   volar = {},
 }
 
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
+require('mason-lspconfig').setup {
   ensure_installed = vim.tbl_keys(servers),
-}
-
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-    }
-  end,
+  handlers = {
+    function(server_name)
+      local server = servers[server_name] or {}
+      server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+      require('lspconfig')[server_name].setup(server)
+    end,
+  },
 }
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = 'solid',
 })
-
-require('lspconfig').tsserver.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  init_options = {
-    plugins = {
-      {
-        name = '@vue/typescript-plugin',
-        location = require('mason-registry')
-          .get_package('vue-language-server')
-          :get_install_path() .. '/node_modules/@vue/language-server',
-        languages = { 'vue' },
-      },
-    },
-  },
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-  handlers = {
-    -- Usually gets called after a code action
-    -- like in moving an anonymous function to outer scope
-    -- https://github.com/jose-elias-alvarez/typescript.nvim/issues/17
-    ['_typescript.rename'] = function(_, result)
-      local line = result.position.line
-      local character = result.position.character
-      local column = vim.str_byteindex(vim.fn.getline '.', character, true)
-      vim.api.nvim_win_set_cursor(0, { line + 1, column })
-      vim.lsp.buf.rename()
-      return result
-    end,
-    -- 'Go to definition' workaround
-    -- https://github.com/holoiii/nvim/commit/73a4db74fe463f5064346ba63870557fedd134ad
-    ['textDocument/definition'] = function(err, result, ...)
-      result = vim.tbl_islist(result) and result[1] or result
-      vim.lsp.handlers['textDocument/definition'](err, result, ...)
-    end,
-  },
-}
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
