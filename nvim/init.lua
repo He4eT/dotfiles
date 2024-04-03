@@ -194,6 +194,12 @@ require('lazy').setup({
     dependencies = {
       'tpope/vim-repeat',
     },
+    config = function ()
+      local leap = require('leap')
+      leap.add_default_mappings()
+      leap.opts.highlight_unlabeled_phase_one_targets = true
+      leap.opts.safe_labels = {}
+    end
   },
   { -- FZF
     'ibhagwan/fzf-lua',
@@ -322,11 +328,6 @@ require('lazy').setup({
     },
   },
 })
-
--- [[ Configure Leap ]]
-require('leap').add_default_mappings()
-require('leap').opts.highlight_unlabeled_phase_one_targets = true
-require('leap').opts.safe_labels = {}
 
 -- [[ Configure fzf-lua ]]
 local fzf = require 'fzf-lua'
