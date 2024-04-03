@@ -162,12 +162,12 @@ require('lazy').setup({
     dependencies = {
       'tpope/vim-repeat',
     },
-    config = function ()
-      local leap = require('leap')
+    config = function()
+      local leap = require 'leap'
       leap.add_default_mappings()
       leap.opts.highlight_unlabeled_phase_one_targets = true
       leap.opts.safe_labels = {}
-    end
+    end,
   },
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -233,7 +233,7 @@ require('lazy').setup({
         build = './install --bin',
       },
     },
-    config = function ()
+    config = function()
       local fzf = require 'fzf-lua'
 
       fzf.setup {
@@ -317,7 +317,7 @@ require('lazy').setup({
       vim.keymap.set({ 'n' }, '<leader>f?', fzf.keymaps, { desc = '[F]zf: keymaps' })
       vim.keymap.set({ 'n' }, '<leader>f/', fzf.search_history, { desc = '[F]zf: search history' })
       vim.keymap.set({ 'n' }, '<leader>f:', fzf.command_history, { desc = '[F]zf: command history' })
-    end
+    end,
   },
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -343,7 +343,7 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ':TSUpdate',
-    config = function ()
+    config = function()
       require('nvim-treesitter.configs').setup {
         ensure_installed = {
           'vim',
@@ -414,7 +414,7 @@ require('lazy').setup({
           },
         },
       }
-    end
+    end,
   },
   {
     'nomnivore/ollama.nvim',
@@ -548,9 +548,7 @@ local servers = {
       plugins = {
         {
           name = '@vue/typescript-plugin',
-          location = require('mason-registry')
-            .get_package('vue-language-server')
-            :get_install_path() .. '/node_modules/@vue/language-server',
+          location = require('mason-registry').get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server',
           languages = { 'vue' },
         },
       },
