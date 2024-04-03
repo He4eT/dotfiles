@@ -492,35 +492,9 @@ vim.filetype.add {
   },
 }
 
-local prevent_lsp_conflicts = function(starting_client)
-  -- Note: check autostart parameter in server config.
-  -- https://www.reddit.com/r/neovim/comments/10n795v/comment/j689u7k/
-  local active_clients = vim.lsp.get_active_clients()
-
-  -- Stop 'tsserver' when 'volar' starts
-  if starting_client.name == 'volar' then
-    for _, active_client in pairs(active_clients) do
-      if active_client.name == 'tsserver' then
-        active_client.stop()
-      end
-    end
-  end
-
-  -- Do not start 'tsserver' if 'volar' is running
-  if starting_client.name == 'tsserver' then
-    for _, active_client in pairs(active_clients) do
-      if active_client.name == 'volar' then
-        starting_client.stop()
-      end
-    end
-  end
-end
-
 -- [[ LSP settings ]]
 -- This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(client, bufnr)
-  prevent_lsp_conflicts(client)
-
+local on_attach = function(_, bufnr)
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -576,6 +550,7 @@ local servers = {
       },
     },
   },
+  volar = {},
 }
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
@@ -606,6 +581,18 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
 require('lspconfig').tsserver.setup {
   on_attach = on_attach,
   capabilities = capabilities,
+  init_options = {
+    plugins = {
+      {
+        name = '@vue/typescript-plugin',
+        location = require('mason-registry')
+          .get_package('vue-language-server')
+          :get_install_path() .. '/node_modules/@vue/language-server',
+        languages = { 'vue' },
+      },
+    },
+  },
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
   handlers = {
     -- Usually gets called after a code action
     -- like in moving an anonymous function to outer scope
@@ -625,13 +612,6 @@ require('lspconfig').tsserver.setup {
       vim.lsp.handlers['textDocument/definition'](err, result, ...)
     end,
   },
-}
-
-require('lspconfig').volar.setup {
-  autostart = false,
-  on_attach = on_attach,
-  capabilities = capabilities,
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
 }
 
 -- nvim-cmp setup
