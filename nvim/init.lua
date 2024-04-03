@@ -123,7 +123,6 @@ vim.keymap.set({ 'n' }, '<BS>', ':nohl<CR>', { desc = 'Turn off highlight' })
 vim.keymap.set({ 'n' }, '<ESC>', ':nohl<CR>', { desc = 'Turn off highlight' })
 
 -- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
@@ -136,7 +135,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- [[ Lazy ]]
 -- Install package manager
 -- https://github.com/folke/lazy.nvim
--- See `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -153,8 +151,50 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
-  -- Backup mainstream colorscheme inspired by Atom
-  'navarasu/onedark.nvim',
+  -- Color highlighter
+  'norcalli/nvim-colorizer.lua',
+  { -- `gc` to comment visual regions/lines
+    'numToStr/Comment.nvim',
+    opts = {},
+  },
+  { -- Leap motion plugin
+    'ggandor/leap.nvim',
+    dependencies = {
+      'tpope/vim-repeat',
+    },
+    config = function ()
+      local leap = require('leap')
+      leap.add_default_mappings()
+      leap.opts.highlight_unlabeled_phase_one_targets = true
+      leap.opts.safe_labels = {}
+    end
+  },
+  { -- Set lualine as statusline
+    'nvim-lualine/lualine.nvim',
+    opts = {
+      options = {
+        icons_enabled = false,
+        component_separators = '|',
+        section_separators = '',
+        globalstatus = true,
+      },
+    },
+  },
+  { -- Adds git releated signs to the gutter
+    'lewis6991/gitsigns.nvim',
+    opts = {
+      signs = {
+        add = { text = '│' },
+        change = { text = '│' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '│' },
+      },
+      preview_config = {
+        border = 'solid',
+      },
+    },
+  },
   { -- Main colorscheme
     'He4eT/desolate.nvim',
     config = function()
@@ -183,24 +223,8 @@ require('lazy').setup({
       'rktjmp/lush.nvim',
     },
   },
-  -- Color highlighter
-  'norcalli/nvim-colorizer.lua',
-  { -- `gc` to comment visual regions/lines
-    'numToStr/Comment.nvim',
-    opts = {},
-  },
-  { -- Leap motion plugin
-    'ggandor/leap.nvim',
-    dependencies = {
-      'tpope/vim-repeat',
-    },
-    config = function ()
-      local leap = require('leap')
-      leap.add_default_mappings()
-      leap.opts.highlight_unlabeled_phase_one_targets = true
-      leap.opts.safe_labels = {}
-    end
-  },
+  -- Backup mainstream colorscheme inspired by Atom
+  'navarasu/onedark.nvim',
   { -- FZF
     'ibhagwan/fzf-lua',
     dependencies = {
@@ -313,34 +337,6 @@ require('lazy').setup({
       'saadparwaiz1/cmp_luasnip',
     },
   },
-  { -- Adds git releated signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '│' },
-        change = { text = '│' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '│' },
-      },
-      preview_config = {
-        border = 'solid',
-      },
-    },
-  },
-  { -- Set lualine as statusline
-    'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
-    opts = {
-      options = {
-        icons_enabled = false,
-        component_separators = '|',
-        section_separators = '',
-        globalstatus = true,
-      },
-    },
-  },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
@@ -348,9 +344,7 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
     config = function ()
-      -- See `:help nvim-treesitter`
       require('nvim-treesitter.configs').setup {
-        -- Add languages to be installed here that you want installed for treesitter
         ensure_installed = {
           'vim',
           'vimdoc',
@@ -381,7 +375,6 @@ require('lazy').setup({
             enable = true,
             lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
             keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
               ['aa'] = '@parameter.outer',
               ['ia'] = '@parameter.inner',
               ['af'] = '@function.outer',
@@ -502,7 +495,7 @@ local on_attach = function(_, bufnr)
 
   -- LSP keymaps
 
-  -- See `:help K` for why this keymap
+  -- Hover Documentation
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
@@ -528,15 +521,10 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   lua_ls = {
     settings = {
@@ -569,8 +557,7 @@ local servers = {
     },
     filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
     handlers = {
-      -- Usually gets called after a code action
-      -- like in moving an anonymous function to outer scope
+      -- Usually gets called after another code action
       -- https://github.com/jose-elias-alvarez/typescript.nvim/issues/17
       ['_typescript.rename'] = function(_, result)
         return result
@@ -651,6 +638,4 @@ cmp.setup {
 }
 
 -- npx @johnnymorganz/stylua-bin ./init.lua
-
--- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
