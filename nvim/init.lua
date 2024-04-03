@@ -72,6 +72,13 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
+-- Filetype aliases
+vim.filetype.add {
+  extension = {
+    pcss = 'css',
+  },
+}
+
 -- [[ Basic Keymaps ]]
 
 -- Remap for dealing with word wrap
@@ -85,7 +92,7 @@ vim.keymap.set('n', '<PageUp>', '<C-u>', { silent = true })
 -- Open terminal
 vim.keymap.set({ 'n' }, '<leader>t', ':terminal<CR>i', { silent = true })
 
--- Escaping Terminal mode
+-- Escape terminal mode
 vim.keymap.set({ 't' }, ';;', '<C-\\><C-n>', { silent = true })
 
 -- Window managment
@@ -114,13 +121,6 @@ vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show git
 -- Highlight
 vim.keymap.set({ 'n' }, '<BS>', ':nohl<CR>', { desc = 'Turn off highlight' })
 vim.keymap.set({ 'n' }, '<ESC>', ':nohl<CR>', { desc = 'Turn off highlight' })
-
--- Filetypes
-vim.filetype.add {
-  extension = {
-    pcss = 'css',
-  },
-}
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -388,8 +388,8 @@ end
 local fzf_git_history = function()
   fzf.files { cmd = "git log --name-only --pretty=\"\" | sed -e '/^\\s*$/d' | awk '!seen[$0]++'" }
 end
--- fzf keymaps
 
+-- fzf keymaps
 vim.keymap.set({ 'n' }, 'gr', fzf.lsp_references, { desc = 'LSP: [G]o to fzf [R]eference list' })
 vim.keymap.set({ 'n' }, '<leader>fu', fzf_grep_filename, { desc = '[F]zf: current file [U]sages' })
 
