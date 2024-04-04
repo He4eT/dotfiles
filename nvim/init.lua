@@ -1,4 +1,43 @@
--- Leader keys
+--[[ NeoVim Configuration File ]]
+
+--[[ Formatter:
+npx @johnnymorganz/stylua-bin ./init.lua
+]]
+
+--[[ Structure:
+├─ cfg_leader: Leader keys
+├─ cfg_options: See `:help vim.o`
+├─ cfg_filetypes: Filetype aliases
+├─ cfg_autocmds: Autocomands
+├─ cfg_keymaps: General keymaps
+└─ cfg_lazy: Plugin manager
+   ├─ cfg_lazy_vim-sleuth: Detect tabstop and shiftwidth automatically
+   ├─ cfg_lazy_colorizer: Color highlighter
+   ├─ cfg_lazy_comment: Toggles linewise and blockwise comments
+   ├─ cfg_lazy_leap: Leap motion plugin
+   ├─ cfg_lazy_lualine: Statusline
+   ├─ cfg_lazy_gitsigns: Git-releated actions and gutter signs
+   ├─ cfg_lazy_desolate: Not-so-colorful colorscheme
+   ├─ cfg_lazy_onedark: Colorscheme inspired by Atom
+   ├─ cfg_lazy_fzf: Fuzzy search
+   │  └─ cfg_lazy_fzf_keymaps
+   ├─ cfg_lazy_lsp: LSP configuration & plugins
+   │  ├─ cfg_lazy_lsp_servers
+   │  │  ├─ cfg_lazy_lsp_servers_lua
+   │  │  ├─ cfg_lazy_lsp_servers_tsserver
+   │  │  └─ cfg_lazy_lsp_servers_volar
+   │  └─ cfg_lazy_lsp_keymaps
+   ├─ cfg_lazy_cmp: Autocompletion
+   │  └─ cfg_lazy_cmp_keymaps
+   ├─ cfg_lazy_treesitter: Highlight, edit, and navigate code
+   │  ├─ cfg_lazy_treesitter_langs
+   │  └─ cfg_lazy_treesitter_keymaps
+   └─ cfg_lazy_ollama: LLM integration
+      └─ cfg_lazy_ollama_prompts
+]]
+
+--[[ cfg_leader: Leader keys ]]
+
 local leader = ' '
 vim.g.mapleader = leader
 vim.g.maplocalleader = leader
@@ -6,8 +45,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<CR>', leader, { silent = true, remap = true })
 vim.keymap.set({ 'n', 'v' }, '<CR><CR>', '<CR>', { silent = true, remap = false })
 
--- Options
--- See `:help vim.o`
+--[[ cfg_options: See `:help vim.o` ]]
 
 -- Set window title
 vim.o.title = true
@@ -60,12 +98,15 @@ vim.o.completeopt = 'menuone,noselect'
 -- Keeps the same screen lines in all split windows
 vim.o.splitkeep = 'screen'
 
--- Filetype aliases
+--[[ cfg_filetypes: Filetype aliases ]]
+
 vim.filetype.add {
   extension = {
     pcss = 'css',
   },
 }
+
+--[[ cfg_autocmds: Autocomands ]]
 
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -88,7 +129,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
 -- Disable line numbers for terminal buffers
 vim.api.nvim_create_autocmd('TermOpen', { pattern = '*', command = 'setlocal nonumber' })
 
--- Basic Keymaps
+--[[ cfg_keymaps: General keymaps ]]
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -126,7 +167,9 @@ vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]ia
 vim.keymap.set({ 'n' }, '<BS>', ':nohl<CR>', { silent = true, desc = 'Turn off highlight' })
 vim.keymap.set({ 'n' }, '<ESC>', ':nohl<CR>', { silent = true, desc = 'Turn off highlight' })
 
+--[[ cfg_lazy: Plugin manager ]]
 -- https://github.com/folke/lazy.nvim
+
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -141,15 +184,17 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  -- Detect tabstop and shiftwidth automatically
+  --[[ cfg_lazy_vim-sleuth: Detect tabstop and shiftwidth automatically ]]
   'tpope/vim-sleuth',
-  -- Color highlighter
+  --[[ cfg_lazy_colorizer: Color highlighter ]]
   'norcalli/nvim-colorizer.lua',
-  { -- Toggles linewise and blockwise comments
+  --[[ cfg_lazy_comment: Toggles linewise and blockwise comments ]]
+  {
     'numToStr/Comment.nvim',
     opts = {},
   },
-  { -- Leap motion plugin
+  --[[ cfg_lazy_leap: Leap motion plugin ]]
+  {
     'ggandor/leap.nvim',
     dependencies = {
       'tpope/vim-repeat',
@@ -161,7 +206,8 @@ require('lazy').setup({
       leap.opts.safe_labels = {}
     end,
   },
-  { -- Set lualine as statusline
+  --[[ cfg_lazy_lualine: Statusline ]]
+  {
     'nvim-lualine/lualine.nvim',
     opts = {
       options = {
@@ -172,10 +218,11 @@ require('lazy').setup({
       },
     },
   },
-  { -- Adds git releated signs to the gutter
+  --[[ cfg_lazy_gitsigns: Git-releated actions and gutter signs ]]
+  {
     'lewis6991/gitsigns.nvim',
     config = function()
-      require('gitsigns').setup({
+      require('gitsigns').setup {
         signs = {
           add = { text = '│' },
           change = { text = '│' },
@@ -186,14 +233,15 @@ require('lazy').setup({
         preview_config = {
           border = 'solid',
         },
-      })
+      }
 
       vim.keymap.set('n', '[g', ':Gitsigns prev_hunk<CR>', { desc = 'Go to previous git hunk' })
       vim.keymap.set('n', ']g', ':Gitsigns next_hunk<CR>', { desc = 'Go to next git hunk' })
       vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show git blame' })
     end,
   },
-  { -- Main colorscheme
+  --[[ cfg_lazy_desolate: Not-so-colorful colorscheme ]]
+  {
     'He4eT/desolate.nvim',
     priority = 1000,
     config = function()
@@ -222,9 +270,10 @@ require('lazy').setup({
       'rktjmp/lush.nvim',
     },
   },
-  -- Backup mainstream colorscheme inspired by Atom
+  --[[ cfg_lazy_onedark: Colorscheme inspired by Atom ]]
   'navarasu/onedark.nvim',
-  { -- FZF
+  --[[ cfg_lazy_fzf: Fuzzy search ]]
+  {
     'ibhagwan/fzf-lua',
     dependencies = {
       {
@@ -293,7 +342,8 @@ require('lazy').setup({
         fzf.files { cmd = "git log --name-only --pretty=\"\" | sed -e '/^\\s*$/d' | awk '!seen[$0]++'" }
       end
 
-      -- fzf keymaps
+      --[[ cfg_lazy_fzf_keymaps ]]
+
       vim.keymap.set({ 'n' }, 'gr', fzf.lsp_references, { desc = 'LSP: [G]o to fzf [R]eference list' })
       vim.keymap.set({ 'n' }, '<leader>fu', fzf_grep_filename, { desc = '[F]zf: current file [U]sages' })
 
@@ -318,24 +368,26 @@ require('lazy').setup({
       vim.keymap.set({ 'n' }, '<leader>f:', fzf.command_history, { desc = '[F]zf: command history' })
     end,
   },
-  { -- LSP Configuration & Plugins
+  --[[ cfg_lazy_lsp: LSP configuration & plugins ]]
+  {
     'neovim/nvim-lspconfig',
     dependencies = {
-      { -- Automatically install LSPs to stdpath for neovim
+      {
         'williamboman/mason.nvim',
         config = true,
       },
       'williamboman/mason-lspconfig.nvim',
     },
     config = function()
+      --[[ cfg_lazy_lsp_servers ]]
       local servers = {
+        --[[ cfg_lazy_lsp_servers_lua ]]
         lua_ls = {
           settings = {
             Lua = {
               workspace = { checkThirdParty = false },
               telemetry = { enable = false },
               diagnostics = {
-                -- Get the language server to recognize the `vim` global
                 globals = {
                   'vim',
                   'require',
@@ -344,6 +396,7 @@ require('lazy').setup({
             },
           },
         },
+        --[[ cfg_lazy_lsp_servers_tsserver ]]
         tsserver = {
           filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
           init_options = {
@@ -369,9 +422,11 @@ require('lazy').setup({
             end,
           },
         },
+        --[[ cfg_lazy_lsp_servers_volar ]]
         volar = {},
       }
 
+      --[[ cfg_lazy_lsp_keymaps ]]
       local setup_lsp_keymaps = function(_, bufnr)
         local nmap = function(keys, func, desc)
           if desc then
@@ -380,27 +435,22 @@ require('lazy').setup({
           vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
         end
 
-        -- Hover Documentation
         nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
         nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
-        -- Basic LSP functionality
         nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
         nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]tion')
         nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
 
-        -- Lesser used LSP functionality
         nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
         nmap('<leader>gD', vim.lsp.buf.type_definition, 'Type Definition')
 
-        -- LSP workspace managment
         nmap('<leader>ea', vim.lsp.buf.add_workspace_folder, 'Workspac[e] [A]dd Folder')
         nmap('<leader>er', vim.lsp.buf.remove_workspace_folder, 'Workspac[e] [R]emove Folder')
         nmap('<leader>el', function()
           print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, 'Workspac[e] [L]ist Folders')
 
-        -- Create a command `:Format` local to the LSP buffer
         vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
           vim.lsp.buf.format()
         end, { desc = 'Format current buffer with LSP' })
@@ -421,13 +471,14 @@ require('lazy').setup({
         },
       }
 
+      -- LSP Appearance
+
+      local diagnostic_icon = '⏹'
+
       -- Tune popup borders
       vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
         border = 'solid',
       })
-
-      -- LSP icons
-      local diagnostic_icon = '⏹'
 
       -- Tune virtual_text diagnostic signs
       vim.diagnostic.config {
@@ -444,7 +495,8 @@ require('lazy').setup({
       end
     end,
   },
-  { -- Autocompletion
+  --[[ cfg_lazy_cmp: Autocompletion ]]
+  {
     'hrsh7th/nvim-cmp',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
@@ -469,6 +521,7 @@ require('lazy').setup({
             luasnip.lsp_expand(args.body)
           end,
         },
+        --[[ cfg_lazy_cmp_keymaps ]]
         mapping = cmp.mapping.preset.insert {
           ['<C-Space>'] = cmp.mapping.complete {},
           ['<CR>'] = cmp.mapping.confirm {
@@ -504,7 +557,8 @@ require('lazy').setup({
       }
     end,
   },
-  { -- Highlight, edit, and navigate code
+  --[[ cfg_lazy_treesitter: Highlight, edit, and navigate code ]]
+  {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
@@ -512,6 +566,7 @@ require('lazy').setup({
     build = ':TSUpdate',
     config = function()
       require('nvim-treesitter.configs').setup {
+        --[[ cfg_lazy_treesitter_langs ]]
         ensure_installed = {
           'vim',
           'vimdoc',
@@ -527,6 +582,9 @@ require('lazy').setup({
         auto_install = true,
         highlight = { enable = true },
         indent = { enable = true, disable = { 'python' } },
+
+        --[[ cfg_lazy_treesitter_keymaps ]]
+
         incremental_selection = {
           enable = true,
           keymaps = {
@@ -582,6 +640,7 @@ require('lazy').setup({
       }
     end,
   },
+  --[[ cfg_lazy_ollama: LLM integration ]]
   {
     'nomnivore/ollama.nvim',
     dependencies = {
@@ -605,6 +664,7 @@ require('lazy').setup({
     opts = {
       model = 'mistral',
       url = 'http://ollama.internal:11434', -- see /etc/hosts
+      --[[ cfg_lazy_ollama_prompts ]]
       prompts = {
         Ask_About_Code = false,
         Simplify_Code = false,
@@ -648,5 +708,4 @@ require('lazy').setup({
   },
 })
 
--- npx @johnnymorganz/stylua-bin ./init.lua
 -- vim: ts=2 sts=2 sw=2 et
