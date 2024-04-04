@@ -330,6 +330,104 @@ require('lazy').setup({
       },
       'williamboman/mason-lspconfig.nvim',
     },
+    config = function()
+      local servers = {
+        lua_ls = {
+          settings = {
+            Lua = {
+              workspace = { checkThirdParty = false },
+              telemetry = { enable = false },
+              diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {
+                  'vim',
+                  'require',
+                },
+              },
+            },
+          },
+        },
+        tsserver = {
+          init_options = {
+            plugins = {
+              {
+                name = '@vue/typescript-plugin',
+                location = require('mason-registry').get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server',
+                languages = { 'vue' },
+              },
+            },
+          },
+          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+          handlers = {
+            -- Usually gets called after another code action
+            -- https://github.com/jose-elias-alvarez/typescript.nvim/issues/17
+            ['_typescript.rename'] = function(_, result)
+              return result
+            end,
+            -- 'Go to definition' workaround
+            -- https://github.com/holoiii/nvim/commit/73a4db74fe463f5064346ba63870557fedd134ad
+            ['textDocument/definition'] = function(err, result, ...)
+              result = vim.tbl_islist(result) and result[1] or result
+              vim.lsp.handlers['textDocument/definition'](err, result, ...)
+            end,
+          },
+        },
+        volar = {},
+      }
+
+      local setup_lsp_keymaps = function(_, bufnr)
+        local nmap = function(keys, func, desc)
+          if desc then
+            desc = 'LSP: ' .. desc
+          end
+          vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+        end
+
+        -- Hover Documentation
+        nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+        nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+
+        -- Basic LSP functionality
+        nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+        nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]tion')
+        nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+
+        -- Lesser used LSP functionality
+        nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+        nmap('<leader>gD', vim.lsp.buf.type_definition, 'Type Definition')
+
+        -- LSP workspace managment
+        nmap('<leader>ea', vim.lsp.buf.add_workspace_folder, 'Workspac[e] [A]dd Folder')
+        nmap('<leader>er', vim.lsp.buf.remove_workspace_folder, 'Workspac[e] [R]emove Folder')
+        nmap('<leader>el', function()
+          print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, 'Workspac[e] [L]ist Folders')
+
+        -- Create a command `:Format` local to the LSP buffer
+        vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+          vim.lsp.buf.format()
+        end, { desc = 'Format current buffer with LSP' })
+      end
+
+      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+        border = 'solid',
+      })
+
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+      require('mason-lspconfig').setup {
+        ensure_installed = vim.tbl_keys(servers),
+        handlers = {
+          function(server_name)
+            local server = servers[server_name] or {}
+            server.on_attach = setup_lsp_keymaps
+            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            require('lspconfig')[server_name].setup(server)
+          end,
+        },
+      }
+    end,
   },
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -349,6 +447,7 @@ require('lazy').setup({
       }
 
       local cmp = require 'cmp'
+
       cmp.setup {
         snippet = {
           expand = function(args)
@@ -533,109 +632,6 @@ require('lazy').setup({
       lazy = '[lazy]',
     },
   },
-})
-
--- [[ LSP settings ]]
--- This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
-    end
-
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-  end
-
-  -- LSP keymaps
-
-  -- Hover Documentation
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
-
-  -- Basic LSP functionality
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]tion')
-  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-
-  -- Lesser used LSP functionality
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>gD', vim.lsp.buf.type_definition, 'Type Definition')
-
-  -- LSP workspace managment
-  nmap('<leader>ea', vim.lsp.buf.add_workspace_folder, 'Workspac[e] [A]dd Folder')
-  nmap('<leader>er', vim.lsp.buf.remove_workspace_folder, 'Workspac[e] [R]emove Folder')
-  nmap('<leader>el', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, 'Workspac[e] [L]ist Folders')
-
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
-end
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
--- Enable the following language servers
-local servers = {
-  lua_ls = {
-    settings = {
-      Lua = {
-        workspace = { checkThirdParty = false },
-        telemetry = { enable = false },
-        diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = {
-            'vim',
-            'require',
-          },
-        },
-      },
-    },
-  },
-  tsserver = {
-    on_attach = on_attach,
-    init_options = {
-      plugins = {
-        {
-          name = '@vue/typescript-plugin',
-          location = require('mason-registry').get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server',
-          languages = { 'vue' },
-        },
-      },
-    },
-    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-    handlers = {
-      -- Usually gets called after another code action
-      -- https://github.com/jose-elias-alvarez/typescript.nvim/issues/17
-      ['_typescript.rename'] = function(_, result)
-        return result
-      end,
-      -- 'Go to definition' workaround
-      -- https://github.com/holoiii/nvim/commit/73a4db74fe463f5064346ba63870557fedd134ad
-      ['textDocument/definition'] = function(err, result, ...)
-        result = vim.tbl_islist(result) and result[1] or result
-        vim.lsp.handlers['textDocument/definition'](err, result, ...)
-      end,
-    },
-  },
-  volar = {},
-}
-
-require('mason-lspconfig').setup {
-  ensure_installed = vim.tbl_keys(servers),
-  handlers = {
-    function(server_name)
-      local server = servers[server_name] or {}
-      server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-      require('lspconfig')[server_name].setup(server)
-    end,
-  },
-}
-
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = 'solid',
 })
 
 -- vim: ts=2 sts=2 sw=2 et
