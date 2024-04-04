@@ -82,11 +82,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Default insert mode in terminal buffers
 local terminal_enter_group = vim.api.nvim_create_augroup('TerminalEnter', { clear = true })
 vim.api.nvim_create_autocmd('BufEnter', {
-  callback = function()
-    vim.api.nvim_command('startinsert')
-  end,
   group = terminal_enter_group,
   pattern = 'term://*',
+  command = 'startinsert',
 })
 
 -- Disable line numbers for terminal buffers
@@ -118,7 +116,7 @@ vim.keymap.set('n', '<leader>l', '<C-i>', { desc = 'Go forward' })
 
 -- Copy'n'Paste
 vim.keymap.set('n', '<leader>y', ':call system("xclip -i -selection clipboard", @@)<cr>', { desc = 'Copy " to system clipboard' })
-vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy selection to system clipboard'})
+vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy selection to system clipboard' })
 
 -- Diagnostic
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -430,18 +428,21 @@ require('lazy').setup({
         border = 'solid',
       })
 
+      -- LSP icons
+      local diagnostic_icon = '⏹'
+
       -- Tune virtual_text diagnostic signs
-      vim.diagnostic.config({
+      vim.diagnostic.config {
         virtual_text = {
-          prefix = '⏹',
+          prefix = diagnostic_icon,
         },
-      })
+      }
 
       -- Tune diagnostic signs
-      local signs = { Error = '⏹ ', Warn = '⏹ ', Hint = '⏹ ', Info = '⏹ ' }
-      for type, icon in pairs(signs) do
+      local signs = { 'Error', 'Warn', 'Hint', 'Info' }
+      for _, type in ipairs(signs) do
         local hl = 'DiagnosticSign' .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+        vim.fn.sign_define(hl, { text = diagnostic_icon, texthl = hl, numhl = hl })
       end
     end,
   },
