@@ -1,6 +1,4 @@
--- npx @johnnymorganz/stylua-bin ./init.lua
-
--- Leader keymaps
+-- Leader key
 local leader = ' '
 vim.g.mapleader = leader
 vim.g.maplocalleader = leader
@@ -10,7 +8,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<CR>', leader, { silent = true, remap = true })
 vim.keymap.set({ 'n', 'v' }, '<CR><CR>', '<CR>', { silent = true, remap = false })
 
--- [[ Setting options ]]
+-- Options
 -- See `:help vim.o`
 
 -- Set window title
@@ -64,16 +62,6 @@ vim.o.completeopt = 'menuone,noselect'
 -- Keeps the same screen lines in all split windows
 vim.o.splitkeep = 'screen'
 
--- Disable line numbers for terminal buffers
-vim.api.nvim_create_autocmd({ 'TermOpen' }, { pattern = { '*' }, command = 'setlocal nonumber' })
-
--- Tune diagnostic signs
-local signs = { Error = '■ ', Warn = '■ ', Hint = '■ ', Info = '■ ' }
-for type, icon in pairs(signs) do
-  local hl = 'DiagnosticSign' .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 -- Filetype aliases
 vim.filetype.add {
   extension = {
@@ -81,7 +69,30 @@ vim.filetype.add {
   },
 }
 
--- [[ Basic Keymaps ]]
+-- Highlight on yank
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
+
+-- Default insert mode in terminal buffers
+local terminal_enter_group = vim.api.nvim_create_augroup('TerminalEnter', { clear = true })
+vim.api.nvim_create_autocmd('BufEnter', {
+  callback = function()
+    vim.api.nvim_command('startinsert')
+  end,
+  group = terminal_enter_group,
+  pattern = 'term://*',
+})
+
+-- Disable line numbers for terminal buffers
+vim.api.nvim_create_autocmd('TermOpen', { pattern = '*', command = 'setlocal nonumber' })
+
+-- Basic Keymaps
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -102,12 +113,12 @@ vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true })
 vim.keymap.set('n', '<leader>k', '<C-w>w', { remap = true })
 vim.keymap.set('n', '<leader>K', ':vs<CR><C-w>w')
 vim.keymap.set('n', '<leader>q', ':b#|bd#<CR>')
-vim.keymap.set('n', '<leader>h', '<C-o>')
-vim.keymap.set('n', '<leader>l', '<C-i>')
+vim.keymap.set('n', '<leader>h', '<C-o>', { desc = 'Go back' })
+vim.keymap.set('n', '<leader>l', '<C-i>', { desc = 'Go forward' })
 
 -- Copy'n'Paste
-vim.keymap.set('n', '<leader>y', ':call system("xclip -i -selection clipboard", @@)<cr>')
-vim.keymap.set('v', '<leader>y', '"+y')
+vim.keymap.set('n', '<leader>y', ':call system("xclip -i -selection clipboard", @@)<cr>', { desc = 'Copy " to system clipboard' })
+vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy selection to system clipboard'})
 
 -- Diagnostic
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -121,21 +132,10 @@ vim.keymap.set('n', ']g', ':Gitsigns next_hunk<CR>', { desc = 'Go to next git hu
 vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show git blame' })
 
 -- Highlight
-vim.keymap.set({ 'n' }, '<BS>', ':nohl<CR>', { desc = 'Turn off highlight' })
-vim.keymap.set({ 'n' }, '<ESC>', ':nohl<CR>', { desc = 'Turn off highlight' })
+vim.keymap.set({ 'n' }, '<BS>', ':nohl<CR>', { silent = true, desc = 'Turn off highlight' })
+vim.keymap.set({ 'n' }, '<ESC>', ':nohl<CR>', { silent = true, desc = 'Turn off highlight' })
 
--- [[ Highlight on yank ]]
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
-})
-
--- [[ Lazy ]]
--- Install package manager
+-- lazy.nvim is a plugin manager
 -- https://github.com/folke/lazy.nvim
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -155,7 +155,7 @@ require('lazy').setup({
   'tpope/vim-sleuth',
   -- Color highlighter
   'norcalli/nvim-colorizer.lua',
-  { -- `gc` to comment visual regions/lines
+  { -- Toggles linewise and blockwise comments
     'numToStr/Comment.nvim',
     opts = {},
   },
@@ -199,6 +199,7 @@ require('lazy').setup({
   },
   { -- Main colorscheme
     'He4eT/desolate.nvim',
+    priority = 1000,
     config = function()
       vim.g.desolate_h = 0
       vim.g.desolate_s = 0
@@ -409,10 +410,6 @@ require('lazy').setup({
         end, { desc = 'Format current buffer with LSP' })
       end
 
-      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = 'solid',
-      })
-
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
@@ -427,6 +424,25 @@ require('lazy').setup({
           end,
         },
       }
+
+      -- Tune popup borders
+      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+        border = 'solid',
+      })
+
+      -- Tune virtual_text diagnostic signs
+      vim.diagnostic.config({
+        virtual_text = {
+          prefix = '⏹',
+        },
+      })
+
+      -- Tune diagnostic signs
+      local signs = { Error = '⏹ ', Warn = '⏹ ', Hint = '⏹ ', Info = '⏹ ' }
+      for type, icon in pairs(signs) do
+        local hl = 'DiagnosticSign' .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+      end
     end,
   },
   { -- Autocompletion
@@ -634,4 +650,5 @@ require('lazy').setup({
   },
 })
 
+-- npx @johnnymorganz/stylua-bin ./init.lua
 -- vim: ts=2 sts=2 sw=2 et
