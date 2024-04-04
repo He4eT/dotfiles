@@ -22,7 +22,7 @@ export ZSH="/home/odd/.oh-my-zsh"
 ZSH_CUSTOM="/home/odd/dotfiles/zsh"
 
 ZSH_THEME="custom-minimal"
-MODE_INDICATOR="%F{yellow}█%f"
+MODE_INDICATOR="%F{yellow}◼%f"
 VI_MODE_CURSOR_INSERT=2
 
 CASE_SENSITIVE="false"
