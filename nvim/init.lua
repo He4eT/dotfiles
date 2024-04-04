@@ -1,10 +1,8 @@
--- Leader key
+-- Leader keys
 local leader = ' '
 vim.g.mapleader = leader
 vim.g.maplocalleader = leader
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
--- Use the Enter key as the second Leader
 vim.keymap.set({ 'n', 'v' }, '<CR>', leader, { silent = true, remap = true })
 vim.keymap.set({ 'n', 'v' }, '<CR><CR>', '<CR>', { silent = true, remap = false })
 
@@ -105,6 +103,7 @@ vim.keymap.set({ 'n' }, '<leader>t', ':terminal<CR>i', { silent = true, desc = '
 
 -- Escape terminal mode
 vim.keymap.set({ 't' }, ';;', '<C-\\><C-n>', { silent = true, desc = 'Escape terminal mode' })
+
 -- Window managment
 vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true, desc = 'Alias for Ctrl + w' })
 vim.keymap.set('n', '<leader>k', '<C-w>w', { remap = true, desc = 'Jump to the next window' })
@@ -123,16 +122,10 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating [d]iagnostic message' })
 vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostics list' })
 
--- Gitsigns
-vim.keymap.set('n', '[g', ':Gitsigns prev_hunk<CR>', { desc = 'Go to previous git hunk' })
-vim.keymap.set('n', ']g', ':Gitsigns next_hunk<CR>', { desc = 'Go to next git hunk' })
-vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show git blame' })
-
 -- Highlight
 vim.keymap.set({ 'n' }, '<BS>', ':nohl<CR>', { silent = true, desc = 'Turn off highlight' })
 vim.keymap.set({ 'n' }, '<ESC>', ':nohl<CR>', { silent = true, desc = 'Turn off highlight' })
 
--- lazy.nvim is a plugin manager
 -- https://github.com/folke/lazy.nvim
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -181,18 +174,24 @@ require('lazy').setup({
   },
   { -- Adds git releated signs to the gutter
     'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '│' },
-        change = { text = '│' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '│' },
-      },
-      preview_config = {
-        border = 'solid',
-      },
-    },
+    config = function()
+      require('gitsigns').setup({
+        signs = {
+          add = { text = '│' },
+          change = { text = '│' },
+          delete = { text = '_' },
+          topdelete = { text = '‾' },
+          changedelete = { text = '│' },
+        },
+        preview_config = {
+          border = 'solid',
+        },
+      })
+
+      vim.keymap.set('n', '[g', ':Gitsigns prev_hunk<CR>', { desc = 'Go to previous git hunk' })
+      vim.keymap.set('n', ']g', ':Gitsigns next_hunk<CR>', { desc = 'Go to next git hunk' })
+      vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show git blame' })
+    end,
   },
   { -- Main colorscheme
     'He4eT/desolate.nvim',
@@ -346,6 +345,7 @@ require('lazy').setup({
           },
         },
         tsserver = {
+          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
           init_options = {
             plugins = {
               {
@@ -355,7 +355,6 @@ require('lazy').setup({
               },
             },
           },
-          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
           handlers = {
             -- Usually gets called after another code action
             -- https://github.com/jose-elias-alvarez/typescript.nvim/issues/17
@@ -526,7 +525,6 @@ require('lazy').setup({
           'scss',
         },
         auto_install = true,
-
         highlight = { enable = true },
         indent = { enable = true, disable = { 'python' } },
         incremental_selection = {
