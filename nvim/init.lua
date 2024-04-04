@@ -338,16 +338,12 @@ require('lazy').setup({
         fzf.grep { search = vim.fn.expand '%:t' }
       end
 
-      local fzf_git_history = function()
+      local fzf_git_chronology = function()
         fzf.files { cmd = "git log --name-only --pretty=\"\" | sed -e '/^\\s*$/d' | awk '!seen[$0]++'" }
       end
 
       --[[ cfg_lazy_fzf_keymaps ]]
 
-      vim.keymap.set({ 'n' }, 'gr', fzf.lsp_references, { desc = 'LSP: [G]o to fzf [R]eference list' })
-      vim.keymap.set({ 'n' }, '<leader>fu', fzf_grep_filename, { desc = '[F]zf: current file [U]sages' })
-
-      vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin, { desc = '[F]zf: [p]allete' })
       vim.keymap.set({ 'n' }, '<leader>f.', fzf.resume, { desc = '[F]zf: Resume' })
 
       vim.keymap.set({ 'n' }, '<leader>b', fzf.buffers, { desc = '[F]zf: [B]uffers' })
@@ -355,17 +351,23 @@ require('lazy').setup({
       vim.keymap.set({ 'n' }, '<leader>fF', fzf_files, { desc = '[F]zf: all [F]iles' })
       vim.keymap.set({ 'n' }, '<leader>ff', fzf.git_files, { desc = '[F]zf: git [f]iles' })
       vim.keymap.set({ 'n' }, '<leader>fd', fzf.git_status, { desc = '[F]zf: git [d]iff' })
-      vim.keymap.set({ 'n' }, '<leader>fh', fzf_git_history, { desc = '[F]zf: git [h]istory' })
+      vim.keymap.set({ 'n' }, '<leader>fh', fzf_git_chronology, { desc = '[F]zf: git c[h]ronology' })
 
+      vim.keymap.set({ 'n' }, '<leader>f/', fzf.blines, { desc = '[F]zf: buffer lines' })
       vim.keymap.set({ 'n' }, '<leader>fg', fzf.live_grep, { desc = '[F]zf: [g]rep' })
       vim.keymap.set({ 'n' }, '<leader>fw', fzf.grep_cword, { desc = '[F]zf: grep [w]' })
       vim.keymap.set({ 'n' }, '<leader>fW', fzf.grep_cWORD, { desc = '[F]zf: grep [W]' })
 
+      vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin, { desc = '[F]zf: [p]allete' })
       vim.keymap.set({ 'n' }, '<leader>p', fzf.registers, { desc = '[F]zf: [p]aste' })
-      vim.keymap.set({ 'n' }, '<leader>/', fzf.blines, { desc = '[F]zf: buffer lines' })
-      vim.keymap.set({ 'n' }, '<leader>f?', fzf.keymaps, { desc = '[F]zf: keymaps' })
-      vim.keymap.set({ 'n' }, '<leader>f/', fzf.search_history, { desc = '[F]zf: search history' })
-      vim.keymap.set({ 'n' }, '<leader>f:', fzf.command_history, { desc = '[F]zf: command history' })
+      vim.keymap.set({ 'n' }, '<leader>?', fzf.keymaps, { desc = '[F]zf: keymaps' })
+      vim.keymap.set({ 'n' }, '<leader>/', fzf.search_history, { desc = '[F]zf: search history' })
+      vim.keymap.set({ 'n' }, '<leader>:', fzf.command_history, { desc = '[F]zf: command history' })
+
+      -- LSP
+      vim.keymap.set({ 'n' }, 'gr', fzf.lsp_references, { desc = 'LSP: [G]o to fzf [R]eference list' })
+      vim.keymap.set({ 'n' }, '<leader>gd', fzf.lsp_definitions, { desc = 'LSP: [G]oto [d]efinition list' })
+      vim.keymap.set({ 'n' }, '<leader>fu', fzf_grep_filename, { desc = '[F]zf: current file [U]sages' })
     end,
   },
   --[[ cfg_lazy_lsp: LSP configuration & plugins ]]
@@ -435,15 +437,17 @@ require('lazy').setup({
           vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
         end
 
+        -- See also cfg_lazy_fzf_keymaps
+
         nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
         nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
         nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
         nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]tion')
-        nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
 
-        nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-        nmap('<leader>gD', vim.lsp.buf.type_definition, 'Type Definition')
+        nmap('gd', vim.lsp.buf.definition, '[G]oto [d]efinition')
+        nmap('gD', vim.lsp.buf.type_definition, '[G]oto type [D]efinition')
+        nmap('<leader>gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
         nmap('<leader>ea', vim.lsp.buf.add_workspace_folder, 'Workspac[e] [A]dd Folder')
         nmap('<leader>er', vim.lsp.buf.remove_workspace_folder, 'Workspac[e] [R]emove Folder')
