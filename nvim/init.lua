@@ -97,20 +97,19 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Remap PgUp/PgDown to C-u/C-d
-vim.keymap.set('n', '<PageDown>', '<C-d>', { silent = true })
-vim.keymap.set('n', '<PageUp>', '<C-u>', { silent = true })
+vim.keymap.set('n', '<PageDown>', '<C-d>', { silent = true, desc = 'Ctrl + d but PageDown' })
+vim.keymap.set('n', '<PageUp>', '<C-u>', { silent = true, desc = 'Ctrl + u but PageUp' })
 
 -- Open terminal
-vim.keymap.set({ 'n' }, '<leader>t', ':terminal<CR>i', { silent = true })
+vim.keymap.set({ 'n' }, '<leader>t', ':terminal<CR>i', { silent = true, desc = 'Open terminal here' })
 
 -- Escape terminal mode
-vim.keymap.set({ 't' }, ';;', '<C-\\><C-n>', { silent = true })
-
+vim.keymap.set({ 't' }, ';;', '<C-\\><C-n>', { silent = true, desc = 'Escape terminal mode' })
 -- Window managment
-vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true })
-vim.keymap.set('n', '<leader>k', '<C-w>w', { remap = true })
-vim.keymap.set('n', '<leader>K', ':vs<CR><C-w>w')
-vim.keymap.set('n', '<leader>q', ':b#|bd#<CR>')
+vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true, desc = 'Alias for Ctrl + w' })
+vim.keymap.set('n', '<leader>k', '<C-w>w', { remap = true, desc = 'Jump to the next window' })
+vim.keymap.set('n', '<leader>K', ':vs<CR><C-w>w', { desc = 'Split window to ther right' })
+vim.keymap.set('n', '<leader>q', ':b#|bd#<CR>', { desc = 'Close current buffer ' })
 vim.keymap.set('n', '<leader>h', '<C-o>', { desc = 'Go back' })
 vim.keymap.set('n', '<leader>l', '<C-i>', { desc = 'Go forward' })
 
@@ -630,7 +629,7 @@ require('lazy').setup({
     },
   },
 }, {
-  -- Lazy options
+  -- lazy.nvim options
   ui = {
     size = { width = 0.85, height = 0.7 },
     border = 'solid',
