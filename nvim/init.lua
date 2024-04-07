@@ -11,7 +11,8 @@ npx @johnnymorganz/stylua-bin ./init.lua
 ├─ cfg_autocmds: Autocomands
 ├─ cfg_keymaps: General keymaps
 └─ cfg_lazy: Plugin manager
-   ├─ cfg_lazy_vim-sleuth: Detect tabstop and shiftwidth automatically
+   ├─ cfg_lazy_vim_sleuth: Detect tabstop and shiftwidth automatically
+   ├─ cfg_lazy_vim_surround: Delete, change and add such surroundings in pairs
    ├─ cfg_lazy_colorizer: Color highlighter
    ├─ cfg_lazy_comment: Toggles linewise and blockwise comments
    ├─ cfg_lazy_leap: Leap motion plugin
@@ -184,8 +185,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  --[[ cfg_lazy_vim-sleuth: Detect tabstop and shiftwidth automatically ]]
+  --[[ cfg_lazy_vim_sleuth: Detect tabstop and shiftwidth automatically ]]
   'tpope/vim-sleuth',
+  --[[ cfg_lazy_vim_surround: Delete, change and add surroundings in pairs ]]
+  'tpope/vim-surround',
   --[[ cfg_lazy_colorizer: Color highlighter ]]
   'norcalli/nvim-colorizer.lua',
   --[[ cfg_lazy_comment: Toggles linewise and blockwise comments ]]
