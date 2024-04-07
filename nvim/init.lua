@@ -244,7 +244,7 @@ require('lazy').setup({
   {
     'He4eT/desolate.nvim',
     priority = 1000,
-    config = function()
+    init = function()
       vim.g.desolate_h = 0
       vim.g.desolate_s = 0
       vim.g.desolate_l = 70
