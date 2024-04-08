@@ -3,7 +3,7 @@
 ## Bootstrap
 
 1. `git clone https://github.com/He4eT/dotfiles.git ~/dotfiles`
-1. Run `./installPackagesFedora.sh`
+1. Run `./installPackages.sh`
 1. Run `./apply.sh`
 1. Install [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh#basic-installation)
 1. Export gtk-theme and icons with `oomox` and apply them with `lxappearance`
