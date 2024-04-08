@@ -24,7 +24,7 @@ npx @johnnymorganz/stylua-bin ./init.lua
    │  └─ cfg_lazy_fzf_keymaps
    ├─ cfg_lazy_lsp: LSP configuration & plugins
    │  ├─ cfg_lazy_lsp_servers
-   │  │  ├─ cfg_lazy_lsp_servers_lua
+   │  │  ├─ cfg_lazy_lsp_servers_lua
    │  │  ├─ cfg_lazy_lsp_servers_tsserver
    │  │  └─ cfg_lazy_lsp_servers_volar
    │  └─ cfg_lazy_lsp_keymaps
