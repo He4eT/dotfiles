@@ -33,5 +33,7 @@ sudo dnf install \
   ranger \
   telegram-desktop \
 
+sudo dnf group install Multimedia
+
 mkdir ./zsh/plugins
 git clone git@github.com:zsh-users/zsh-autosuggestions.git ~/dotfiles/zsh/plugins/zsh-autosuggestions
