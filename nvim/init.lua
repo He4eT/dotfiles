@@ -145,6 +145,7 @@ vim.keymap.set({ 'n' }, '<leader>t', ':terminal<CR>i', { silent = true, desc = '
 
 -- Escape terminal mode
 vim.keymap.set({ 't' }, ';;', '<C-\\><C-n>', { silent = true, desc = 'Escape terminal mode' })
+vim.keymap.set({ 't' }, ';<leader>k', '<C-\\><C-n><C-w>w', { silent = true, desc = 'Jump away from terminal' })
 
 -- Window managment
 vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true, desc = 'Alias for Ctrl + w' })
