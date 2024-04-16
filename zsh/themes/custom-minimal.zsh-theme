@@ -27,6 +27,7 @@ precmd() {
   local exit_code=$?
 
   if [ $exit_code -ne 0 ]; then
+    echo
     echo "┌╼ Exit code: $exit_code"
   fi
 }

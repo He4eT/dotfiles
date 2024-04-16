@@ -21,6 +21,9 @@ clear
 export ZSH="/home/odd/.oh-my-zsh"
 ZSH_CUSTOM="/home/odd/dotfiles/zsh"
 
+# https://github.com/ohmyzsh/ohmyzsh/issues/12328#issuecomment-2043492331
+zstyle ':omz:alpha:lib:git' async-prompt no
+
 ZSH_THEME="custom-minimal"
 MODE_INDICATOR="%F{yellow}◼%f"
 VI_MODE_CURSOR_INSERT=2
