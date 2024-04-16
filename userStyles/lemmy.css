@@ -4,6 +4,15 @@
   border-radius: 0 !important;
 }
 
+/* Filter section */
+.btn-check {
+  position: unset;
+  pointer-events: auto;
+  opacity: 0;
+  margin-left: -13px;
+  z-index: 1000;
+}
+
 /* Some air for post text. */
 #postContent {
   line-height: 1.5;
