@@ -699,6 +699,7 @@ require('lazy').setup({
   lockfile = '~/dotfiles/nvim/lazy-lock.json',
   ui = {
     size = { width = 0.85, height = 0.7 },
+    backdrop = 100,
     border = 'solid',
     icons = {
       cmd = '[cmd]',
