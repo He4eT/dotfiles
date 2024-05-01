@@ -63,6 +63,7 @@ vim.wo.number = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
+vim.o.mousemodel = 'extend'
 
 -- Enable break indent
 vim.o.breakindent = false
