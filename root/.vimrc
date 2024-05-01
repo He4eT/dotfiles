@@ -32,26 +32,10 @@
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
   endif
   call plug#begin('~/.vim/bundle')
-
-    """ Themes
     Plug 'tribela/vim-transparent'
     Plug 'widatama/vim-phoenix'
-
-    Plug 'Lokaltog/vim-monotone'
-    Plug 'alexanderheldt/monokrom.vim'
-    Plug 'pgdouyon/vim-yin-yang'
-
-    """ Navigation
-    Plug 'justinmk/vim-sneak'
   call plug#end()
-
-""" Sneak
-
-  let g:sneak#label = 1
-  autocmd ColorScheme * hi Sneak guifg=black guibg=white ctermfg=black ctermbg=white
-  autocmd ColorScheme * hi SneakScope guifg=black guibg=white ctermfg=black ctermbg=white
-  autocmd ColorScheme * hi SneakLabel guifg=black guibg=white ctermfg=black ctermbg=white
-
+ 
 """ Appearance
 
   colorscheme phoenix
