@@ -1,9 +1,12 @@
 # Common settings
 
 export PATH=$HOME/apps/bin:$PATH
-export EDITOR="/usr/bin/vim"
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-# export ARCHFLAGS="-arch x86_64"
+
+if [[ "$NVIM" ]]; then
+  export EDITOR="/usr/bin/nvim"
+else
+  export EDITOR="/usr/bin/vim"
+fi
 
 # NVM
 
