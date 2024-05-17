@@ -19,6 +19,10 @@
 
 /* Addressbar */
 
+#nav-bar-customization-target {
+  --toolbar-start-end-padding: 0;
+}
+
 #main-window:not([privatebrowsingmode="temporary"]) #urlbar-background {
   /* --toolbar-field-border-color: #adadad; */
   border-color: var(--button-active-bgcolor) !important;
