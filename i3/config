@@ -15,7 +15,7 @@ exec --no-startup-id picom \
 
 # [Appearance]
 
-# class                 border  backgr. text    marker  child_border
+# Class                 Border  Back    Text    Marker  Child_Border
 client.focused          #383838 #383838 #cdcdcd #bdbdbd #bdbdbd
 client.focused_inactive #222222 #222222 #7d7d7d #222222 #000000
 client.unfocused        #222222 #222222 #7d7d7d #222222 #000000
