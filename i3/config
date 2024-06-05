@@ -57,7 +57,7 @@ bindsym $mod+g exec xdotool mousemove 0 1080
 bindsym $mod+Shift+g exec xdotool mousemove 960 540
 
 bindsym $mod+t exec firefox --new-tab --url about:newtab && i3-msg '[urgent=latest] focus'
-bindsym $mod+o exec "~/dotfiles/i3/scripts/tabToLastWorkspace.sh"
+bindsym $mod+Shift+o exec "~/dotfiles/i3/scripts/tabToLastWorkspace.sh"
 
 # [Notifications]
 
