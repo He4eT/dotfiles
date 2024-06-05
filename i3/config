@@ -1,13 +1,8 @@
 # [Startup]
 
 exec --no-startup-id feh --bg-scale ~/dotfiles/wallpaper.png
-
-exec --no-startup-id polybar top
-
-# exec --no-startup-id setxkbmap -option 'grp:alt_space_toggle'
 exec --no-startup-id setxkbmap -option 'grp:caps_toggle'
-
-# compton: Xubuntu 20.04 ThinkPad E14
+exec --no-startup-id polybar top
 exec --no-startup-id picom \
   -cb -o 1 \
   --vsync \
@@ -18,17 +13,14 @@ exec --no-startup-id picom \
   --shadow-exclude='class_g = "thunderbird" && argb' \
   --shadow-exclude='class_g = "TelegramDesktop" && argb' \
 
-# compton: Xubuntu 18.04 Samsung [backup]
-# exec --no-startup-id ~/.local/bin/compton -cb --shadow-exclude '_NET_WM_NAME@:s = "rofi"' -o 1 --shadow-exclude 'x <= 0 && x2 >= 1920 && y <= 30 && y2 >= 1020' --backend glx --vsync opengl-swc --unredir-if-possible
-
 # [Appearance]
 
-# class                 border  backgr. text    indicator child_border
-client.focused          #383838 #383838 #cdcdcd #bdbdbd   #bdbdbd
-client.focused_inactive #222222 #222222 #7d7d7d #222222   #000000
-client.unfocused        #222222 #222222 #7d7d7d #222222   #000000
-client.urgent           #222222 #222222 #7d7d7d #222222   #000000
-client.placeholder      #222222 #222222 #7d7d7d #222222   #000000
+# class                 border  backgr. text    marker  child_border
+client.focused          #383838 #383838 #cdcdcd #bdbdbd #bdbdbd
+client.focused_inactive #222222 #222222 #7d7d7d #222222 #000000
+client.unfocused        #222222 #222222 #7d7d7d #222222 #000000
+client.urgent           #222222 #222222 #7d7d7d #222222 #000000
+client.placeholder      #222222 #222222 #7d7d7d #222222 #000000
 client.background       #ffffff
 
 font pango:NotoSans 11
@@ -36,18 +28,14 @@ font pango:NotoSans 11
 gaps inner 30
 hide_edge_borders both
 
-workspace 1 gaps inner 0
-workspace 2 gaps inner 0
-for_window [workspace="2"] layout tabbed
-workspace 5 gaps inner 0
-workspace 9 gaps inner 0
-
 for_window [class=".*"] title_format " %title "
 for_window [class="^.*"] border pixel 3
 
+# [Exceptions]
+
 for_window [title=" is sharing your screen.$"] border none, sticky enable, move position 0 px 0 px
 
-# [Keyboard shortcuts]
+# [Keyboard Shortcuts]
 
 set $mod Mod4
 
@@ -55,50 +43,53 @@ set $mod Mod4
 
 bindsym $mod+Return exec urxvt
 
-bindsym $mod+t exec firefox --new-tab --url about:newtab && i3-msg '[urgent=latest] focus'
-bindsym $mod+o exec "~/dotfiles/i3/scripts/tabToLastWorkspace.sh"
+bindsym $mod+d exec rofi -show run
+bindsym $mod+Tab exec rofi -show window
+
+# [Utils]
 
 bindsym Print exec xfce4-screenshooter
 bindsym XF86Tools exec xfce4-screenshooter --region --delay 0
 
-bindsym $mod+d exec rofi -show run
-bindsym $mod+Tab exec rofi -show window
-
 bindsym $mod+g exec xdotool mousemove 0 1080
 bindsym $mod+Shift+g exec xdotool mousemove 960 540
 
-# notifications
+bindsym $mod+t exec firefox --new-tab --url about:newtab && i3-msg '[urgent=latest] focus'
+bindsym $mod+o exec "~/dotfiles/i3/scripts/tabToLastWorkspace.sh"
+
+# [Notifications]
 
 bindsym $mod+grave exec --no-startup-id dunstctl history-pop
 bindsym $mod+BackSpace exec --no-startup-id dunstctl close-all
 
-# volume controls
+# [Volume Controls]
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
-# screen brightness controls
+# [Screen Brightness Controls]
 
 bindsym XF86MonBrightnessUp exec --no-startup-id "light -A 5 & sleep 0.1 & dunstify Brightness -h int:value:`light`"
 bindsym XF86MonBrightnessDown exec --no-startup-id "light -U 5 & sleep 0.1 & dunstify Brightness -h int:value:`light`"
 
-# i3
-
-# screen locker
-bindsym $mod+F4 exec "i3lock -c 000000"
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-# [Window]
+# [i3 Controls]
 
 bindsym $mod+Shift+q kill
 
-# change focus
+# Lock the screen
+bindsym $mod+F4 exec "i3lock -c 000000"
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# Exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Change the Focus
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -110,7 +101,7 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
+# Move the Focused Window
 
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
@@ -122,39 +113,37 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
+# Split in Horizontal Orientation
 bindsym $mod+b split h
 
-# split in vertical orientation
+# Split in Vertical Orientation
 bindsym $mod+v split v
 
-# enter fullscreen mode for the focused container
+# Enter Fullscreen Mode for the Focused Container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
+# Change Container Layout (Stacked, Tabbed, Toggle Split)
 
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
+# Toggle Mode (Tiling / Floating)
 bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
+# Change Focus Between Tiling and Floating Windows
 bindsym $mod+space focus mode_toggle
 
-# use mouse+$mod to drag floating windows to their wanted position
+# Use Mouse+$mod to Drag Floating Windows to Their Wanted Position
 floating_modifier $mod
 
-# focus the parent container
+# Focus the Parent Container
 bindsym $mod+a focus parent
 
-# focus the child container
+# Focus the Child Container
 bindsym $mod+z focus child
 
 # [Workspaces]
-
-workspace_auto_back_and_forth yes
 
 set $ws1 "1"
 set $ws2 "2"
@@ -167,17 +156,29 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# switch to nearest workspace
+# Workspace Rules
 
-bindsym $mod+Ctrl+j workspace prev
-bindsym $mod+Ctrl+k workspace next
+workspace_auto_back_and_forth yes
 
-bindsym $mod+Ctrl+Up workspace prev
+workspace 1 gaps inner 0
+workspace 2 gaps inner 0
+for_window [workspace="2"] layout tabbed
+workspace 5 gaps inner 0
+workspace 9 gaps inner 0
+
+# Switch to Nearest Workspace
+
+bindsym $mod+Ctrl+h workspace prev
+bindsym $mod+Ctrl+j workspace next
+bindsym $mod+Ctrl+k workspace prev
+bindsym $mod+Ctrl+l workspace next
+
 bindsym $mod+Ctrl+Left workspace prev
 bindsym $mod+Ctrl+Down workspace next
+bindsym $mod+Ctrl+Up workspace prev
 bindsym $mod+Ctrl+Right workspace next
 
-# switch to workspace
+# Switch to Workspace
 
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -190,7 +191,7 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
-# move focused container to workspace
+# Move Focused Container to Workspace
 
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
@@ -205,24 +206,20 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # [Mods]
 
-# resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
 mode "resize" {
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
+        # Resize Current Window
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
-        # gaps size
+        # Set Gaps Size
         bindsym r exec "i3-msg mode default; exec i3-msg gaps inner current set 0"
         bindsym 0 gaps inner current set 0
         bindsym 1 gaps inner current set 10
@@ -231,45 +228,41 @@ mode "resize" {
         bindsym 4 gaps inner current set 40
         bindsym 5 gaps inner current set 50
 
-        # back to normal: Enter or Escape or $mod+r
+        # Back to Normal Mode
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
 
-bindsym $mod+r mode "resize"
-
-# mouse mode
+bindsym $mod+m mode "mouse"
 mode "mouse" {
-        # clicks
+        # Clicks
         bindsym j exec xdotool click 1
         bindsym k exec xdotool click 3
         bindsym l exec xdotool click 2
 
-        # wheel
+        # Wheel
         bindsym t exec xdotool click 4
         bindsym g exec xdotool click 5
 
-        # wheel
         bindsym y exec xdotool click 4
         bindsym h exec xdotool click 5
 
-        # movement
+        # Movement
         bindsym a exec "~/dotfiles/i3/scripts/binSeekCursor.sh reset"
         bindsym e exec "~/dotfiles/i3/scripts/binSeekCursor.sh up"
         bindsym s exec "~/dotfiles/i3/scripts/binSeekCursor.sh left"
         bindsym d exec "~/dotfiles/i3/scripts/binSeekCursor.sh down"
         bindsym f exec "~/dotfiles/i3/scripts/binSeekCursor.sh right"
 
-        # slow movement
+        # Slow Movement
         bindsym Shift+e exec xdotool mousemove_relative -- 0 -1
         bindsym Shift+s exec xdotool mousemove_relative -- -1 0
         bindsym Shift+d exec xdotool mousemove_relative -- 0 1
         bindsym Shift+f exec xdotool mousemove_relative -- 1 0
 
-        # back to normal: Enter or Escape
+        # Back to Normal Mode
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym $mod+m mode "default"
 }
-
-bindsym $mod+m mode "mouse"
