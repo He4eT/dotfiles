@@ -15,6 +15,7 @@ sudo dnf install \
   cmatrix \
   NetworkManager-tui \
   arandr \
+  gpick \
   light \
   btop \
   htop \
