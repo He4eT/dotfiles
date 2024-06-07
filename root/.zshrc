@@ -52,6 +52,7 @@ alias ncdu='ncdu --color off'
 alias ga.='ga . && gst'
 alias gcmsgrnd='git commit -m "$(fakemsg)"'
 alias ghist="git log --name-only --pretty='' | sed -e '/^\\s*$/d' | awk '!seen[\$0]++' | less"
+alias cdgr='cd $(git rev-parse --show-toplevel)'
 
 ## Servers
 
