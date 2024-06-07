@@ -46,6 +46,8 @@ source $ZSH/oh-my-zsh.sh
 alias :q='exit'
 alias fakemsg='echo "$(curl -s https://whatthecommit.com/index.txt)"'
 alias ncdu='ncdu --color off'
+alias lynx='WWW_HOME=https://duckduckgo.com \
+  lynx -accept_all_cookies -nocolor -nopause -show_cursor:true -tna -vikeys'
 
 ## git
 
