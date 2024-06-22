@@ -8,6 +8,7 @@ npx @johnnymorganz/stylua-bin ./init.lua
 ├─ cfg_leader: Leader keys
 ├─ cfg_options: See `:help vim.o`
 ├─ cfg_filetypes: Filetype aliases
+├─ cfg_cmds: Commands
 ├─ cfg_autocmds: Autocomands
 ├─ cfg_keymaps: General keymaps
 └─ cfg_lazy: Plugin manager
@@ -30,11 +31,9 @@ npx @johnnymorganz/stylua-bin ./init.lua
    │  └─ cfg_lazy_lsp_keymaps
    ├─ cfg_lazy_cmp: Autocompletion
    │  └─ cfg_lazy_cmp_keymaps
-   ├─ cfg_lazy_treesitter: Highlight, edit, and navigate code
-   │  ├─ cfg_lazy_treesitter_langs
-   │  └─ cfg_lazy_treesitter_keymaps
-   └─ cfg_lazy_ollama: LLM integration
-      └─ cfg_lazy_ollama_prompts
+   └─ cfg_lazy_treesitter: Highlight, edit, and navigate code
+      ├─ cfg_lazy_treesitter_langs
+      └─ cfg_lazy_treesitter_keymaps
 ]]
 
 --[[ cfg_leader: Leader keys ]]
@@ -107,6 +106,11 @@ vim.filetype.add {
     pcss = 'css',
   },
 }
+
+--[[ cfg_cmds: Commands ]]
+
+-- Ignore :EditQuery command
+vim.cmd 'command E Explore'
 
 --[[ cfg_autocmds: Autocomands ]]
 
@@ -247,8 +251,8 @@ require('lazy').setup({
   },
   --[[ cfg_lazy_desolate: Not-so-colorful colorscheme ]]
   {
-    -- dir = '~/trash/desolate.nvim',
     'He4eT/desolate.nvim',
+    -- dir = '~/trash/desolate.nvim',
     priority = 1000,
     init = function()
       vim.g.desolate_h = 0
@@ -649,52 +653,6 @@ require('lazy').setup({
         },
       }
     end,
-  },
-  --[[ cfg_lazy_ollama: LLM integration ]]
-  {
-    'nomnivore/ollama.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    },
-    cmd = { 'Ollama', 'OllamaModel' },
-    keys = {
-      {
-        '<leader>j',
-        ':Ollama<CR>',
-        desc = 'Ollama Menu',
-        mode = { 'v' },
-      },
-      {
-        '<leader>j',
-        ":lua require('ollama').prompt('Generate_Code')<cr>",
-        desc = 'Ollama Code Generation',
-        mode = { 'n' },
-      },
-    },
-    opts = {
-      model = 'mistral',
-      url = 'http://ollama.internal:11434', -- see /etc/hosts
-      --[[ cfg_lazy_ollama_prompts ]]
-      prompts = {
-        Ask_About_Code = false,
-        Simplify_Code = false,
-        Improve_Text = {
-          prompt = 'Make this text simple and readable. Respond with improved version of this text: ```$sel```',
-          extract = false,
-          action = 'replace',
-        },
-        Modify_Text = {
-          prompt = 'Modify this text in the following way: $input\n\n' .. '```$sel```',
-          extract = false,
-          action = 'replace',
-        },
-        Use_selection_as_prompt = {
-          prompt = '$sel',
-          extract = false,
-          action = 'replace',
-        },
-      },
-    },
   },
 }, {
   -- lazy.nvim options
