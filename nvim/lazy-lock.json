@@ -4,7 +4,7 @@
   "cmp-nvim-lsp": { "branch": "main", "commit": "39e2eda76828d88b773cc27a3f61d2ad782c922d" },
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "cmp_luasnip": { "branch": "master", "commit": "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
-  "desolate.nvim": { "branch": "develop", "commit": "b87fff48ccb2c443b90c83b0115d60a7aaa56904" },
+  "desolate.nvim": { "branch": "develop", "commit": "460602427d4a7a35364790e520cf032e5d78cb60" },
   "fzf": { "branch": "master", "commit": "7c2ffd3fef3f9131ee448a5f40d91835c8bd814d" },
   "fzf-lua": { "branch": "main", "commit": "1ec6eeda11c3a3dcd544e1c61ad4b8c9b49903c4" },
   "gitsigns.nvim": { "branch": "main", "commit": "8df63f2ddc615feb71fd4aee45a4cee022876df1" },

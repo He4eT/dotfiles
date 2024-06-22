@@ -247,6 +247,7 @@ require('lazy').setup({
   },
   --[[ cfg_lazy_desolate: Not-so-colorful colorscheme ]]
   {
+    -- dir = '~/trash/desolate.nvim',
     'He4eT/desolate.nvim',
     priority = 1000,
     init = function()
@@ -424,7 +425,7 @@ require('lazy').setup({
             -- 'Go to definition' workaround
             -- https://github.com/holoiii/nvim/commit/73a4db74fe463f5064346ba63870557fedd134ad
             ['textDocument/definition'] = function(err, result, ...)
-              result = vim.tbl_islist(result) and result[1] or result
+              result = vim.islist(result) and result[1] or result
               vim.lsp.handlers['textDocument/definition'](err, result, ...)
             end,
           },
