@@ -2,7 +2,7 @@ configuration {
   /* fc-list for full list */
   /* fc-match for check */
   font: "Noto Sans 11";
-  window-format: "{w}\t{c}\t{t}";
+  window-format: "{w}\t{n}\t{t}";
 }
 
 @theme "./paper-float.rasi"
