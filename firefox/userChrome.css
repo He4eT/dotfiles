@@ -29,10 +29,8 @@
   background-color: Field !important;
 }
 
-@media (-moz-bool-pref: "browser.urlbar.richSuggestions.featureGate") {
-  #urlbar:not(.searchButton) > #urlbar-input-container .identity-box-button {
-    padding-inline: var(--urlbar-icon-padding) !important;
-  }
+.identity-box-button {
+  padding-inline: var(--urlbar-icon-padding) !important;
 }
 
 #tracking-protection-icon-container,
