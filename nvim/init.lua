@@ -147,6 +147,7 @@ vim.keymap.set('n', '<PageUp>', '<C-u>', { silent = true, desc = 'Ctrl + u but P
 
 -- Open terminal
 vim.keymap.set({ 'n' }, '<leader>t', ':terminal<CR>i', { silent = true, desc = 'Open terminal here' })
+vim.keymap.set({ 'n' }, '<leader>T', ':vs<CR><C-w>w:terminal<CR>i', { silent = true, desc = 'Open terminal in vsplit' })
 
 -- Escape terminal mode
 vim.keymap.set({ 't' }, ';;', '<C-\\><C-n>', { silent = true, desc = 'Escape terminal mode' })
