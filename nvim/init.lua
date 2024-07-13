@@ -146,8 +146,8 @@ vim.keymap.set('n', '<PageDown>', '<C-d>', { silent = true, desc = 'Ctrl + d but
 vim.keymap.set('n', '<PageUp>', '<C-u>', { silent = true, desc = 'Ctrl + u but PageUp' })
 
 -- Open terminal
-vim.keymap.set({ 'n' }, '<leader>t', ':terminal<CR>i', { silent = true, desc = 'Open terminal here' })
-vim.keymap.set({ 'n' }, '<leader>T', ':vs<CR><C-w>w:terminal<CR>i', { silent = true, desc = 'Open terminal in vsplit' })
+vim.keymap.set({ 'n' }, '<leader>T', ':terminal<CR>i', { silent = true, desc = 'Open terminal here' })
+vim.keymap.set({ 'n' }, '<leader>t', ':vs<CR><C-w>w:terminal<CR>i', { silent = true, desc = 'Open terminal in vsplit' })
 
 -- Escape terminal mode
 vim.keymap.set({ 't' }, ';;', '<C-\\><C-n>', { silent = true, desc = 'Escape terminal mode' })
