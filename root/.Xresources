@@ -32,14 +32,14 @@ URxvt.keysym.C-S-0x56: eval:paste_clipboard
 *.color3:  #ffad29
 *.color11: #ffb929
 
-*.color4:  #4e9fb1
-*.color12: #6d878d
+*.color4:  #757575
+*.color12: #BDBDBD
 
 *.color5:  #9414e6
 *.color13: #ff37ff
 
-*.color6:  #42717b
-*.color14: #00ccd3
+*.color6:  #6d878d
+*.color14: #90A4AE
 
 *.color7:  #e1e1e0
 *.color15: #ffffff
