@@ -49,6 +49,16 @@ alias ncdu='ncdu --color off'
 alias lynx='WWW_HOME=https://duckduckgo.com \
   lynx -accept_all_cookies -nocolor -nopause -show_cursor:true -tna -vikeys'
 
+# Aliases for nmtui @see https://lemmy.world/post/17689127
+
+NMTUI_COLORS='
+  root=black,default;
+  actlistbox=black,lightgray;
+  actsellistbox=black,yellow;
+'
+alias nmtui='NEWT_COLORS="$NMTUI_COLORS" nmtui'
+alias nmtui-connect='NEWT_COLORS="$NMTUI_COLORS" nmtui-connect'
+
 ## git
 
 alias ga.='ga . && gst'
