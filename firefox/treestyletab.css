@@ -77,6 +77,6 @@ tab-item tab-favicon * {
 }
 
 .highlighter::before {
-  margin-top: -1px;
-  margin-bottom: -1px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
