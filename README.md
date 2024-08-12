@@ -6,7 +6,10 @@
 1. Run `./installPackages.sh`
 1. Run `./apply.sh`
 1. Install [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh#basic-installation)
-1. Export gtk-theme and icons with `oomox` and apply them with `lxappearance`
+
+## GTK
+
+1. Apply [Desolate-GTK](https://github.com/He4eT/Desolate-GTK)
 1. [Apply](https://wiki.archlinux.org/title/Cursor_themes) the [Quintom cursor theme](https://gitlab.com/Burning_Cube/quintom-cursor-theme/-/tree/master/) as `Quintom_Snow`
 
 ## git
