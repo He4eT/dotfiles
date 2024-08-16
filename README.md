@@ -11,6 +11,11 @@
 
 1. Apply [Desolate-GTK](https://github.com/He4eT/Desolate-GTK)
 1. [Apply](https://wiki.archlinux.org/title/Cursor_themes) the [Quintom cursor theme](https://gitlab.com/Burning_Cube/quintom-cursor-theme/-/tree/master/) as `Quintom_Snow`
+1. Add variables to `/etc/environment`:
+    ```
+    QT_QPA_PLATFORMTHEME=qt5ct
+    XDG_CURRENT_DESKTOP=gnome
+    ```
 
 ## git
 
