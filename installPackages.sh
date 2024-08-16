@@ -10,6 +10,7 @@ sudo dnf install \
   gparted \
   gimp \
   vlc \
+  qt5ct \
   rxvt-unicode \
   cbonsai \
   cmatrix \
