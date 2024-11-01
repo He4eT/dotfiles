@@ -10,7 +10,7 @@
 }
 
 #main-window:not([tabsintitlebar="true"]) #TabsToolbar {
-    visibility: collapse !important;
+  visibility: collapse !important;
 }
 
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
@@ -19,13 +19,16 @@
 
 /* Addressbar */
 
+#nav-bar.browser-toolbar {
+  background-color: -moz-dialog !important;
+}
+
 #nav-bar-customization-target {
   --toolbar-start-end-padding: 0;
 }
 
 #main-window:not([privatebrowsingmode="temporary"]) #urlbar-background {
-  /* --toolbar-field-border-color: #adadad; */
-  border-color: var(--button-active-bgcolor) !important;
+  border-color: ThreeDShadow !important;
   background-color: Field !important;
 }
 

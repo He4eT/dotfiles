@@ -7,6 +7,9 @@
 .newtab-button {
   display: none;
 }
+.newtab-button::after {
+  display: none;
+}
 
 /* Counter tunning */
 .counter {
@@ -29,7 +32,7 @@
 
 /* Common background */
 #background {
-  background: color-mix(in srgb, -moz-dialog 85%, white);
+  background: -moz-dialog;
 }
 
 /* Pined tabs container */
@@ -58,7 +61,7 @@ tab-item-substance {
 
 .tab:hover > tab-item-substance,
 .tab.active > tab-item-substance {
-  background: var(--face-highlight-more-more-lighter);
+  background: var(--face-highlight-more-lighter);
 }
 
 .tab .label {
