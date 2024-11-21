@@ -64,6 +64,7 @@ alias nmtui-connect='NEWT_COLORS="$NMTUI_COLORS" nmtui-connect'
 
 ## git
 
+alias cdg='cd $(git rev-parse --show-toplevel 2>/dev/null)'
 alias ga.='ga . && gst'
 alias gcmsgrnd='git commit -m "$(fakemsg)"'
 alias ghist="git log --name-only --pretty='' | sed -e '/^\\s*$/d' | awk '!seen[\$0]++' | less"
