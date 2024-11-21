@@ -49,6 +49,7 @@ alias fakemsg='echo "$(curl -s https://whatthecommit.com/index.txt)"'
 alias ncdu='ncdu --color off'
 alias lynx='WWW_HOME=https://duckduckgo.com \
   lynx -accept_all_cookies -nocolor -nopause -show_cursor:true -tna -vikeys'
+alias status='clear && fastfetch -c ~/dotfiles/fastfetch/status.jsonc'
 
 # Aliases for nmtui @see https://lemmy.world/post/17689127
 

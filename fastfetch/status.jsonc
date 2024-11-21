@@ -1,0 +1,101 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": "none",
+    "display": {
+        "color": "white",
+    },
+    "modules": [
+        "os",
+        "kernel",
+        "initsystem",
+        "packages",
+        "uptime",
+        "users",
+
+        "break",
+
+        "terminalsize",
+        {
+            "type": "colors",
+            "key": "Terminal Colors",
+            "symbol": "square",
+        },
+
+        "break",
+
+        "host",
+        "poweradapter",
+        "sound",
+        {
+            "type": "battery",
+            "temp": true,
+        },
+
+        "break",
+
+        {
+            "type": "cpu",
+            "showPeCoreCount": true,
+            "temp": true,
+        },
+        "cpuusage",
+        "processes",
+        "loadavg",
+
+        "break",
+
+        {
+            "type": "gpu",
+            "driverSpecific": true,
+            "temp": true,
+        },
+        "display",
+        "brightness",
+        // "monitor",
+
+        "break",
+
+        "memory",
+        "swap",
+        "physicalmemory",
+
+        "break",
+
+        "disk",
+        {
+            "type": "physicaldisk",
+            "temp": true
+        },
+        // "diskio",
+
+        "break",
+
+        "wifi",
+        "dns",
+        {
+            "type": "publicip",
+            "timeout": 1000
+        },
+        {
+            "type": "localip",
+            "showIpv6": false,
+            "showMac": false,
+            "showSpeed": false,
+            "showMtu": false,
+            "showLoop": false,
+            "showFlags": false,
+            "showAllIps": true
+        },
+        // "netio",
+
+        "break",
+
+        "datetime",
+        {
+          "type": "weather",
+          "timeout": 1000
+        },
+
+        "break",
+    ]
+}
