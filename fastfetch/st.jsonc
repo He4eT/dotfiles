@@ -1,0 +1,45 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": "none",
+    "display": {
+        "color": "yellow",
+        "key": {
+            "width": 13,
+        },
+        "bar": {
+            "charElapsed": "▪",
+            "charTotal": "-",
+            "width": 12,
+        },
+        "percent": {
+            "type": 3,
+        },
+    },
+    "modules": [
+        "title",
+        "break",
+        "memory",
+        "swap",
+        {
+            "type": "disk",
+            "folders": "/",
+        },
+        "break",
+        {
+            "type": "battery",
+            "key": "Battery",
+        },
+        {
+            "type": "brightness",
+            "key": "Brightness",
+        },
+        {
+            "type": "sound",
+            "format": "{5} ({3}) [{2}]",
+        },
+        {
+            "type": "wifi",
+            "format": "{11} ({7}) [{10} - {4}]",
+        },
+    ],
+}
