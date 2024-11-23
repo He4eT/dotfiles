@@ -64,7 +64,7 @@
         "disk",
         {
             "type": "physicaldisk",
-            "temp": true
+            "temp": true,
         },
         // "diskio",
 
@@ -74,7 +74,7 @@
         "dns",
         {
             "type": "publicip",
-            "timeout": 1000
+            "timeout": 1000,
         },
         {
             "type": "localip",
@@ -84,7 +84,7 @@
             "showMtu": false,
             "showLoop": false,
             "showFlags": false,
-            "showAllIps": true
+            "showAllIps": true,
         },
         // "netio",
 
@@ -92,10 +92,10 @@
 
         "datetime",
         {
-          "type": "weather",
-          "timeout": 1000
+            "type": "weather",
+            "timeout": 1000,
         },
 
         "break",
-    ]
+    ],
 }
