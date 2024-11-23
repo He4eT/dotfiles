@@ -14,6 +14,7 @@ sudo dnf install \
   rxvt-unicode \
   cbonsai \
   cmatrix \
+  fastfetch \
   NetworkManager-tui \
   arandr \
   gpick \
