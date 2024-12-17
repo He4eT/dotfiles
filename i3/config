@@ -1,6 +1,6 @@
 # [Startup]
 
-exec --no-startup-id feh --bg-scale ~/dotfiles/wallpaper.png
+exec --no-startup-id feh --bg-scale ~/dotfiles/wallpapers/png/blob.png
 exec --no-startup-id setxkbmap -option 'grp:caps_toggle'
 exec --no-startup-id polybar top
 exec --no-startup-id picom \
