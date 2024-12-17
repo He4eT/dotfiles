@@ -28,7 +28,7 @@ font pango:NotoSans 11
 gaps inner 30
 hide_edge_borders both
 
-for_window [class=".*"] title_format " %title "
+for_window [class=".*"] title_format " ◤ %title "
 for_window [class="^.*"] border pixel 3
 
 # [Exceptions]
