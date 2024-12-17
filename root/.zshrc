@@ -29,6 +29,7 @@ ZSH_THEME="custom-minimal"
 MODE_INDICATOR="%F{yellow}◼%f"
 VI_MODE_CURSOR_INSERT=2
 KEYTIMEOUT=1
+bindkey -M vicmd 'V' edit-command-line
 
 CASE_SENSITIVE="false"
 
