@@ -46,8 +46,3 @@ rm ~/.config/rofi/config
 ln -sv ~/dotfiles/rofi/config.rasi ~/.config/rofi/config.rasi
 rm ~/.config/rofi/paper-float.rasi
 ln -sv ~/dotfiles/rofi/paper-float.rasi ~/.config/rofi/paper-float.rasi
-
-# oomox
-mkdir -p ~/.config/oomox/colors
-rm ~/.config/oomox/colors/gray
-ln -sv ~/dotfiles/oomox/colors/gray ~/.config/oomox/colors/gray
