@@ -10,6 +10,10 @@ ln -sv ~/dotfiles/root/.zshrc ~/.zshrc
 rm ~/.vimrc
 ln -sv ~/dotfiles/root/.vimrc ~/.vimrc
 
+# .lynxrc
+rm ~/.lynxrc
+ln -sv ~/dotfiles/root/.lynxrc ~/.lynxrc
+
 # kitty
 mkdir -p ~/.config/kitty
 rm ~/.config/kitty/kitty.conf
