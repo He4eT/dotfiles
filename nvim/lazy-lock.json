@@ -6,7 +6,7 @@
   "cmp_luasnip": { "branch": "master", "commit": "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
   "desolate.nvim": { "branch": "develop", "commit": "08c59bb2d9e805b206e8128a698bb839a189f1ae" },
   "fzf": { "branch": "master", "commit": "97030d4cb10d9b1c51f2afd60e14c6e46a7fe4ba" },
-  "fzf-lua": { "branch": "main", "commit": "7022b5b002bb7488e1be4470bad2342bcc8d4d99" },
+  "fzf-lua": { "branch": "main", "commit": "72e25cc0bf4e47c5bef33f65e1943c4cc7dc27a1" },
   "gitsigns.nvim": { "branch": "main", "commit": "5f808b5e4fef30bd8aca1b803b4e555da07fc412" },
   "lazy.nvim": { "branch": "main", "commit": "7e6c863bc7563efbdd757a310d17ebc95166cef3" },
   "leap.nvim": { "branch": "main", "commit": "c6bfb191f1161fbabace1f36f578a20ac6c7642c" },
