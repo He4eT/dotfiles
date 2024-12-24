@@ -40,6 +40,13 @@ mkdir -p ~/.config/polybar
 rm ~/.config/polybar/config
 ln -sv ~/dotfiles/polybar/config ~/.config/polybar/config
 
+# ranger
+mkdir -p ~/.config/ranger
+rm ~/.config/ranger/rc.conf
+ln -sv ~/dotfiles/ranger/rc.conf ~/.config/ranger/rc.conf
+rm ~/.config/ranger/scope.sh
+ln -sv ~/dotfiles/ranger/scope.sh ~/.config/ranger/scope.sh
+
 # rofi
 mkdir -p ~/.config/rofi
 rm ~/.config/rofi/config
