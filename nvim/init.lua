@@ -26,7 +26,7 @@ npx @johnnymorganz/stylua-bin ./init.lua
    ├─ cfg_lazy_lsp: LSP configuration & plugins
    │  ├─ cfg_lazy_lsp_servers
    │  │  ├─ cfg_lazy_lsp_servers_lua
-   │  │  ├─ cfg_lazy_lsp_servers_tsserver
+   │  │  ├─ cfg_lazy_lsp_servers_ts_ls
    │  │  └─ cfg_lazy_lsp_servers_volar
    │  └─ cfg_lazy_lsp_keymaps
    ├─ cfg_lazy_cmp: Autocompletion
@@ -414,8 +414,8 @@ require('lazy').setup({
             },
           },
         },
-        --[[ cfg_lazy_lsp_servers_tsserver ]]
-        tsserver = {
+        --[[ cfg_lazy_lsp_servers_ts_ls ]]
+        ts_ls = {
           filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
           init_options = {
             plugins = {
