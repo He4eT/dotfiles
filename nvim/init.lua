@@ -196,7 +196,13 @@ require('lazy').setup({
   --[[ cfg_lazy_vim_surround: Delete, change and add surroundings in pairs ]]
   'tpope/vim-surround',
   --[[ cfg_lazy_colorizer: Color highlighter ]]
-  'norcalli/nvim-colorizer.lua',
+  {
+    "catgoose/nvim-colorizer.lua",
+    cmd = "ColorizerToggle",
+    opts = {
+      filetypes = {},
+    },
+  },
   --[[ cfg_lazy_comment: Toggles linewise and blockwise comments ]]
   {
     'numToStr/Comment.nvim',
