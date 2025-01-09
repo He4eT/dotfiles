@@ -36,13 +36,13 @@
 
     # Borders
 
-    frame_width = 2
-    frame_color = "#cdcdcd"
+    frame_width = 3
+    frame_color = "#bdbdbd"
 
     gap_size = 0
 
-    separator_height = 2
-    separator_color = "#cdcdcd"
+    separator_height = 3
+    separator_color = "#bdbdbd"
 
     # Paddings
 
