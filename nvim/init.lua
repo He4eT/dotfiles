@@ -99,6 +99,9 @@ vim.o.completeopt = 'menuone,noselect'
 -- Keeps the same screen lines in all split windows
 vim.o.splitkeep = 'screen'
 
+-- Netrw settings
+vim.g.netrw_sort_sequence = '[\\/]$,*'
+
 --[[ cfg_filetypes: Filetype aliases ]]
 
 vim.filetype.add {
