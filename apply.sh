@@ -38,7 +38,7 @@ ln -sv ~/dotfiles/dunst/dunstrc ~/.config/dunst/dunstrc
 # polybar
 mkdir -p ~/.config/polybar
 rm ~/.config/polybar/config
-ln -sv ~/dotfiles/polybar/config ~/.config/polybar/config
+ln -sv ~/dotfiles/polybar/config.ini ~/.config/polybar/config.ini
 
 # ranger
 mkdir -p ~/.config/ranger
