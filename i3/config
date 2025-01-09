@@ -22,10 +22,10 @@ exec --no-startup-id picom \
 
 # Class                 Border  Back    Text    Marker  Child_Border
 client.focused          #383838 #383838 #cdcdcd #bdbdbd #bdbdbd
-client.focused_inactive #222222 #222222 #7d7d7d #222222 #000000
-client.unfocused        #222222 #222222 #7d7d7d #222222 #000000
-client.urgent           #222222 #222222 #7d7d7d #222222 #000000
-client.placeholder      #222222 #222222 #7d7d7d #222222 #000000
+client.focused_inactive #222222 #222222 #7d7d7d #222222 #222222
+client.unfocused        #222222 #222222 #7d7d7d #222222 #222222
+client.urgent           #222222 #222222 #7d7d7d #222222 #222222
+client.placeholder      #222222 #222222 #7d7d7d #222222 #222222
 client.background       #ffffff
 
 font pango:NotoSans 11
