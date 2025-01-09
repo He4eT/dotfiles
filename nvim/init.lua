@@ -73,6 +73,9 @@ vim.o.wrap = false
 -- Break lines at word
 vim.o.linebreak = true
 
+-- Go to start of the line after gg and similar moves
+vim.o.startofline = true
+
 -- Show cursorline
 vim.o.cursorline = true
 
