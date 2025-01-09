@@ -6,7 +6,7 @@
     selection:  #444444;
 
     inner-padding: 0.5em;
-    border-width: 2px;
+    border-width: 3px;
 
     border-color: @selection;
     background-color: @bg;
@@ -16,7 +16,7 @@
 #window {
     border: @border-width;
     width: 800px;
-    height: 518px;
+    height: 477px;
 }
 
 #inputbar {
