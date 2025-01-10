@@ -203,8 +203,8 @@ require('lazy').setup({
   'tpope/vim-surround',
   --[[ cfg_lazy_colorizer: Color highlighter ]]
   {
-    "catgoose/nvim-colorizer.lua",
-    cmd = "ColorizerToggle",
+    'catgoose/nvim-colorizer.lua',
+    cmd = 'ColorizerToggle',
     opts = {
       filetypes = {},
     },
