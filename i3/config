@@ -38,7 +38,8 @@ for_window [class="^.*"] border pixel 3
 
 # [Exceptions]
 
-for_window [title=" is sharing your screen.$"] border none, sticky enable, move position 0 px 0 px
+for_window [title=" is sharing your screen.$"] \
+        border none, sticky enable, move position 0 px 0 px
 
 # [Keyboard Shortcuts]
 
@@ -61,8 +62,10 @@ bindsym $mod+y exec --no-startup-id "pkill gpick; gpick -so | xclip -sel c"
 bindsym $mod+g exec --no-startup-id xdotool mousemove 0 1080
 bindsym $mod+Shift+g exec --no-startup-id xdotool mousemove 960 540
 
-bindsym $mod+t exec firefox --new-tab --url about:newtab && i3-msg '[urgent=latest] focus'
-bindsym $mod+Shift+o exec "~/dotfiles/i3/scripts/tabToLastWorkspace.sh"
+bindsym $mod+t \
+        exec "firefox --new-tab --url about:newtab && i3-msg 'workspace 1'"
+bindsym $mod+Shift+o \
+        exec "~/dotfiles/i3/scripts/tabToLastWorkspace.sh"
 
 # [Notifications]
 
@@ -71,14 +74,19 @@ bindsym $mod+BackSpace exec --no-startup-id dunstctl close-all
 
 # [Volume Controls]
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id \
+        pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id \
+        pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id \
+        pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
 # [Screen Brightness Controls]
 
-bindsym XF86MonBrightnessUp exec --no-startup-id "light -A 5 && dunstify Brightness -h int:value:`light`"
-bindsym XF86MonBrightnessDown exec --no-startup-id "light -U 5 && dunstify Brightness -h int:value:`light`"
+bindsym XF86MonBrightnessUp exec --no-startup-id \
+        "light -A 5 && dunstify Brightness -h int:value:`light`"
+bindsym XF86MonBrightnessDown exec --no-startup-id \
+        "light -U 5 && dunstify Brightness -h int:value:`light`"
 
 # [i3 Controls]
 
@@ -94,7 +102,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec \
+        "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes' 'i3-msg exit'"
 
 # Change the Focus
 
@@ -227,13 +236,14 @@ mode "resize" {
         bindsym Right resize grow width 10 px or 10 ppt
 
         # Set Gaps Size
-        bindsym r exec "i3-msg mode default; exec i3-msg gaps inner current set 0"
         bindsym 0 gaps inner current set 0
         bindsym 1 gaps inner current set 10
         bindsym 2 gaps inner current set 20
         bindsym 3 gaps inner current set 30
         bindsym 4 gaps inner current set 40
         bindsym 5 gaps inner current set 50
+        bindsym r exec --no-startup-id \
+                "i3-msg mode default && i3-msg gaps inner current set 0"
 
         # Back to Normal Mode
         bindsym Return mode "default"
@@ -244,29 +254,34 @@ mode "resize" {
 bindsym $mod+m mode "mouse"
 mode "mouse" {
         # Clicks
-        bindsym j exec xdotool click 1
-        bindsym k exec xdotool click 3
-        bindsym l exec xdotool click 2
+        bindsym j exec --no-startup-id xdotool click 1
+        bindsym k exec --no-startup-id xdotool click 3
+        bindsym l exec --no-startup-id xdotool click 2
 
         # Wheel
-        bindsym t exec xdotool click 4
-        bindsym g exec xdotool click 5
+        bindsym t exec --no-startup-id xdotool click 4
+        bindsym g exec --no-startup-id xdotool click 5
 
-        bindsym y exec xdotool click 4
-        bindsym h exec xdotool click 5
+        bindsym y exec --no-startup-id xdotool click 4
+        bindsym h exec --no-startup-id xdotool click 5
 
         # Movement
-        bindsym a exec "~/dotfiles/i3/scripts/binSeekCursor.sh reset"
-        bindsym e exec "~/dotfiles/i3/scripts/binSeekCursor.sh up"
-        bindsym s exec "~/dotfiles/i3/scripts/binSeekCursor.sh left"
-        bindsym d exec "~/dotfiles/i3/scripts/binSeekCursor.sh down"
-        bindsym f exec "~/dotfiles/i3/scripts/binSeekCursor.sh right"
+        bindsym a exec --no-startup-id \
+                "~/dotfiles/i3/scripts/binSeekCursor.sh reset"
+        bindsym e exec --no-startup-id \
+                "~/dotfiles/i3/scripts/binSeekCursor.sh up"
+        bindsym s exec --no-startup-id \
+                "~/dotfiles/i3/scripts/binSeekCursor.sh left"
+        bindsym d exec --no-startup-id \
+                "~/dotfiles/i3/scripts/binSeekCursor.sh down"
+        bindsym f exec --no-startup-id \
+                "~/dotfiles/i3/scripts/binSeekCursor.sh right"
 
         # Slow Movement
-        bindsym Shift+e exec xdotool mousemove_relative -- 0 -1
-        bindsym Shift+s exec xdotool mousemove_relative -- -1 0
-        bindsym Shift+d exec xdotool mousemove_relative -- 0 1
-        bindsym Shift+f exec xdotool mousemove_relative -- 1 0
+        bindsym Shift+e exec --no-startup-id xdotool mousemove_relative -- 0 -1
+        bindsym Shift+s exec --no-startup-id xdotool mousemove_relative -- -1 0
+        bindsym Shift+d exec --no-startup-id xdotool mousemove_relative -- 0 1
+        bindsym Shift+f exec --no-startup-id xdotool mousemove_relative -- 1 0
 
         # Back to Normal Mode
         bindsym Return mode "default"
