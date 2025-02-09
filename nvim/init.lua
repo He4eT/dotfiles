@@ -42,8 +42,6 @@ local leader = ' '
 vim.g.mapleader = leader
 vim.g.maplocalleader = leader
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.keymap.set({ 'n', 'v' }, '<CR>', leader, { silent = true, remap = true })
-vim.keymap.set({ 'n', 'v' }, '<CR><CR>', '<CR>', { silent = true, remap = false })
 
 --[[ cfg_options: See `:help vim.o` ]]
 
