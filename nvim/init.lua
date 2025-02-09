@@ -165,8 +165,8 @@ vim.keymap.set('n', '<leader>h', '<C-o>', { desc = 'Go back' })
 vim.keymap.set('n', '<leader>l', '<C-i>', { desc = 'Go forward' })
 
 -- Copy'n'Paste
-vim.keymap.set('n', '<leader>y', ':call system("xclip -i -selection clipboard", @@)<cr>', { desc = 'Copy " to system clipboard' })
-vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy selection to system clipboard' })
+vim.keymap.set('n', '<leader>y', ':call system("xclip -i -selection clipboard", @@)<cr>', { desc = 'Copy last yanked or deleted text to the system clipboard' })
+vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy selection to the system clipboard' })
 
 -- Diagnostic
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
