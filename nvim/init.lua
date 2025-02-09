@@ -114,7 +114,7 @@ vim.filetype.add {
 --[[ cfg_cmds: Commands ]]
 
 -- Ignore :EditQuery command
-vim.cmd 'command E Explore'
+vim.api.nvim_create_user_command('E', 'Explore', {})
 
 --[[ cfg_autocmds: Autocomands ]]
 
