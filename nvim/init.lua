@@ -600,6 +600,7 @@ require('lazy').setup({
           'tsx',
           'vue',
           'html',
+          'ninja',
           'css',
           'scss',
         },
