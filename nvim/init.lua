@@ -139,6 +139,12 @@ vim.api.nvim_create_autocmd('BufEnter', {
 -- Disable line numbers for terminal buffers
 vim.api.nvim_create_autocmd('TermOpen', { pattern = '*', command = 'setlocal nonumber' })
 
+-- Switch the keyboard layout to English (US) when leaving Insert Mode
+local switch_layout_command = "silent !setxkbmap -layout 'us,ru' -option 'grp:caps_toggle'"
+vim.api.nvim_create_autocmd("InsertLeave", {
+  command = switch_layout_command
+})
+
 --[[ cfg_keymaps: General keymaps ]]
 
 -- Remap for dealing with word wrap
