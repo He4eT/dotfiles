@@ -140,9 +140,8 @@ vim.api.nvim_create_autocmd('BufEnter', {
 vim.api.nvim_create_autocmd('TermOpen', { pattern = '*', command = 'setlocal nonumber' })
 
 -- Switch the keyboard layout to English (US) when leaving Insert Mode
-local switch_layout_command = "silent !setxkbmap -layout 'us,ru' -option 'grp:caps_toggle'"
 vim.api.nvim_create_autocmd("InsertLeave", {
-  command = switch_layout_command
+  command = "silent !xkb-switch -s us"
 })
 
 --[[ cfg_keymaps: General keymaps ]]
