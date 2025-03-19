@@ -30,6 +30,7 @@ sudo dnf install \
   xclip \
   xdotool \
   xdpyinfo \
+  xkb-switch \
   git \
   zsh \
   mc \
