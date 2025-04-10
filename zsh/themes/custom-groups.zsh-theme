@@ -4,7 +4,7 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}▴%{$fg[white]%}]%{$reset_color%} "
 ZSH_THEME_GIT_PROMPT_CLEAN="]%{$reset_color%} "
 
 function braille_prompt() {
-  local input="${1:-0}"  # если аргумент не передан, по умолчанию 0
+  local input="${1:-0}"
   local hash=$( echo "$input" | md5sum | cut -d' ' -f1)
   local braille=$(echo $hash | xxd -r -p | od -An -vtu1 | \
     awk '{for(i=1;i<=NF;i++) printf "\\U%08x", 0x2800 + $i}' | xargs -0 printf "%b")
