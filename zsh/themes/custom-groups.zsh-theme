@@ -12,8 +12,9 @@ function braille_prompt() {
   local color='\033[1;30m'
   local reset='\033[0m'
   local prefix='▣─□□□─────────────────╼⢸'
-  local postfix='⡇╾──────────╼━━━━'
-  echo -e "${color}${prefix}${braille}${postfix}${reset}"
+  local postfix='⡇╾──────────╼━━━━        ▒ '
+  local datetime=$(date '+%Y-%m-%d %H:%M:%S')
+  echo -e "${color}${prefix}${braille}${postfix}${datetime}${reset}"
 }
 
 vcs_status() {
