@@ -45,13 +45,22 @@ source $ZSH/oh-my-zsh.sh
 
 # Aliases
 
-alias :q='exit'
 alias fakemsg='echo "$(curl -s https://whatthecommit.com/index.txt)"'
+
+alias st='fastfetch -c ~/dotfiles/fastfetch/st.jsonc'
+alias status='clear && fastfetch -c ~/dotfiles/fastfetch/status.jsonc'
+
+# Commands
+
+alias :q='exit'
+alias :timestamps='omz theme use custom-groups'
+alias :notimestamps='omz theme use custom-minimal'
+
+# Apps
+
 alias ncdu='ncdu --color off'
 alias lynx='WWW_HOME=https://duckduckgo.com \
   lynx -accept_all_cookies -nocolor -nopause -show_cursor:true -tna -vikeys'
-alias st='fastfetch -c ~/dotfiles/fastfetch/st.jsonc'
-alias status='clear && fastfetch -c ~/dotfiles/fastfetch/status.jsonc'
 
 # Aliases for nmtui @see https://lemmy.world/post/17689127
 
@@ -83,6 +92,7 @@ alias summon='clear && docker exec -it ollama ollama run'
 alias summonable='docker exec -it ollama ollama list'
 
 ## Music
+
 alias somafm='npx ~/trash/fuzzsoma'
 
 ## Copy from terminal
