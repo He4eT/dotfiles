@@ -26,12 +26,13 @@ ZSH_CUSTOM="/home/odd/dotfiles/zsh"
 zstyle ':omz:alpha:lib:git' async-prompt no
 
 ZSH_THEME="custom-minimal"
+CASE_SENSITIVE="false"
+
+ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(end-of-line)
+
 MODE_INDICATOR="%F{yellow}◼%f"
-VI_MODE_CURSOR_INSERT=2
 KEYTIMEOUT=1
 bindkey -M vicmd 'V' edit-command-line
-
-CASE_SENSITIVE="false"
 
 plugins=(
   git
