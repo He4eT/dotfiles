@@ -183,6 +183,9 @@ vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]ia
 vim.keymap.set({ 'n' }, '<BS>', ':nohl<CR>', { silent = true, desc = 'Turn off highlight' })
 vim.keymap.set({ 'n' }, '<ESC>', ':nohl<CR>', { silent = true, desc = 'Turn off highlight' })
 
+-- Search in Visual Mode
+vim.keymap.set({ 'x' }, '/', '<Esc>/\\%V', { desc = 'Search within visual selection' })
+
 --[[ cfg_lazy: Plugin manager ]]
 -- https://github.com/folke/lazy.nvim
 
