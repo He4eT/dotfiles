@@ -102,6 +102,7 @@ alias somafm='npx ~/trash/fuzzsoma'
 alias last-terminal-screenshot='\
   vim \
   -c "norm G" \
+  -c "norm H" \
   -c "set relativenumber" \
   /tmp/urxvt-screen-content.txt
 '
