@@ -49,6 +49,9 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.o.title = true
 vim.o.titlestring = '%F'
 
+-- Window borders
+vim.o.winborder = 'solid'
+
 -- Hide mode in cmd
 vim.o.showmode = false
 
@@ -174,8 +177,12 @@ vim.keymap.set('n', '<leader>y', ':call system("xclip -i -selection clipboard", 
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy selection to the system clipboard' })
 
 -- Diagnostic
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '[d', function()
+  vim.diagnostic.jump { count = -1, float = true }
+end, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', function()
+  vim.diagnostic.jump { count = 1, float = true }
+end, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating [d]iagnostic message' })
 vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostics list' })
 
@@ -325,6 +332,8 @@ require('lazy').setup({
         },
         grep = {
           rg_opts = '--vimgrep --smart-case --max-columns=512'
+            .. ' --column'
+            .. ' --line-number'
             .. ' --color=ansi'
             .. ' --colors path:fg:yellow'
             .. ' --colors line:fg:green'
@@ -393,7 +402,7 @@ require('lazy').setup({
       vim.keymap.set({ 'n' }, '<leader>:', fzf.command_history, { desc = '[F]zf: command history' })
 
       -- LSP
-      vim.keymap.set({ 'n' }, 'gr', fzf.lsp_references, { desc = 'LSP: [G]o to fzf [R]eference list' })
+      vim.keymap.set({ 'n' }, '<leader>gr', fzf.lsp_references, { desc = 'LSP: [G]o to fzf [R]eference list' })
       vim.keymap.set({ 'n' }, '<leader>gd', fzf.lsp_definitions, { desc = 'LSP: [G]oto [d]efinition list' })
       vim.keymap.set({ 'n' }, '<leader>fu', fzf_grep_filename, { desc = '[F]zf: current file [U]sages' })
     end,
@@ -503,28 +512,24 @@ require('lazy').setup({
         },
       }
 
-      -- LSP Appearance
+      -- Diagnostic Appearance
 
       local diagnostic_icon = '⏹'
+      local diagnostic_types = { 'Error', 'Warn', 'Hint', 'Info' }
 
-      -- Tune popup borders
-      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = 'solid',
-      })
+      local diagnostic_signs = {}
+      for type in pairs(diagnostic_types) do
+        diagnostic_signs[vim.diagnostic.severity[type]] = diagnostic_icon
+      end
 
-      -- Tune virtual_text diagnostic signs
       vim.diagnostic.config {
+        signs = {
+          text = diagnostic_signs,
+        },
         virtual_text = {
           prefix = diagnostic_icon,
         },
       }
-
-      -- Tune diagnostic signs
-      local signs = { 'Error', 'Warn', 'Hint', 'Info' }
-      for _, type in ipairs(signs) do
-        local hl = 'DiagnosticSign' .. type
-        vim.fn.sign_define(hl, { text = diagnostic_icon, texthl = hl, numhl = hl })
-      end
     end,
   },
   --[[ cfg_lazy_cmp: Autocompletion ]]
