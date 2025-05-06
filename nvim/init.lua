@@ -177,12 +177,6 @@ vim.keymap.set('n', '<leader>y', ':call system("xclip -i -selection clipboard", 
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy selection to the system clipboard' })
 
 -- Diagnostic
-vim.keymap.set('n', '[d', function()
-  vim.diagnostic.jump { count = -1, float = true }
-end, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', function()
-  vim.diagnostic.jump { count = 1, float = true }
-end, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating [d]iagnostic message' })
 vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostics list' })
 
