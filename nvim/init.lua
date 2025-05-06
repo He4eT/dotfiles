@@ -379,7 +379,10 @@ require('lazy').setup({
       end
 
       local fzf_git_chronology = function()
-        fzf.files { cmd = "git log --name-only --pretty=\"\" | sed -e '/^\\s*$/d' | awk '!seen[$0]++'" }
+        fzf.files {
+          cmd = "git log --name-only --pretty=\"\" | sed -e '/^\\s*$/d' | awk '!seen[$0]++'",
+          hidden = false,
+        }
       end
 
       --[[ cfg_lazy_fzf_keymaps ]]
