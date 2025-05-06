@@ -331,14 +331,17 @@ require('lazy').setup({
           },
         },
         grep = {
-          rg_opts = '--vimgrep --smart-case --max-columns=512'
+          rg_opts = ''
+            .. ' --color=ansi'
+            .. ' --colors column:fg:blue'
+            .. ' --colors line:fg:green'
+            .. ' --colors match:fg:red'
+            .. ' --colors path:fg:yellow'
             .. ' --column'
             .. ' --line-number'
-            .. ' --color=ansi'
-            .. ' --colors path:fg:yellow'
-            .. ' --colors line:fg:green'
-            .. ' --colors column:fg:blue'
-            .. ' --colors match:fg:red',
+            .. ' --max-columns=512'
+            .. ' --smart-case'
+            .. ' --vimgrep',
           file_ignore_patterns = {
             '^node_modules/',
             '/node_modules/',
@@ -561,6 +564,7 @@ require('lazy').setup({
         --[[ cfg_lazy_cmp_keymaps ]]
         mapping = cmp.mapping.preset.insert {
           ['<C-Space>'] = cmp.mapping.complete {},
+          ['<Esc>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm {
             behavior = cmp.ConfirmBehavior.Insert,
             select = true,
