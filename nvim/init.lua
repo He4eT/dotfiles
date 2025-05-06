@@ -98,7 +98,7 @@ vim.o.updatetime = 250
 vim.o.timeout = false
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = 'menuone,noselect,fuzzy'
 
 -- Keeps the same screen lines in all split windows
 vim.o.splitkeep = 'screen'
