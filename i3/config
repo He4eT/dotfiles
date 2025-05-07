@@ -3,6 +3,7 @@
 exec --no-startup-id feh --bg-scale ~/dotfiles/wallpapers/png/blob.png
 exec --no-startup-id setxkbmap -layout 'us,ru' -option 'grp:caps_toggle'
 exec --no-startup-id polybar top
+exec --no-startup-id unclutter
 exec --no-startup-id picom \
   --daemon \
   --backend glx \
