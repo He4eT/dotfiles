@@ -31,6 +31,7 @@ sudo dnf install \
   xdotool \
   xdpyinfo \
   xkb-switch \
+  unclutter-xfixes \
   git \
   zsh \
   mc \
