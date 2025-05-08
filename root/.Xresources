@@ -1,4 +1,6 @@
 ! RXVT Config. terminus font is required!
+!
+! xrdb ~/.Xresources
 
 URxvt.font: xft:Terminus:size=13
 
@@ -13,8 +15,6 @@ URxvt*iso14755: False
 URxvt*iso14755_52: False
 URxvt.keysym.C-S-0x43: eval:selection_to_clipboard
 URxvt.keysym.C-S-0x56: eval:paste_clipboard
-
-! Misterioso.colorscheme
 
 *.cursorColor: #c5c8c6
 *.foreground:  #c5c8c6
