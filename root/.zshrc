@@ -50,6 +50,7 @@ alias fakemsg='echo "$(curl -s https://whatthecommit.com/index.txt)"'
 
 alias st='fastfetch -c ~/dotfiles/fastfetch/st.jsonc'
 alias status='clear && fastfetch -c ~/dotfiles/fastfetch/status.jsonc'
+alias kb='setxkbmap -layout us,ru -option "grp:caps_toggle"'
 
 # Commands
 
