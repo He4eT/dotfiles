@@ -30,19 +30,23 @@ CASE_SENSITIVE="false"
 
 ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(end-of-line)
 
-MODE_INDICATOR="%F{yellow}◼%f"
-KEYTIMEOUT=1
-bindkey -M vicmd 'V' edit-command-line
-
 plugins=(
   git
-  vi-mode
   fancy-ctrl-z
   fzf
   zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
+
+# Go to Vim
+
+open-in-editor() {
+  zle edit-command-line
+  zle end-of-line
+}
+zle -N open-in-editor
+bindkey '^v' open-in-editor
 
 # Aliases
 
