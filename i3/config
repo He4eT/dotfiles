@@ -14,10 +14,11 @@ exec --no-startup-id picom \
   --shadow-offset-x=-12 \
   --shadow-offset-y=-9 \
   --shadow-exclude='x <= 0 && x2 >= 1920 && y <= 30 && y2 >= 1020' \
-  --shadow-exclude='class_g ?= "i3-frame"' \
-  --shadow-exclude='class_g = "org.mozilla.firefox" && argb' \
-  --shadow-exclude='class_g = "org.mozilla.thunderbird" && argb' \
+  --shadow-exclude='class_g = "i3-frame"' \
+  --shadow-exclude='class_g = "Google-chrome" && argb' \
   --shadow-exclude='class_g = "TelegramDesktop" && argb' \
+  --shadow-exclude='class_g = "net.thunderbird.Thunderbird" && argb' \
+  --shadow-exclude='class_g = "org.mozilla.firefox" && argb' \
 
 # [Appearance]
 
