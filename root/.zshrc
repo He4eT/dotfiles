@@ -1,3 +1,4 @@
+setxkbmap -layout 'us,ru' -option 'grp:caps_toggle'
 xset -b
 clear
 
