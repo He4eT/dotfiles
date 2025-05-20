@@ -45,6 +45,9 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 --[[ cfg_options: See `:help vim.o` ]]
 
+-- Disable Intro (:intro)
+vim.opt.shortmess:append('I')
+
 -- Set window title
 vim.o.title = true
 vim.o.titlestring = '%F'
