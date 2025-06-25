@@ -64,6 +64,10 @@ tab-item-substance {
   background: var(--face-highlight-more-lighter);
 }
 
+.tab.active > tab-item-substance {
+  font-weight: bold;
+}
+
 .tab .label {
   margin-left: 0.4em;
   line-height: var(--tab-size);
