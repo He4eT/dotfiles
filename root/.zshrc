@@ -79,7 +79,7 @@ NMTUI_COLORS='
 alias nmtui='NEWT_COLORS="$NMTUI_COLORS" nmtui'
 alias nmtui-connect='NEWT_COLORS="$NMTUI_COLORS" nmtui-connect'
 
-## git
+## Git
 
 alias cdg='cd $(git rev-parse --show-toplevel 2>/dev/null)'
 alias ga.='ga . && gst'
@@ -112,8 +112,11 @@ alias last-terminal-screenshot='\
   -c "set relativenumber" \
   /tmp/urxvt-screen-content.txt
 '
+
 alias yank='\
   xdotool keydown shift keydown Print ;\
   xdotool keyup Print keyup shift ;\
   last-terminal-screenshot ;\
 '
+
+alias f2c='xclip -selection clipboard <'
