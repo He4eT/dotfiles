@@ -405,8 +405,8 @@ require('lazy').setup({
       vim.keymap.set({ 'n' }, '<leader>:', fzf.command_history, { desc = '[F]zf: command history' })
 
       -- LSP
+      vim.keymap.set({ 'n' }, 'gd', fzf.lsp_definitions, { desc = 'LSP: [G]oto [d]efinition list' })
       vim.keymap.set({ 'n' }, '<leader>gr', fzf.lsp_references, { desc = 'LSP: [G]o to fzf [R]eference list' })
-      vim.keymap.set({ 'n' }, '<leader>gd', fzf.lsp_definitions, { desc = 'LSP: [G]oto [d]efinition list' })
       vim.keymap.set({ 'n' }, '<leader>fu', fzf_grep_filename, { desc = '[F]zf: current file [U]sages' })
     end,
   },
@@ -447,19 +447,6 @@ require('lazy').setup({
               },
             },
           },
-          handlers = {
-            -- Usually gets called after another code action
-            -- https://github.com/jose-elias-alvarez/typescript.nvim/issues/17
-            ['_typescript.rename'] = function(_, result)
-              return result
-            end,
-            -- 'Go to definition' workaround
-            -- https://github.com/holoiii/nvim/commit/73a4db74fe463f5064346ba63870557fedd134ad
-            ['textDocument/definition'] = function(err, result, ...)
-              result = vim.islist(result) and result[1] or result
-              vim.lsp.handlers['textDocument/definition'](err, result, ...)
-            end,
-          },
         },
         --[[ cfg_lazy_lsp_servers_volar ]]
         volar = {},
@@ -482,9 +469,9 @@ require('lazy').setup({
         nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
         nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]tion')
 
-        nmap('gd', vim.lsp.buf.definition, '[G]oto [d]efinition')
         nmap('gD', vim.lsp.buf.type_definition, '[G]oto type [D]efinition')
         nmap('<leader>gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+        nmap('<leader>gd', vim.lsp.buf.definition, '[G]oto [d]efinition')
 
         nmap('<leader>ea', vim.lsp.buf.add_workspace_folder, 'Workspac[e] [A]dd Folder')
         nmap('<leader>er', vim.lsp.buf.remove_workspace_folder, 'Workspac[e] [R]emove Folder')
