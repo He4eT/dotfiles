@@ -414,11 +414,8 @@ require('lazy').setup({
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      {
-        'williamboman/mason.nvim',
-        config = true,
-      },
-      'williamboman/mason-lspconfig.nvim',
+      { 'mason-org/mason.nvim', opts = {} },
+      'mason-org/mason-lspconfig.nvim',
     },
     config = function()
       --[[ cfg_lazy_lsp_servers ]]
