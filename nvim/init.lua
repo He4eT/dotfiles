@@ -48,6 +48,9 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Disable Intro (:intro)
 vim.opt.shortmess:append('I')
 
+-- Raise a dialog asking if you wish to save the current file(s)
+vim.o.confirm = true
+
 -- Set window title
 vim.o.title = true
 vim.o.titlestring = '%F'
