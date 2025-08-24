@@ -45,7 +45,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 --[[ cfg_options: See `:help vim.o` ]]
 
 -- Disable Intro (:intro)
-vim.opt.shortmess:append('I')
+vim.opt.shortmess:append 'I'
 
 -- Raise a dialog asking if you wish to save the current file(s)
 vim.o.confirm = true
@@ -480,7 +480,7 @@ require('lazy').setup({
               {
                 -- https://github.com/vuejs/language-tools/wiki/Neovim
                 languages = { 'vue' },
-                location = vim.fn.stdpath('data') .. '/mason/packages/vue-language-server/node_modules/@vue/language-server',
+                location = vim.fn.stdpath 'data' .. '/mason/packages/vue-language-server/node_modules/@vue/language-server',
                 name = '@vue/typescript-plugin',
               },
             },
