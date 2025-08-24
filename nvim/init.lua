@@ -19,6 +19,7 @@ npx @johnnymorganz/stylua-bin ./init.lua
    ├─ cfg_lazy_leap: Leap motion plugin
    ├─ cfg_lazy_lualine: Statusline
    ├─ cfg_lazy_gitsigns: Git-releated actions and gutter signs
+   │  └─ cfg_lazy_gitsigns_keymaps
    ├─ cfg_lazy_desolate: Not-so-colorful colorscheme
    ├─ cfg_lazy_onedark: Colorscheme inspired by Atom
    ├─ cfg_lazy_fzf: Fuzzy search
@@ -272,6 +273,8 @@ require('lazy').setup({
           changedelete = { text = '│' },
         },
       }
+
+      --[[ cfg_lazy_gitsigns_keymaps ]]
 
       vim.keymap.set('n', '[g', ':Gitsigns prev_hunk<CR>', { desc = 'Go to previous Git hunk' })
       vim.keymap.set('n', ']g', ':Gitsigns next_hunk<CR>', { desc = 'Go to next Git hunk' })
