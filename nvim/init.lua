@@ -184,9 +184,9 @@ vim.keymap.set('n', '<leader>l', '<C-i>', { desc = 'Go forward' })
 -- Copy'n'Paste
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy selection to the system clipboard' })
 vim.keymap.set('n', '<leader>y', function()
-  local text = vim.fn.getreg('"')
+  local text = vim.fn.getreg '"'
   vim.fn.system('xclip -i -selection clipboard', text)
-  print('Copied to system clipboard')
+  print 'Copied to system clipboard'
 end, {
   silent = true,
   desc = 'Copy last yanked or deleted text to system clipboard via xclip',
