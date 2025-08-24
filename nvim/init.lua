@@ -502,20 +502,18 @@ require('lazy').setup({
 
       -- Diagnostic Appearance
 
-      local diagnostic_icon = '⏹'
-      local diagnostic_types = { 'Error', 'Warn', 'Hint', 'Info' }
-
-      local diagnostic_signs = {}
-      for type in pairs(diagnostic_types) do
-        diagnostic_signs[vim.diagnostic.severity[type]] = diagnostic_icon
-      end
-
+      local icon = '⏹'
       vim.diagnostic.config {
         signs = {
-          text = diagnostic_signs,
+          text = {
+            [vim.diagnostic.severity.ERROR] = icon,
+            [vim.diagnostic.severity.WARN] = icon,
+            [vim.diagnostic.severity.HINT] = icon,
+            [vim.diagnostic.severity.INFO] = icon,
+          },
         },
         virtual_text = {
-          prefix = diagnostic_icon,
+          prefix = icon,
         },
       }
     end,
