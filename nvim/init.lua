@@ -163,12 +163,12 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Remap PgUp/PgDown to C-u/C-d
-vim.keymap.set('n', '<PageDown>', '<C-d>', { silent = true, desc = 'Ctrl + d but PageDown' })
-vim.keymap.set('n', '<PageUp>', '<C-u>', { silent = true, desc = 'Ctrl + u but PageUp' })
+vim.keymap.set('n', '<PageDown>', '<C-d>', { silent = true, desc = 'Emulate <Ctrl + d>' })
+vim.keymap.set('n', '<PageUp>', '<C-u>', { silent = true, desc = 'Emulate <Ctrl + u>' })
 
 -- Open terminal
-vim.keymap.set({ 'n' }, '<leader>T', ':terminal<CR>i', { silent = true, desc = 'Open terminal here' })
-vim.keymap.set({ 'n' }, '<leader>t', ':vs<CR><C-w>w:terminal<CR>i', { silent = true, desc = 'Open terminal in vsplit' })
+vim.keymap.set({ 'n' }, '<leader>T', ':terminal<CR>i', { silent = true, desc = 'Open [t]erminal here' })
+vim.keymap.set({ 'n' }, '<leader>t', ':vs<CR><C-w>w:terminal<CR>i', { silent = true, desc = 'Open [T]erminal in vsplit' })
 
 -- Escape terminal mode
 vim.keymap.set({ 't' }, ';;', '<C-\\><C-n>', { silent = true, desc = 'Escape terminal mode' })
@@ -176,20 +176,20 @@ vim.keymap.set({ 't' }, ';;', '<C-\\><C-n>', { silent = true, desc = 'Escape ter
 -- Window managment
 vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true, desc = 'Alias for Ctrl + w' })
 vim.keymap.set('n', '<leader>k', '<C-w>w', { remap = true, desc = 'Jump to the next window' })
-vim.keymap.set('n', '<leader>K', ':vs<CR><C-w>w', { desc = 'Split window to ther right' })
+vim.keymap.set('n', '<leader>K', ':vs<CR><C-w>w', { desc = 'Split window to the right' })
 vim.keymap.set('n', '<leader>q', ':b#|bd#<CR>', { desc = 'Close current buffer ' })
-vim.keymap.set('n', '<leader>h', '<C-o>', { desc = 'Go back' })
-vim.keymap.set('n', '<leader>l', '<C-i>', { desc = 'Go forward' })
+vim.keymap.set('n', '<leader>h', '<C-o>', { desc = 'Back' })
+vim.keymap.set('n', '<leader>l', '<C-i>', { desc = 'Forward' })
 
 -- Copy'n'Paste
-vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy selection to the system clipboard' })
+vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Cop[y] selection to system clipboard' })
 vim.keymap.set('n', '<leader>y', function()
   local text = vim.fn.getreg '"'
   vim.fn.system('xclip -i -selection clipboard', text)
   print 'Copied to system clipboard'
 end, {
   silent = true,
-  desc = 'Copy last yanked or deleted text to system clipboard via xclip',
+  desc = 'Copy last [y]anked or deleted text to system clipboard',
 })
 
 -- Diagnostic
@@ -197,8 +197,8 @@ vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostics list' })
 
 -- Highlight
-vim.keymap.set({ 'n' }, '<BS>', ':nohl<CR>', { silent = true, desc = 'Turn off highlight' })
-vim.keymap.set({ 'n' }, '<ESC>', ':nohl<CR>', { silent = true, desc = 'Turn off highlight' })
+vim.keymap.set({ 'n' }, '<BS>', ':nohl<CR>', { silent = true, desc = 'Hide highlight' })
+vim.keymap.set({ 'n' }, '<ESC>', ':nohl<CR>', { silent = true, desc = 'Hide highlight' })
 
 -- Search in Visual Mode
 vim.keymap.set({ 'x' }, '/', '<Esc>/\\%V', { desc = 'Search within visual selection' })
@@ -276,9 +276,9 @@ require('lazy').setup({
       vim.keymap.set('n', '[g', ':Gitsigns prev_hunk<CR>', { desc = 'Go to previous Git hunk' })
       vim.keymap.set('n', ']g', ':Gitsigns next_hunk<CR>', { desc = 'Go to next Git hunk' })
 
-      vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show [G]it [B]lame' })
+      vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show [g]it [b]lame' })
       vim.keymap.set('n', '<leader>gj', ':Gitsigns stage_hunk<CR>', { desc = 'Stage/unstage current hunk' })
-      vim.keymap.set('n', '<leader>gk', ':Gitsigns preview_hunk<CR>', { desc = 'Show [G]it hun[k] preview' })
+      vim.keymap.set('n', '<leader>gk', ':Gitsigns preview_hunk<CR>', { desc = 'Show [g]it hun[k] preview' })
     end,
   },
   --[[ cfg_lazy_desolate: Not-so-colorful colorscheme ]]
@@ -393,30 +393,30 @@ require('lazy').setup({
 
       --[[ cfg_lazy_fzf_keymaps ]]
 
-      vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin, { desc = '[F]zf: [P]allete' })
-      vim.keymap.set({ 'n' }, '<leader>f.', fzf.resume, { desc = '[F]zf: Resume' })
+      vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin, { desc = '[f]zf: [p]allete' })
+      vim.keymap.set({ 'n' }, '<leader>f.', fzf.resume, { desc = '[f]zf: resume' })
 
-      vim.keymap.set({ 'n' }, '<leader>b', fzf.buffers, { desc = '[F]zf: [B]uffers' })
+      vim.keymap.set({ 'n' }, '<leader>b', fzf.buffers, { desc = '[f]zf: [b]uffers' })
 
-      vim.keymap.set({ 'n' }, '<leader>fF', fzf_files, { desc = '[F]zf: all [F]iles' })
-      vim.keymap.set({ 'n' }, '<leader>ff', fzf.git_files, { desc = '[F]zf: git [f]iles' })
-      vim.keymap.set({ 'n' }, '<leader>fd', fzf.git_status, { desc = '[F]zf: git [d]iff' })
-      vim.keymap.set({ 'n' }, '<leader>fh', fzf_git_chronology, { desc = '[F]zf: git c[h]ronology' })
+      vim.keymap.set({ 'n' }, '<leader>fF', fzf_files, { desc = '[f]zf: all [F]iles' })
+      vim.keymap.set({ 'n' }, '<leader>ff', fzf.git_files, { desc = '[f]zf: git [f]iles' })
+      vim.keymap.set({ 'n' }, '<leader>fd', fzf.git_status, { desc = '[f]zf: git [d]iff' })
+      vim.keymap.set({ 'n' }, '<leader>fh', fzf_git_chronology, { desc = '[f]zf: git c[h]ronology' })
 
-      vim.keymap.set({ 'n' }, '<leader>fg', fzf.live_grep, { desc = '[F]zf: [g]rep' })
-      vim.keymap.set({ 'n' }, '<leader>fw', fzf.grep_cword, { desc = '[F]zf: grep [w]' })
-      vim.keymap.set({ 'n' }, '<leader>fW', fzf.grep_cWORD, { desc = '[F]zf: grep [W]' })
-      vim.keymap.set({ 'n' }, '<leader>f/', fzf.blines, { desc = '[F]zf: buffer lines' })
+      vim.keymap.set({ 'n' }, '<leader>f/', fzf.blines, { desc = '[f]zf: buffer lines' })
+      vim.keymap.set({ 'n' }, '<leader>fg', fzf.live_grep, { desc = '[f]zf: [g]rep' })
+      vim.keymap.set({ 'n' }, '<leader>fw', fzf.grep_cword, { desc = '[f]zf: grep [w]' })
+      vim.keymap.set({ 'n' }, '<leader>fW', fzf.grep_cWORD, { desc = '[f]zf: grep [W]' })
+      vim.keymap.set({ 'n' }, '<leader>fu', fzf_grep_filename, { desc = '[f]zf: current file [u]sages' })
 
-      vim.keymap.set({ 'n' }, '<leader>p', fzf.registers, { desc = '[F]zf: [p]aste' })
-      vim.keymap.set({ 'n' }, '<leader>?', fzf.keymaps, { desc = '[F]zf: keymaps' })
-      vim.keymap.set({ 'n' }, '<leader>/', fzf.search_history, { desc = '[F]zf: search history' })
-      vim.keymap.set({ 'n' }, '<leader>:', fzf.command_history, { desc = '[F]zf: command history' })
+      vim.keymap.set({ 'n' }, '<leader>p', fzf.registers, { desc = '[f]zf: [p]aste from register' })
+      vim.keymap.set({ 'n' }, '<leader>?', fzf.keymaps, { desc = '[f]zf: keymaps' })
+      vim.keymap.set({ 'n' }, '<leader>/', fzf.search_history, { desc = '[f]zf: search history' })
+      vim.keymap.set({ 'n' }, '<leader>:', fzf.command_history, { desc = '[f]zf: command history' })
 
       -- LSP
-      vim.keymap.set({ 'n' }, '<leader>gd', fzf.lsp_definitions, { desc = 'LSP: [G]oto [D]efinition list' })
-      vim.keymap.set({ 'n' }, '<leader>gr', fzf.lsp_references, { desc = 'LSP: [G]o to fzf [R]eference list' })
-      vim.keymap.set({ 'n' }, '<leader>fu', fzf_grep_filename, { desc = '[F]zf: current file [U]sages' })
+      vim.keymap.set({ 'n' }, '<leader>gd', fzf.lsp_definitions, { desc = 'LSP: [g]oto [d]efinition list' })
+      vim.keymap.set({ 'n' }, '<leader>gr', fzf.lsp_references, { desc = 'LSP: [g]o to fzf [r]eference list' })
     end,
   },
   --[[ cfg_lazy_lsp: LSP configuration & plugins ]]
@@ -453,20 +453,20 @@ require('lazy').setup({
 
           -- See also cfg_lazy_fzf_keymaps
 
-          map('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation', { 'n', 'i' })
+          map('<C-k>', vim.lsp.buf.signature_help, 'signature documentation', { 'n', 'i' })
 
-          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]tion', { 'n', 'x' })
+          map('<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame')
+          map('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction', { 'n', 'x' })
 
-          map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-          map('gD', vim.lsp.buf.type_definition, '[G]oto type [D]efinition')
-          map('<leader>gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          map('gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
+          map('gD', vim.lsp.buf.type_definition, '[g]oto type [D]efinition')
+          map('<leader>gD', vim.lsp.buf.declaration, '[g]oto [D]eclaration')
 
-          map('<leader>ea', vim.lsp.buf.add_workspace_folder, 'Workspac[e] [A]dd Folder')
-          map('<leader>er', vim.lsp.buf.remove_workspace_folder, 'Workspac[e] [R]emove Folder')
+          map('<leader>ea', vim.lsp.buf.add_workspace_folder, 'workspac[e]: [a]dd folder')
+          map('<leader>er', vim.lsp.buf.remove_workspace_folder, 'workspac[e]: [r]emove folder')
           map('<leader>el', function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-          end, 'Workspac[e] [L]ist Folders')
+          end, 'workspac[e]: [l]ist folders')
 
           vim.api.nvim_buf_create_user_command(event.buf, 'Format', function(_)
             vim.lsp.buf.format()
