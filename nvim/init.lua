@@ -24,11 +24,10 @@ npx @johnnymorganz/stylua-bin ./init.lua
    ├─ cfg_lazy_fzf: Fuzzy search
    │  └─ cfg_lazy_fzf_keymaps
    ├─ cfg_lazy_lsp: LSP configuration & plugins
-   │  ├─ cfg_lazy_lsp_servers
-   │  │  ├─ cfg_lazy_lsp_servers_lua
-   │  │  ├─ cfg_lazy_lsp_servers_ts_ls
-   │  │  └─ cfg_lazy_lsp_servers_vue_ls
-   │  └─ cfg_lazy_lsp_keymaps
+   │  ├─ cfg_lazy_lsp_keymaps
+   │  └─ cfg_lazy_lsp_servers
+   │     ├─ cfg_lazy_lsp_servers_lua
+   │     └─ cfg_lazy_lsp_servers_ts_ls
    ├─ cfg_lazy_cmp: Autocompletion
    │  └─ cfg_lazy_cmp_keymaps
    └─ cfg_lazy_treesitter: Highlight, edit, and navigate code
@@ -421,38 +420,21 @@ require('lazy').setup({
       'mason-org/mason-lspconfig.nvim',
     },
     config = function()
-      --[[ cfg_lazy_lsp_servers ]]
-      local servers = {
-        --[[ cfg_lazy_lsp_servers_lua ]]
-        lua_ls = {
-          settings = {
-            Lua = {
-              workspace = { checkThirdParty = false },
-              telemetry = { enable = false },
-              diagnostics = {
-                globals = {
-                  'vim',
-                  'require',
-                },
-              },
-            },
+      -- Diagnostic Appearance
+
+      local icon = '⏹'
+      vim.diagnostic.config {
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = icon,
+            [vim.diagnostic.severity.WARN] = icon,
+            [vim.diagnostic.severity.HINT] = icon,
+            [vim.diagnostic.severity.INFO] = icon,
           },
         },
-        --[[ cfg_lazy_lsp_servers_ts_ls ]]
-        ts_ls = {
-          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-          init_options = {
-            plugins = {
-              {
-                name = '@vue/typescript-plugin',
-                location = vim.fn.expand '$MASON/packages' .. '/vue-language-server' .. '/node_modules/@vue/language-server',
-                languages = { 'vue' },
-              },
-            },
-          },
+        virtual_text = {
+          prefix = icon,
         },
-        --[[ cfg_lazy_lsp_servers_vue_ls ]]
-        vue_ls = {},
       }
 
       --[[ cfg_lazy_lsp_keymaps ]]
@@ -486,34 +468,39 @@ require('lazy').setup({
         end,
       })
 
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
-      require('mason-lspconfig').setup {
-        ensure_installed = vim.tbl_keys(servers),
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
+      --[[ cfg_lazy_lsp_servers ]]
+      local servers = {
+        --[[ cfg_lazy_lsp_servers_lua ]]
+        lua_ls = {},
+        --[[ cfg_lazy_lsp_servers_ts_ls ]]
+        ts_ls = {
+          filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue' },
+          init_options = {
+            plugins = {
+              {
+                -- https://github.com/vuejs/language-tools/wiki/Neovim
+                languages = { 'vue' },
+                location = vim.fn.stdpath('data') .. '/mason/packages/vue-language-server/node_modules/@vue/language-server',
+                name = '@vue/typescript-plugin',
+              },
+            },
+          },
         },
       }
 
-      -- Diagnostic Appearance
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-      local icon = '⏹'
-      vim.diagnostic.config {
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = icon,
-            [vim.diagnostic.severity.WARN] = icon,
-            [vim.diagnostic.severity.HINT] = icon,
-            [vim.diagnostic.severity.INFO] = icon,
-          },
-        },
-        virtual_text = {
-          prefix = icon,
+      for server, config in pairs(servers) do
+        config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
+        vim.lsp.config(server, config)
+      end
+
+      require('mason-lspconfig').setup {
+        automatic_enable = true,
+        ensure_installed = {
+          'lua-language-server',
+          'typescript-language-server',
+          'vue-language-server',
         },
       }
     end,
