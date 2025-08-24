@@ -26,8 +26,6 @@ npx @johnnymorganz/stylua-bin ./init.lua
    ├─ cfg_lazy_lsp: LSP configuration & plugins
    │  ├─ cfg_lazy_lsp_keymaps
    │  └─ cfg_lazy_lsp_servers
-   │     ├─ cfg_lazy_lsp_servers_lua
-   │     └─ cfg_lazy_lsp_servers_ts_ls
    ├─ cfg_lazy_cmp: Autocompletion
    │  └─ cfg_lazy_cmp_keymaps
    └─ cfg_lazy_treesitter: Highlight, edit, and navigate code
@@ -100,6 +98,8 @@ vim.o.smartcase = true
 
 -- Decrease update time
 vim.o.updatetime = 250
+
+-- Disabling the timeout for key sequence completion
 vim.o.timeout = false
 
 -- Set completeopt to have a better completion experience
@@ -127,28 +127,32 @@ vim.api.nvim_create_user_command('E', 'Explore', {})
 --[[ cfg_autocmds: Autocomands ]]
 
 -- Highlight on yank
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
+  group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
+  pattern = '*',
   callback = function()
     vim.highlight.on_yank()
   end,
-  group = highlight_group,
-  pattern = '*',
 })
 
 -- Default insert mode in terminal buffers
-local terminal_enter_group = vim.api.nvim_create_augroup('TerminalEnter', { clear = true })
 vim.api.nvim_create_autocmd('BufEnter', {
-  group = terminal_enter_group,
+  group = vim.api.nvim_create_augroup('TerminalEnter', { clear = true }),
   pattern = 'term://*',
   command = 'startinsert',
 })
 
 -- Disable line numbers for terminal buffers
-vim.api.nvim_create_autocmd('TermOpen', { pattern = '*', command = 'setlocal nonumber' })
+vim.api.nvim_create_autocmd('TermOpen', {
+  group = vim.api.nvim_create_augroup('TerminalSettings', { clear = true }),
+  pattern = '*',
+  command = 'setlocal nonumber',
+})
 
 -- Switch the keyboard layout to English (US) when leaving Insert Mode
 vim.api.nvim_create_autocmd('InsertLeave', {
+  group = vim.api.nvim_create_augroup('SwitchToEnglishOnLeave', { clear = true }),
+  pattern = '*',
   command = 'silent !xkb-switch -s us',
 })
 
@@ -178,8 +182,15 @@ vim.keymap.set('n', '<leader>h', '<C-o>', { desc = 'Go back' })
 vim.keymap.set('n', '<leader>l', '<C-i>', { desc = 'Go forward' })
 
 -- Copy'n'Paste
-vim.keymap.set('n', '<leader>y', ':call system("xclip -i -selection clipboard", @@)<cr>', { desc = 'Copy last yanked or deleted text to the system clipboard' })
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy selection to the system clipboard' })
+vim.keymap.set('n', '<leader>y', function()
+  local text = vim.fn.getreg('"')
+  vim.fn.system('xclip -i -selection clipboard', text)
+  print('Copied to system clipboard')
+end, {
+  silent = true,
+  desc = 'Copy last yanked or deleted text to system clipboard via xclip',
+})
 
 -- Diagnostic
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating [d]iagnostic message' })
@@ -217,9 +228,6 @@ require('lazy').setup({
   {
     'catgoose/nvim-colorizer.lua',
     cmd = 'ColorizerToggle',
-    opts = {
-      filetypes = {},
-    },
   },
   --[[ cfg_lazy_comment: Toggles linewise and blockwise comments ]]
   {
@@ -263,9 +271,6 @@ require('lazy').setup({
           topdelete = { text = '‾' },
           changedelete = { text = '│' },
         },
-        preview_config = {
-          border = 'solid',
-        },
       }
 
       vim.keymap.set('n', '[g', ':Gitsigns prev_hunk<CR>', { desc = 'Go to previous git hunk' })
@@ -276,8 +281,10 @@ require('lazy').setup({
   --[[ cfg_lazy_desolate: Not-so-colorful colorscheme ]]
   {
     'He4eT/desolate.nvim',
+    dependencies = {
+      'rktjmp/lush.nvim',
+    },
     -- dir = '~/trash/desolate.nvim',
-    priority = 1000,
     init = function()
       vim.g.desolate_h = 0
       vim.g.desolate_s = 0
@@ -300,9 +307,6 @@ require('lazy').setup({
       vim.o.background = 'dark'
       vim.cmd.colorscheme 'desolate'
     end,
-    dependencies = {
-      'rktjmp/lush.nvim',
-    },
   },
   --[[ cfg_lazy_onedark: Colorscheme inspired by Atom ]]
   'navarasu/onedark.nvim',
@@ -386,6 +390,7 @@ require('lazy').setup({
 
       --[[ cfg_lazy_fzf_keymaps ]]
 
+      vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin, { desc = '[F]zf: [P]allete' })
       vim.keymap.set({ 'n' }, '<leader>f.', fzf.resume, { desc = '[F]zf: Resume' })
 
       vim.keymap.set({ 'n' }, '<leader>b', fzf.buffers, { desc = '[F]zf: [B]uffers' })
@@ -395,12 +400,11 @@ require('lazy').setup({
       vim.keymap.set({ 'n' }, '<leader>fd', fzf.git_status, { desc = '[F]zf: git [d]iff' })
       vim.keymap.set({ 'n' }, '<leader>fh', fzf_git_chronology, { desc = '[F]zf: git c[h]ronology' })
 
-      vim.keymap.set({ 'n' }, '<leader>f/', fzf.blines, { desc = '[F]zf: buffer lines' })
       vim.keymap.set({ 'n' }, '<leader>fg', fzf.live_grep, { desc = '[F]zf: [g]rep' })
       vim.keymap.set({ 'n' }, '<leader>fw', fzf.grep_cword, { desc = '[F]zf: grep [w]' })
       vim.keymap.set({ 'n' }, '<leader>fW', fzf.grep_cWORD, { desc = '[F]zf: grep [W]' })
+      vim.keymap.set({ 'n' }, '<leader>f/', fzf.blines, { desc = '[F]zf: buffer lines' })
 
-      vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin, { desc = '[F]zf: [p]allete' })
       vim.keymap.set({ 'n' }, '<leader>p', fzf.registers, { desc = '[F]zf: [p]aste' })
       vim.keymap.set({ 'n' }, '<leader>?', fzf.keymaps, { desc = '[F]zf: keymaps' })
       vim.keymap.set({ 'n' }, '<leader>/', fzf.search_history, { desc = '[F]zf: search history' })
@@ -421,7 +425,6 @@ require('lazy').setup({
     },
     config = function()
       -- Diagnostic Appearance
-
       local icon = '⏹'
       vim.diagnostic.config {
         signs = {
@@ -470,9 +473,7 @@ require('lazy').setup({
 
       --[[ cfg_lazy_lsp_servers ]]
       local servers = {
-        --[[ cfg_lazy_lsp_servers_lua ]]
         lua_ls = {},
-        --[[ cfg_lazy_lsp_servers_ts_ls ]]
         ts_ls = {
           filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue' },
           init_options = {
@@ -498,9 +499,9 @@ require('lazy').setup({
       require('mason-lspconfig').setup {
         automatic_enable = true,
         ensure_installed = {
-          'lua-language-server',
-          'typescript-language-server',
-          'vue-language-server',
+          'lua_ls',
+          'ts_ls',
+          'vue_ls',
         },
       }
     end,
@@ -528,7 +529,7 @@ require('lazy').setup({
           ['<C-Space>'] = cmp.mapping.complete {},
           ['<Esc>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Insert,
+            behavior = cmp.ConfirmBehavior.Replace,
             select = true,
           },
           ['<Tab>'] = cmp.mapping(function(fallback)
@@ -572,13 +573,12 @@ require('lazy').setup({
           'tsx',
           'vue',
           'html',
-          'ninja',
           'css',
           'scss',
         },
         auto_install = true,
         highlight = { enable = true },
-        indent = { enable = true, disable = { 'python' } },
+        indent = { enable = true },
 
         --[[ cfg_lazy_treesitter_keymaps ]]
 
@@ -594,7 +594,7 @@ require('lazy').setup({
         textobjects = {
           select = {
             enable = true,
-            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,
             keymaps = {
               ['aa'] = '@parameter.outer',
               ['ia'] = '@parameter.inner',
@@ -602,35 +602,6 @@ require('lazy').setup({
               ['if'] = '@function.inner',
               ['ac'] = '@class.outer',
               ['ic'] = '@class.inner',
-            },
-          },
-          move = {
-            enable = true,
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next_start = {
-              [']m'] = '@function.outer',
-              [']]'] = '@class.outer',
-            },
-            goto_next_end = {
-              [']M'] = '@function.outer',
-              [']['] = '@class.outer',
-            },
-            goto_previous_start = {
-              ['[m'] = '@function.outer',
-              ['[['] = '@class.outer',
-            },
-            goto_previous_end = {
-              ['[M'] = '@function.outer',
-              ['[]'] = '@class.outer',
-            },
-          },
-          swap = {
-            enable = true,
-            swap_next = {
-              ['<leader>a'] = '@parameter.inner',
-            },
-            swap_previous = {
-              ['<leader>A'] = '@parameter.inner',
             },
           },
         },
