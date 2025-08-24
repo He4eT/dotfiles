@@ -3,7 +3,7 @@
   "cmp-nvim-lsp": { "branch": "main", "commit": "bd5a7d6db125d4654b50eeae9f5217f24bb22fd3" },
   "cmp-path": { "branch": "main", "commit": "c642487086dbd9a93160e1679a1327be111cbc25" },
   "desolate.nvim": { "branch": "develop", "commit": "08c59bb2d9e805b206e8128a698bb839a189f1ae" },
-  "fzf": { "branch": "master", "commit": "9a53d84b9cce3a0be12fb98e313726ecc806f034" },
+  "fzf": { "branch": "master", "commit": "f2179f015c29a7c5e741e7cbd9f3baf21b5acd0c" },
   "fzf-lua": { "branch": "main", "commit": "7d66cd81cf485fb17c22d82021cc166ce332a14c" },
   "gitsigns.nvim": { "branch": "main", "commit": "6e3c66548035e50db7bd8e360a29aec6620c3641" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
