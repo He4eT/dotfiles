@@ -27,7 +27,7 @@ npx @johnnymorganz/stylua-bin ./init.lua
    │  ├─ cfg_lazy_lsp_servers
    │  │  ├─ cfg_lazy_lsp_servers_lua
    │  │  ├─ cfg_lazy_lsp_servers_ts_ls
-   │  │  └─ cfg_lazy_lsp_servers_volar
+   │  │  └─ cfg_lazy_lsp_servers_vue_ls
    │  └─ cfg_lazy_lsp_keymaps
    ├─ cfg_lazy_cmp: Autocompletion
    │  └─ cfg_lazy_cmp_keymaps
@@ -408,7 +408,7 @@ require('lazy').setup({
       vim.keymap.set({ 'n' }, '<leader>:', fzf.command_history, { desc = '[F]zf: command history' })
 
       -- LSP
-      vim.keymap.set({ 'n' }, 'gd', fzf.lsp_definitions, { desc = 'LSP: [G]oto [d]efinition list' })
+      vim.keymap.set({ 'n' }, '<leader>gd', fzf.lsp_definitions, { desc = 'LSP: [G]oto [D]efinition list' })
       vim.keymap.set({ 'n' }, '<leader>gr', fzf.lsp_references, { desc = 'LSP: [G]o to fzf [R]eference list' })
       vim.keymap.set({ 'n' }, '<leader>fu', fzf_grep_filename, { desc = '[F]zf: current file [U]sages' })
     end,
@@ -451,41 +451,40 @@ require('lazy').setup({
             },
           },
         },
-        --[[ cfg_lazy_lsp_servers_volar ]]
-        volar = {},
+        --[[ cfg_lazy_lsp_servers_vue_ls ]]
+        vue_ls = {},
       }
 
       --[[ cfg_lazy_lsp_keymaps ]]
-      local setup_lsp_keymaps = function(_, bufnr)
-        local nmap = function(keys, func, desc)
-          if desc then
-            desc = 'LSP: ' .. desc
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
+        callback = function(event)
+          local map = function(keys, func, desc, mode)
+            vim.keymap.set(mode or 'n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
-          vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-        end
 
-        -- See also cfg_lazy_fzf_keymaps
+          -- See also cfg_lazy_fzf_keymaps
 
-        nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-        nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+          map('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation', { 'n', 'i' })
 
-        nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-        nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]tion')
+          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]tion', { 'n', 'x' })
 
-        nmap('gD', vim.lsp.buf.type_definition, '[G]oto type [D]efinition')
-        nmap('<leader>gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-        nmap('<leader>gd', vim.lsp.buf.definition, '[G]oto [d]efinition')
+          map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+          map('gD', vim.lsp.buf.type_definition, '[G]oto type [D]efinition')
+          map('<leader>gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
-        nmap('<leader>ea', vim.lsp.buf.add_workspace_folder, 'Workspac[e] [A]dd Folder')
-        nmap('<leader>er', vim.lsp.buf.remove_workspace_folder, 'Workspac[e] [R]emove Folder')
-        nmap('<leader>el', function()
-          print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, 'Workspac[e] [L]ist Folders')
+          map('<leader>ea', vim.lsp.buf.add_workspace_folder, 'Workspac[e] [A]dd Folder')
+          map('<leader>er', vim.lsp.buf.remove_workspace_folder, 'Workspac[e] [R]emove Folder')
+          map('<leader>el', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+          end, 'Workspac[e] [L]ist Folders')
 
-        vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-          vim.lsp.buf.format()
-        end, { desc = 'Format current buffer with LSP' })
-      end
+          vim.api.nvim_buf_create_user_command(event.buf, 'Format', function(_)
+            vim.lsp.buf.format()
+          end, { desc = 'Format current buffer with LSP' })
+        end,
+      })
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
@@ -495,7 +494,6 @@ require('lazy').setup({
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
-            server.on_attach = setup_lsp_keymaps
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
           end,
