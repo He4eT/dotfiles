@@ -280,6 +280,7 @@ require('lazy').setup({
       vim.keymap.set('n', ']g', ':Gitsigns next_hunk<CR>', { desc = 'Go to next Git hunk' })
 
       vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show [g]it [b]lame' })
+      vim.keymap.set('n', '<leader>gu', ':Gitsigns reset_hunk<CR>', { desc = 'Reset [g]it h[u]nk' })
       vim.keymap.set('n', '<leader>gj', ':Gitsigns stage_hunk<CR>', { desc = 'Stage/unstage current hunk' })
       vim.keymap.set('n', '<leader>gk', ':Gitsigns preview_hunk<CR>', { desc = 'Show [g]it hun[k] preview' })
     end,
