@@ -229,6 +229,7 @@ require('lazy').setup({
   {
     'catgoose/nvim-colorizer.lua',
     cmd = 'ColorizerToggle',
+    opts = {},
   },
   --[[ cfg_lazy_comment: Toggles linewise and blockwise comments ]]
   {
