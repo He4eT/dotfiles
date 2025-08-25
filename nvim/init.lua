@@ -175,10 +175,12 @@ vim.keymap.set({ 'n' }, '<leader>t', ':vs<CR><C-w>w:terminal<CR>i', { silent = t
 vim.keymap.set({ 't' }, ';;', '<C-\\><C-n>', { silent = true, desc = 'Escape terminal mode' })
 
 -- Window managment
+vim.keymap.set('n', '<leader>q', ':bp|bd#<CR>', { desc = 'Close current buffer ' })
 vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true, desc = 'Alias for Ctrl + w' })
 vim.keymap.set('n', '<leader>k', '<C-w>w', { remap = true, desc = 'Jump to the next window' })
 vim.keymap.set('n', '<leader>K', ':vs<CR><C-w>w', { desc = 'Split window to the right' })
-vim.keymap.set('n', '<leader>q', ':b#|bd#<CR>', { desc = 'Close current buffer ' })
+
+-- Navigation
 vim.keymap.set('n', '<leader>h', '<C-o>', { desc = 'Back' })
 vim.keymap.set('n', '<leader>l', '<C-i>', { desc = 'Forward' })
 
@@ -254,10 +256,10 @@ require('lazy').setup({
     'nvim-lualine/lualine.nvim',
     opts = {
       options = {
-        icons_enabled = false,
-        component_separators = '|',
-        section_separators = '',
         globalstatus = true,
+        icons_enabled = false,
+        section_separators = '',
+        component_separators = '|',
       },
     },
   },
@@ -439,8 +441,8 @@ require('lazy').setup({
           text = {
             [vim.diagnostic.severity.ERROR] = icon,
             [vim.diagnostic.severity.WARN] = icon,
-            [vim.diagnostic.severity.HINT] = icon,
             [vim.diagnostic.severity.INFO] = icon,
+            [vim.diagnostic.severity.HINT] = icon,
           },
         },
         virtual_text = {
@@ -532,9 +534,9 @@ require('lazy').setup({
         },
         --[[ cfg_lazy_cmp_keymaps ]]
         mapping = cmp.mapping.preset.insert {
+          ['<C-Space>'] = cmp.mapping.complete {},
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete {},
           ['<Esc>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm {
             behavior = cmp.ConfirmBehavior.Replace,
@@ -595,8 +597,8 @@ require('lazy').setup({
           keymaps = {
             init_selection = '<c-space>',
             node_incremental = '<c-space>',
-            scope_incremental = '<c-s>',
             node_decremental = '<M-space>',
+            scope_incremental = '<c-s>',
           },
         },
         textobjects = {
@@ -620,9 +622,9 @@ require('lazy').setup({
   -- lazy.nvim options
   lockfile = '~/dotfiles/nvim/lazy-lock.json',
   ui = {
-    size = { width = 0.85, height = 0.7 },
     backdrop = 100,
     border = 'solid',
+    size = { width = 0.85, height = 0.7 },
     icons = {
       cmd = '[cmd]',
       config = '[cfg]',
