@@ -18,10 +18,10 @@ npx @johnnymorganz/stylua-bin ./init.lua
    ├─ cfg_lazy_comment: Toggles linewise and blockwise comments
    ├─ cfg_lazy_leap: Leap motion plugin
    ├─ cfg_lazy_lualine: Statusline
+   ├─ cfg_lazy_onedark: Colorscheme inspired by Atom
+   ├─ cfg_lazy_desolate: Not-so-colorful colorscheme
    ├─ cfg_lazy_gitsigns: Git-releated actions and gutter signs
    │  └─ cfg_lazy_gitsigns_keymaps
-   ├─ cfg_lazy_desolate: Not-so-colorful colorscheme
-   ├─ cfg_lazy_onedark: Colorscheme inspired by Atom
    ├─ cfg_lazy_fzf: Fuzzy search
    │  └─ cfg_lazy_fzf_keymaps
    ├─ cfg_lazy_lsp: LSP configuration & plugins
@@ -124,7 +124,7 @@ vim.filetype.add {
 
 vim.api.nvim_create_user_command('E', 'Explore', { desc = 'Alias for :Explore' })
 
-vim.api.nvim_create_user_command('WipeUI', function ()
+vim.api.nvim_create_user_command('WipeUI', function()
   vim.api.nvim_command 'nohlsearch'
   vim.api.nvim_echo({}, false, {})
   for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -214,7 +214,7 @@ vim.keymap.set('x', '/', '<Esc>/\\%V', { desc = 'Search within visual selection'
 
 -- Hide search highlight, cmdline, and popups
 vim.keymap.set('n', '<BS>', ':WipeUI<CR>', { silent = true, desc = 'WipeUI' })
-vim.keymap.set('n', '<ESC>', ':WipeUI<CR>', { silent = true, desc = 'WipeUI'})
+vim.keymap.set('n', '<ESC>', ':WipeUI<CR>', { silent = true, desc = 'WipeUI' })
 
 --[[ cfg_lazy: Plugin manager ]]
 -- https://github.com/folke/lazy.nvim
@@ -273,31 +273,8 @@ require('lazy').setup({
       },
     },
   },
-  --[[ cfg_lazy_gitsigns: Git-releated actions and gutter signs ]]
-  {
-    'lewis6991/gitsigns.nvim',
-    config = function()
-      require('gitsigns').setup {
-        signs = {
-          add = { text = '│' },
-          change = { text = '│' },
-          delete = { text = '_' },
-          topdelete = { text = '‾' },
-          changedelete = { text = '│' },
-        },
-      }
-
-      --[[ cfg_lazy_gitsigns_keymaps ]]
-
-      vim.keymap.set('n', '[g', ':Gitsigns prev_hunk<CR>', { desc = 'Go to previous Git hunk' })
-      vim.keymap.set('n', ']g', ':Gitsigns next_hunk<CR>', { desc = 'Go to next Git hunk' })
-
-      vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show [g]it [b]lame' })
-      vim.keymap.set('n', '<leader>gu', ':Gitsigns reset_hunk<CR>', { desc = 'Reset [g]it h[u]nk' })
-      vim.keymap.set('n', '<leader>gj', ':Gitsigns stage_hunk<CR>', { desc = 'Stage/unstage current hunk' })
-      vim.keymap.set('n', '<leader>gk', ':Gitsigns preview_hunk<CR>', { desc = 'Show [g]it hun[k] preview' })
-    end,
-  },
+  --[[ cfg_lazy_onedark: Colorscheme inspired by Atom ]]
+  'navarasu/onedark.nvim',
   --[[ cfg_lazy_desolate: Not-so-colorful colorscheme ]]
   {
     'He4eT/desolate.nvim',
@@ -329,8 +306,31 @@ require('lazy').setup({
       vim.cmd.colorscheme 'desolate'
     end,
   },
-  --[[ cfg_lazy_onedark: Colorscheme inspired by Atom ]]
-  'navarasu/onedark.nvim',
+  --[[ cfg_lazy_gitsigns: Git-releated actions and gutter signs ]]
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup {
+        signs = {
+          add = { text = '│' },
+          change = { text = '│' },
+          delete = { text = '_' },
+          topdelete = { text = '‾' },
+          changedelete = { text = '│' },
+        },
+      }
+
+      --[[ cfg_lazy_gitsigns_keymaps ]]
+
+      vim.keymap.set('n', '[g', ':Gitsigns prev_hunk<CR>', { desc = 'Go to previous Git hunk' })
+      vim.keymap.set('n', ']g', ':Gitsigns next_hunk<CR>', { desc = 'Go to next Git hunk' })
+
+      vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show [g]it [b]lame' })
+      vim.keymap.set('n', '<leader>gu', ':Gitsigns reset_hunk<CR>', { desc = 'Reset [g]it h[u]nk' })
+      vim.keymap.set('n', '<leader>gj', ':Gitsigns stage_hunk<CR>', { desc = 'Stage/unstage current hunk' })
+      vim.keymap.set('n', '<leader>gk', ':Gitsigns preview_hunk<CR>', { desc = 'Show [g]it hun[k] preview' })
+    end,
+  },
   --[[ cfg_lazy_fzf: Fuzzy search ]]
   {
     'ibhagwan/fzf-lua',
