@@ -122,8 +122,18 @@ vim.filetype.add {
 
 --[[ cfg_cmds: Commands ]]
 
--- Ignore :EditQuery command
-vim.api.nvim_create_user_command('E', 'Explore', {})
+vim.api.nvim_create_user_command('E', 'Explore', { desc = 'Alias for :Explore' })
+
+vim.api.nvim_create_user_command('WipeUI', function ()
+  vim.api.nvim_command 'nohlsearch'
+  vim.api.nvim_echo({}, false, {})
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local win_config = vim.api.nvim_win_get_config(win)
+    if win_config.relative ~= '' then
+      vim.api.nvim_win_close(win, true)
+    end
+  end
+end, { desc = 'Clear search highlight, cmdline, and popups' })
 
 --[[ cfg_autocmds: Autocomands ]]
 
@@ -203,19 +213,8 @@ vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]ia
 vim.keymap.set('x', '/', '<Esc>/\\%V', { desc = 'Search within visual selection' })
 
 -- Hide search highlight, cmdline, and popups
-local function wipe_ui()
-  vim.api.nvim_command 'nohlsearch'
-  vim.api.nvim_echo({}, false, {})
-  for _, win in ipairs(vim.api.nvim_list_wins()) do
-    local win_config = vim.api.nvim_win_get_config(win)
-    if win_config.relative ~= '' then
-      vim.api.nvim_win_close(win, true)
-    end
-  end
-end
-
-vim.keymap.set('n', '<BS>', wipe_ui, { desc = 'Clear search, cmdline, and popups' })
-vim.keymap.set('n', '<ESC>', wipe_ui, { desc = 'Clear search, cmdline, and popups' })
+vim.keymap.set('n', '<BS>', ':WipeUI<CR>', { silent = true, desc = 'WipeUI' })
+vim.keymap.set('n', '<ESC>', ':WipeUI<CR>', { silent = true, desc = 'WipeUI'})
 
 --[[ cfg_lazy: Plugin manager ]]
 -- https://github.com/folke/lazy.nvim
