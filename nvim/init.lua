@@ -14,24 +14,24 @@ npx @johnnymorganz/stylua-bin ./init.lua
 └─ cfg_lazy: Plugin manager
    ├─ cfg_lazy_guess_indent: Detect tabstop and shiftwidth automatically
    ├─ cfg_lazy_surround: Delete, change and add such surroundings in pairs
-   ├─ cfg_lazy_colorizer: Color highlighter
    ├─ cfg_lazy_comment: Toggles linewise and blockwise comments
-   ├─ cfg_lazy_leap: Leap motion plugin
+   ├─ cfg_lazy_colorizer: Color highlighter
    ├─ cfg_lazy_lualine: Statusline
-   ├─ cfg_lazy_onedark: Colorscheme inspired by Atom
-   ├─ cfg_lazy_desolate: Not-so-colorful colorscheme
-   ├─ cfg_lazy_gitsigns: Git-releated actions and gutter signs
-   │  └─ cfg_lazy_gitsigns_keymaps
+   ├─ cfg_lazy_leap: Leap motion plugin
+   ├─ cfg_lazy_cmp: Autocompletion
+   │  └─ cfg_lazy_cmp_keymaps
    ├─ cfg_lazy_fzf: Fuzzy search
    │  └─ cfg_lazy_fzf_keymaps
+   ├─ cfg_lazy_gitsigns: Git-releated actions and gutter signs
+   │  └─ cfg_lazy_gitsigns_keymaps
    ├─ cfg_lazy_lsp: LSP configuration & plugins
    │  ├─ cfg_lazy_lsp_keymaps
    │  └─ cfg_lazy_lsp_servers
-   ├─ cfg_lazy_cmp: Autocompletion
-   │  └─ cfg_lazy_cmp_keymaps
-   └─ cfg_lazy_treesitter: Highlight, edit, and navigate code
-      ├─ cfg_lazy_treesitter_langs
-      └─ cfg_lazy_treesitter_keymaps
+   ├─ cfg_lazy_treesitter: Highlight, edit, and navigate code
+   │  ├─ cfg_lazy_treesitter_langs
+   │  └─ cfg_lazy_treesitter_keymaps
+   ├─ cfg_lazy_onedark: Colorscheme inspired by Atom
+   └─ cfg_lazy_desolate: Not-so-colorful colorscheme
 ]]
 
 --[[ cfg_leader: Leader keys ]]
@@ -237,16 +237,28 @@ require('lazy').setup({
   'NMAC427/guess-indent.nvim',
   --[[ cfg_lazy_surround: Delete, change and add surroundings in pairs ]]
   'tpope/vim-surround',
+  --[[ cfg_lazy_comment: Toggles linewise and blockwise comments ]]
+  {
+    'numToStr/Comment.nvim',
+    opts = {},
+  },
   --[[ cfg_lazy_colorizer: Color highlighter ]]
   {
     'catgoose/nvim-colorizer.lua',
     cmd = 'ColorizerToggle',
     opts = {},
   },
-  --[[ cfg_lazy_comment: Toggles linewise and blockwise comments ]]
+  --[[ cfg_lazy_lualine: Statusline ]]
   {
-    'numToStr/Comment.nvim',
-    opts = {},
+    'nvim-lualine/lualine.nvim',
+    opts = {
+      options = {
+        globalstatus = true,
+        icons_enabled = false,
+        section_separators = '',
+        component_separators = '|',
+      },
+    },
   },
   --[[ cfg_lazy_leap: Leap motion plugin ]]
   {
@@ -261,74 +273,52 @@ require('lazy').setup({
       leap.opts.safe_labels = {}
     end,
   },
-  --[[ cfg_lazy_lualine: Statusline ]]
+  --[[ cfg_lazy_cmp: Autocompletion ]]
   {
-    'nvim-lualine/lualine.nvim',
-    opts = {
-      options = {
-        globalstatus = true,
-        icons_enabled = false,
-        section_separators = '',
-        component_separators = '|',
-      },
-    },
-  },
-  --[[ cfg_lazy_onedark: Colorscheme inspired by Atom ]]
-  'navarasu/onedark.nvim',
-  --[[ cfg_lazy_desolate: Not-so-colorful colorscheme ]]
-  {
-    'He4eT/desolate.nvim',
+    'hrsh7th/nvim-cmp',
     dependencies = {
-      'rktjmp/lush.nvim',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-path',
     },
-    -- dir = '~/trash/desolate.nvim',
-    priority = 1000,
-    init = function()
-      vim.g.desolate_h = 0
-      vim.g.desolate_s = 0
-      vim.g.desolate_l = 70
-      vim.g.desolate_contrast = 120
-
-      vim.g.desolate_fg = '#cdcdcd'
-      vim.g.desolate_bg = '#383838'
-
-      vim.g.desolate_constant = '#ffd700'
-      vim.g.desolate_identifier = '#ffc812'
-      vim.g.desolate_statement = '#ffffff'
-
-      vim.g.desolate_error = '#ff4242'
-      vim.g.desolate_warning = '#ffad29'
-      vim.g.desolate_success = '#74af68'
-      vim.g.desolate_info = '#ffffff'
-
-      vim.o.termguicolors = true
-      vim.o.background = 'dark'
-      vim.cmd.colorscheme 'desolate'
-    end,
-  },
-  --[[ cfg_lazy_gitsigns: Git-releated actions and gutter signs ]]
-  {
-    'lewis6991/gitsigns.nvim',
     config = function()
-      require('gitsigns').setup {
-        signs = {
-          add = { text = '│' },
-          change = { text = '│' },
-          delete = { text = '_' },
-          topdelete = { text = '‾' },
-          changedelete = { text = '│' },
+      local cmp = require 'cmp'
+
+      cmp.setup {
+        snippet = {
+          expand = function(args)
+            vim.snippet.expand(args.body)
+          end,
+        },
+        --[[ cfg_lazy_cmp_keymaps ]]
+        mapping = cmp.mapping.preset.insert {
+          ['<C-Space>'] = cmp.mapping.complete {},
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<Esc>'] = cmp.mapping.abort(),
+          ['<CR>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+          },
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+        },
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'path' },
         },
       }
-
-      --[[ cfg_lazy_gitsigns_keymaps ]]
-
-      vim.keymap.set('n', '[g', ':Gitsigns prev_hunk<CR>', { desc = 'Go to previous Git hunk' })
-      vim.keymap.set('n', ']g', ':Gitsigns next_hunk<CR>', { desc = 'Go to next Git hunk' })
-
-      vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show [g]it [b]lame' })
-      vim.keymap.set('n', '<leader>gu', ':Gitsigns reset_hunk<CR>', { desc = 'Reset [g]it h[u]nk' })
-      vim.keymap.set('n', '<leader>gj', ':Gitsigns stage_hunk<CR>', { desc = 'Stage/unstage current hunk' })
-      vim.keymap.set('n', '<leader>gk', ':Gitsigns preview_hunk<CR>', { desc = 'Show [g]it hun[k] preview' })
     end,
   },
   --[[ cfg_lazy_fzf: Fuzzy search ]]
@@ -423,6 +413,31 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>gr', fzf.lsp_references, { desc = 'LSP: [g]o to fzf [r]eference list' })
     end,
   },
+  --[[ cfg_lazy_gitsigns: Git-releated actions and gutter signs ]]
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup {
+        signs = {
+          add = { text = '│' },
+          change = { text = '│' },
+          delete = { text = '_' },
+          topdelete = { text = '‾' },
+          changedelete = { text = '│' },
+        },
+      }
+
+      --[[ cfg_lazy_gitsigns_keymaps ]]
+
+      vim.keymap.set('n', '[g', ':Gitsigns prev_hunk<CR>', { desc = 'Go to previous Git hunk' })
+      vim.keymap.set('n', ']g', ':Gitsigns next_hunk<CR>', { desc = 'Go to next Git hunk' })
+
+      vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show [g]it [b]lame' })
+      vim.keymap.set('n', '<leader>gu', ':Gitsigns reset_hunk<CR>', { desc = 'Reset [g]it h[u]nk' })
+      vim.keymap.set('n', '<leader>gj', ':Gitsigns stage_hunk<CR>', { desc = 'Stage/unstage current hunk' })
+      vim.keymap.set('n', '<leader>gk', ':Gitsigns preview_hunk<CR>', { desc = 'Show [g]it hun[k] preview' })
+    end,
+  },
   --[[ cfg_lazy_lsp: LSP configuration & plugins ]]
   {
     'neovim/nvim-lspconfig',
@@ -513,54 +528,6 @@ require('lazy').setup({
       }
     end,
   },
-  --[[ cfg_lazy_cmp: Autocompletion ]]
-  {
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-    },
-    config = function()
-      local cmp = require 'cmp'
-
-      cmp.setup {
-        snippet = {
-          expand = function(args)
-            vim.snippet.expand(args.body)
-          end,
-        },
-        --[[ cfg_lazy_cmp_keymaps ]]
-        mapping = cmp.mapping.preset.insert {
-          ['<C-Space>'] = cmp.mapping.complete {},
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<Esc>'] = cmp.mapping.abort(),
-          ['<CR>'] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-          },
-          ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
-        },
-        sources = {
-          { name = 'nvim_lsp' },
-          { name = 'path' },
-        },
-      }
-    end,
-  },
   --[[ cfg_lazy_treesitter: Highlight, edit, and navigate code ]]
   {
     'nvim-treesitter/nvim-treesitter',
@@ -613,6 +580,39 @@ require('lazy').setup({
           },
         },
       }
+    end,
+  },
+  --[[ cfg_lazy_onedark: Colorscheme inspired by Atom ]]
+  'navarasu/onedark.nvim',
+  --[[ cfg_lazy_desolate: Not-so-colorful colorscheme ]]
+  {
+    'He4eT/desolate.nvim',
+    dependencies = {
+      'rktjmp/lush.nvim',
+    },
+    -- dir = '~/trash/desolate.nvim',
+    priority = 1000,
+    init = function()
+      vim.g.desolate_h = 0
+      vim.g.desolate_s = 0
+      vim.g.desolate_l = 70
+      vim.g.desolate_contrast = 120
+
+      vim.g.desolate_fg = '#cdcdcd'
+      vim.g.desolate_bg = '#383838'
+
+      vim.g.desolate_constant = '#ffd700'
+      vim.g.desolate_identifier = '#ffc812'
+      vim.g.desolate_statement = '#ffffff'
+
+      vim.g.desolate_error = '#ff4242'
+      vim.g.desolate_warning = '#ffad29'
+      vim.g.desolate_success = '#74af68'
+      vim.g.desolate_info = '#ffffff'
+
+      vim.o.termguicolors = true
+      vim.o.background = 'dark'
+      vim.cmd.colorscheme 'desolate'
     end,
   },
 }, {
