@@ -344,9 +344,13 @@ require('lazy').setup({
       local fzf = require 'fzf-lua'
 
       fzf.setup {
+        fzf_colors = true,
         winopts = {
           border = 'single',
           fullscreen = true,
+          preview = {
+            border = 'single',
+          },
           previewers = {
             builtin = {
               syntax = true,
@@ -372,25 +376,6 @@ require('lazy').setup({
             '^.git/',
             '^.yarn/',
           },
-        },
-        fzf_opts = {
-          ['--border'] = 'none',
-          ['--preview-window'] = 'border-sharp',
-        },
-        fzf_colors = {
-          ['fg'] = { 'fg', 'CursorLine' },
-          ['bg'] = { 'bg', 'Normal' },
-          ['hl'] = { 'fg', 'Comment' },
-          ['fg+'] = { 'fg', 'Normal' },
-          ['bg+'] = { 'bg', 'CursorLine' },
-          ['hl+'] = { 'fg', 'Statement' },
-          ['info'] = { 'fg', 'Normal' },
-          ['prompt'] = { 'fg', 'Conditional' },
-          ['pointer'] = { 'fg', 'Exception' },
-          ['marker'] = { 'fg', 'Keyword' },
-          ['spinner'] = { 'fg', 'Label' },
-          ['header'] = { 'fg', 'Comment' },
-          ['gutter'] = { 'bg', 'Normal' },
         },
       }
 
