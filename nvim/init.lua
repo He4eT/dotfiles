@@ -199,12 +199,23 @@ end, {
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating [d]iagnostic message' })
 vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostics list' })
 
--- Highlight
-vim.keymap.set({ 'n' }, '<BS>', ':nohl<CR>', { silent = true, desc = 'Hide highlight' })
-vim.keymap.set({ 'n' }, '<ESC>', ':nohl<CR>', { silent = true, desc = 'Hide highlight' })
-
 -- Search in Visual Mode
 vim.keymap.set({ 'x' }, '/', '<Esc>/\\%V', { desc = 'Search within visual selection' })
+
+-- Hide search highlight, cmdline, and popups
+local function wipe_ui()
+  vim.api.nvim_command 'nohlsearch'
+  vim.api.nvim_echo({}, false, {})
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local win_config = vim.api.nvim_win_get_config(win)
+    if win_config.relative ~= '' then
+      vim.api.nvim_win_close(win, true)
+    end
+  end
+end
+
+vim.keymap.set({ 'n' }, '<BS>', wipe_ui, { desc = 'Clear search, cmdline, and popups' })
+vim.keymap.set({ 'n' }, '<ESC>', wipe_ui, { desc = 'Clear search, cmdline, and popups' })
 
 --[[ cfg_lazy: Plugin manager ]]
 -- https://github.com/folke/lazy.nvim
