@@ -346,6 +346,7 @@ require('lazy').setup({
       fzf.setup {
         fzf_colors = true,
         winopts = {
+          backdrop = 100,
           border = 'single',
           fullscreen = true,
           preview = {
