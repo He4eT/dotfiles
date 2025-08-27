@@ -487,7 +487,7 @@ require('lazy').setup({
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
           end, 'workspac[e]: [l]ist folders')
 
-          vim.api.nvim_buf_create_user_command(event.buf, 'Format', function(_)
+          vim.api.nvim_buf_create_user_command(event.buf, 'Format', function()
             vim.lsp.buf.format()
           end, { desc = 'Format current buffer with LSP' })
         end,
@@ -590,7 +590,6 @@ require('lazy').setup({
     dependencies = {
       'rktjmp/lush.nvim',
     },
-    -- dir = '~/trash/desolate.nvim',
     priority = 1000,
     init = function()
       vim.g.desolate_h = 0
@@ -614,6 +613,7 @@ require('lazy').setup({
       vim.o.background = 'dark'
       vim.cmd.colorscheme 'desolate'
     end,
+    -- dir = '~/trash/desolate.nvim',
   },
 }, {
   -- lazy.nvim options
