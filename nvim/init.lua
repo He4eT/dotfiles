@@ -168,11 +168,11 @@ vim.keymap.set('n', '<PageDown>', '<C-d>', { silent = true, desc = 'Emulate <Ctr
 vim.keymap.set('n', '<PageUp>', '<C-u>', { silent = true, desc = 'Emulate <Ctrl + u>' })
 
 -- Open terminal
-vim.keymap.set({ 'n' }, '<leader>T', ':terminal<CR>i', { silent = true, desc = 'Open [t]erminal here' })
-vim.keymap.set({ 'n' }, '<leader>t', ':vs<CR><C-w>w:terminal<CR>i', { silent = true, desc = 'Open [T]erminal in vsplit' })
+vim.keymap.set('n', '<leader>T', ':terminal<CR>i', { silent = true, desc = 'Open [t]erminal here' })
+vim.keymap.set('n', '<leader>t', ':vs<CR><C-w>w:terminal<CR>i', { silent = true, desc = 'Open [T]erminal in vsplit' })
 
 -- Escape terminal mode
-vim.keymap.set({ 't' }, ';;', '<C-\\><C-n>', { silent = true, desc = 'Escape terminal mode' })
+vim.keymap.set('t', ';;', '<C-\\><C-n>', { silent = true, desc = 'Escape terminal mode' })
 
 -- Window managment
 vim.keymap.set('n', '<leader>q', ':bp|bd#<CR>', { desc = 'Close current buffer ' })
@@ -200,7 +200,7 @@ vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostics list' })
 
 -- Search in Visual Mode
-vim.keymap.set({ 'x' }, '/', '<Esc>/\\%V', { desc = 'Search within visual selection' })
+vim.keymap.set('x', '/', '<Esc>/\\%V', { desc = 'Search within visual selection' })
 
 -- Hide search highlight, cmdline, and popups
 local function wipe_ui()
@@ -214,8 +214,8 @@ local function wipe_ui()
   end
 end
 
-vim.keymap.set({ 'n' }, '<BS>', wipe_ui, { desc = 'Clear search, cmdline, and popups' })
-vim.keymap.set({ 'n' }, '<ESC>', wipe_ui, { desc = 'Clear search, cmdline, and popups' })
+vim.keymap.set('n', '<BS>', wipe_ui, { desc = 'Clear search, cmdline, and popups' })
+vim.keymap.set('n', '<ESC>', wipe_ui, { desc = 'Clear search, cmdline, and popups' })
 
 --[[ cfg_lazy: Plugin manager ]]
 -- https://github.com/folke/lazy.nvim
@@ -411,30 +411,30 @@ require('lazy').setup({
 
       --[[ cfg_lazy_fzf_keymaps ]]
 
-      vim.keymap.set({ 'n' }, '<leader>fp', fzf.builtin, { desc = '[f]zf: [p]allete' })
-      vim.keymap.set({ 'n' }, '<leader>f.', fzf.resume, { desc = '[f]zf: resume' })
+      vim.keymap.set('n', '<leader>fp', fzf.builtin, { desc = '[f]zf: [p]allete' })
+      vim.keymap.set('n', '<leader>f.', fzf.resume, { desc = '[f]zf: resume' })
 
-      vim.keymap.set({ 'n' }, '<leader>b', fzf.buffers, { desc = '[f]zf: [b]uffers' })
+      vim.keymap.set('n', '<leader>b', fzf.buffers, { desc = '[f]zf: [b]uffers' })
 
-      vim.keymap.set({ 'n' }, '<leader>fF', fzf_files, { desc = '[f]zf: all [F]iles' })
-      vim.keymap.set({ 'n' }, '<leader>ff', fzf.git_files, { desc = '[f]zf: git [f]iles' })
-      vim.keymap.set({ 'n' }, '<leader>fd', fzf.git_status, { desc = '[f]zf: git [d]iff' })
-      vim.keymap.set({ 'n' }, '<leader>fh', fzf_git_chronology, { desc = '[f]zf: git c[h]ronology' })
+      vim.keymap.set('n', '<leader>fF', fzf_files, { desc = '[f]zf: all [F]iles' })
+      vim.keymap.set('n', '<leader>ff', fzf.git_files, { desc = '[f]zf: git [f]iles' })
+      vim.keymap.set('n', '<leader>fd', fzf.git_status, { desc = '[f]zf: git [d]iff' })
+      vim.keymap.set('n', '<leader>fh', fzf_git_chronology, { desc = '[f]zf: git c[h]ronology' })
 
-      vim.keymap.set({ 'n' }, '<leader>f/', fzf.blines, { desc = '[f]zf: buffer lines' })
-      vim.keymap.set({ 'n' }, '<leader>fg', fzf.live_grep, { desc = '[f]zf: [g]rep' })
-      vim.keymap.set({ 'n' }, '<leader>fw', fzf.grep_cword, { desc = '[f]zf: grep [w]' })
-      vim.keymap.set({ 'n' }, '<leader>fW', fzf.grep_cWORD, { desc = '[f]zf: grep [W]' })
-      vim.keymap.set({ 'n' }, '<leader>fu', fzf_grep_filename, { desc = '[f]zf: current file [u]sages' })
+      vim.keymap.set('n', '<leader>f/', fzf.blines, { desc = '[f]zf: buffer lines' })
+      vim.keymap.set('n', '<leader>fg', fzf.live_grep, { desc = '[f]zf: [g]rep' })
+      vim.keymap.set('n', '<leader>fw', fzf.grep_cword, { desc = '[f]zf: grep [w]' })
+      vim.keymap.set('n', '<leader>fW', fzf.grep_cWORD, { desc = '[f]zf: grep [W]' })
+      vim.keymap.set('n', '<leader>fu', fzf_grep_filename, { desc = '[f]zf: current file [u]sages' })
 
-      vim.keymap.set({ 'n' }, '<leader>p', fzf.registers, { desc = '[f]zf: [p]aste from register' })
-      vim.keymap.set({ 'n' }, '<leader>?', fzf.keymaps, { desc = '[f]zf: keymaps' })
-      vim.keymap.set({ 'n' }, '<leader>/', fzf.search_history, { desc = '[f]zf: search history' })
-      vim.keymap.set({ 'n' }, '<leader>:', fzf.command_history, { desc = '[f]zf: command history' })
+      vim.keymap.set('n', '<leader>p', fzf.registers, { desc = '[f]zf: [p]aste from register' })
+      vim.keymap.set('n', '<leader>?', fzf.keymaps, { desc = '[f]zf: keymaps' })
+      vim.keymap.set('n', '<leader>/', fzf.search_history, { desc = '[f]zf: search history' })
+      vim.keymap.set('n', '<leader>:', fzf.command_history, { desc = '[f]zf: command history' })
 
       -- LSP
-      vim.keymap.set({ 'n' }, '<leader>gd', fzf.lsp_definitions, { desc = 'LSP: [g]oto [d]efinition list' })
-      vim.keymap.set({ 'n' }, '<leader>gr', fzf.lsp_references, { desc = 'LSP: [g]o to fzf [r]eference list' })
+      vim.keymap.set('n', '<leader>gd', fzf.lsp_definitions, { desc = 'LSP: [g]oto [d]efinition list' })
+      vim.keymap.set('n', '<leader>gr', fzf.lsp_references, { desc = 'LSP: [g]o to fzf [r]eference list' })
     end,
   },
   --[[ cfg_lazy_lsp: LSP configuration & plugins ]]
