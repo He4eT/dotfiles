@@ -12,8 +12,8 @@ npx @johnnymorganz/stylua-bin ./init.lua
 ├─ cfg_autocmds: Autocomands
 ├─ cfg_keymaps: General keymaps
 └─ cfg_lazy: Plugin manager
-   ├─ cfg_lazy_vim_sleuth: Detect tabstop and shiftwidth automatically
-   ├─ cfg_lazy_vim_surround: Delete, change and add such surroundings in pairs
+   ├─ cfg_lazy_guess_indent: Detect tabstop and shiftwidth automatically
+   ├─ cfg_lazy_surround: Delete, change and add such surroundings in pairs
    ├─ cfg_lazy_colorizer: Color highlighter
    ├─ cfg_lazy_comment: Toggles linewise and blockwise comments
    ├─ cfg_lazy_leap: Leap motion plugin
@@ -132,7 +132,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
   pattern = '*',
   callback = function()
-    vim.highlight.on_yank()
+    vim.hl.on_yank()
   end,
 })
 
@@ -234,9 +234,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  --[[ cfg_lazy_vim_sleuth: Detect tabstop and shiftwidth automatically ]]
-  'tpope/vim-sleuth',
-  --[[ cfg_lazy_vim_surround: Delete, change and add surroundings in pairs ]]
+  --[[ cfg_lazy_guess_indent: Detect tabstop and shiftwidth automatically ]]
+  'NMAC427/guess-indent.nvim',
+  --[[ cfg_lazy_surround: Delete, change and add surroundings in pairs ]]
   'tpope/vim-surround',
   --[[ cfg_lazy_colorizer: Color highlighter ]]
   {
@@ -306,6 +306,7 @@ require('lazy').setup({
       'rktjmp/lush.nvim',
     },
     -- dir = '~/trash/desolate.nvim',
+    priority = 1000,
     init = function()
       vim.g.desolate_h = 0
       vim.g.desolate_s = 0
