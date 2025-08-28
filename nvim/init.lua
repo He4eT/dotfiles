@@ -12,8 +12,8 @@ npx @johnnymorganz/stylua-bin ./init.lua
 ├─ cfg_keymaps: Base keymaps
 └─ cfg_lazy: Plugin manager
    ├─ cfg_lazy_guess_indent: Detect tabstop and shiftwidth automatically
-   ├─ cfg_lazy_surround: Delete, change and add surroundings in pairs
-   ├─ cfg_lazy_comment: Toggles linewise and blockwise comments
+   ├─ cfg_lazy_surround: Add/change/delete paired surroundings
+   ├─ cfg_lazy_comment: Toggle line/block comments
    ├─ cfg_lazy_colorizer: Color highlighter
    ├─ cfg_lazy_lualine: Statusline
    ├─ cfg_lazy_leap: Leap motion plugin
@@ -21,7 +21,7 @@ npx @johnnymorganz/stylua-bin ./init.lua
    │  └─ cfg_lazy_cmp_keymaps
    ├─ cfg_lazy_fzf: Fuzzy search
    │  └─ cfg_lazy_fzf_keymaps
-   ├─ cfg_lazy_gitsigns: Git-releated actions and gutter signs
+   ├─ cfg_lazy_gitsigns: Git-related actions and gutter signs
    │  └─ cfg_lazy_gitsigns_keymaps
    ├─ cfg_lazy_lsp: LSP configuration & plugins
    │  ├─ cfg_lazy_lsp_keymaps
@@ -182,7 +182,7 @@ vim.keymap.set('n', '<leader>t', ':vs<CR><C-w>w:terminal<CR>i', { silent = true,
 vim.keymap.set('t', ';;', '<C-\\><C-n>', { silent = true, desc = 'Escape terminal mode' })
 
 -- Window managment
-vim.keymap.set('n', '<leader>q', ':bp|bd#<CR>', { desc = 'Close current buffer ' })
+vim.keymap.set('n', '<leader>q', ':bp|bd#<CR>', { desc = 'Close current buffer' })
 vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true, desc = 'Alias for Ctrl + w' })
 vim.keymap.set('n', '<leader>k', '<C-w>w', { remap = true, desc = 'Jump to the next window' })
 vim.keymap.set('n', '<leader>K', ':vs<CR><C-w>w', { desc = 'Split window to the right' })
@@ -232,9 +232,9 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   --[[ cfg_lazy_guess_indent: Detect tabstop and shiftwidth automatically ]]
   'NMAC427/guess-indent.nvim',
-  --[[ cfg_lazy_surround: Delete, change and add surroundings in pairs ]]
+  --[[ cfg_lazy_surround: Add/change/delete paired surroundings ]]
   'tpope/vim-surround',
-  --[[ cfg_lazy_comment: Toggles linewise and blockwise comments ]]
+  --[[ cfg_lazy_comment: Toggle line/block comments ]]
   {
     'numToStr/Comment.nvim',
     opts = {},
@@ -385,7 +385,7 @@ require('lazy').setup({
       --[[ cfg_lazy_fzf_keymaps ]]
 
       vim.keymap.set('n', '<leader>fp', fzf.builtin, { desc = '[f]zf: [p]allete' })
-      vim.keymap.set('n', '<leader>f.', fzf.resume, { desc = '[f]zf: resume' })
+      vim.keymap.set('n', '<leader>f.', fzf.resume, { desc = '[f]zf: resume [.]' })
 
       vim.keymap.set('n', '<leader>b', fzf.buffers, { desc = '[f]zf: [b]uffers' })
 
@@ -394,23 +394,23 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fd', fzf.git_status, { desc = '[f]zf: git [d]iff' })
       vim.keymap.set('n', '<leader>fh', fzf_git_chronology, { desc = '[f]zf: git c[h]ronology' })
 
-      vim.keymap.set('n', '<leader>f/', fzf.blines, { desc = '[f]zf: buffer lines' })
+      vim.keymap.set('n', '<leader>f/', fzf.blines, { desc = '[f]zf: buffer lines [/]' })
       vim.keymap.set('n', '<leader>fg', fzf.live_grep, { desc = '[f]zf: [g]rep' })
       vim.keymap.set('n', '<leader>fw', fzf.grep_cword, { desc = '[f]zf: grep [w]' })
       vim.keymap.set('n', '<leader>fW', fzf.grep_cWORD, { desc = '[f]zf: grep [W]' })
       vim.keymap.set('n', '<leader>fu', fzf_grep_filename, { desc = '[f]zf: current file [u]sages' })
 
       vim.keymap.set('n', '<leader>p', fzf.registers, { desc = '[f]zf: [p]aste from register' })
-      vim.keymap.set('n', '<leader>?', fzf.keymaps, { desc = '[f]zf: keymaps' })
-      vim.keymap.set('n', '<leader>/', fzf.search_history, { desc = '[f]zf: search history' })
-      vim.keymap.set('n', '<leader>:', fzf.command_history, { desc = '[f]zf: command history' })
+      vim.keymap.set('n', '<leader>?', fzf.keymaps, { desc = '[f]zf: keymaps [?]' })
+      vim.keymap.set('n', '<leader>/', fzf.search_history, { desc = 'fzf: search history [/]' })
+      vim.keymap.set('n', '<leader>:', fzf.command_history, { desc = 'fzf: command history [:]' })
 
       -- LSP
       vim.keymap.set('n', '<leader>gd', fzf.lsp_definitions, { desc = 'LSP: [g]oto [d]efinition list' })
-      vim.keymap.set('n', '<leader>gr', fzf.lsp_references, { desc = 'LSP: [g]o to fzf [r]eference list' })
+      vim.keymap.set('n', '<leader>gr', fzf.lsp_references, { desc = 'LSP: [g]oto [r]eference list' })
     end,
   },
-  --[[ cfg_lazy_gitsigns: Git-releated actions and gutter signs ]]
+  --[[ cfg_lazy_gitsigns: Git-related actions and gutter signs ]]
   {
     'lewis6991/gitsigns.nvim',
     config = function()
@@ -432,7 +432,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Show [g]it [b]lame' })
       vim.keymap.set('n', '<leader>gu', ':Gitsigns reset_hunk<CR>', { desc = 'Reset [g]it h[u]nk' })
       vim.keymap.set('n', '<leader>gj', ':Gitsigns stage_hunk<CR>', { desc = 'Stage/unstage current hunk' })
-      vim.keymap.set('n', '<leader>gk', ':Gitsigns preview_hunk<CR>', { desc = 'Show [g]it hun[k] preview' })
+      vim.keymap.set('n', '<leader>gk', ':Gitsigns preview_hunk<CR>', { desc = 'Preview [g]it hun[k]' })
     end,
   },
   --[[ cfg_lazy_lsp: LSP configuration & plugins ]]
