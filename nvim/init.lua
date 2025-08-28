@@ -5,15 +5,14 @@ npx @johnnymorganz/stylua-bin ./init.lua
 ]]
 
 --[[ Structure:
-├─ cfg_leader: Leader keys
 ├─ cfg_options: See `:help vim.o`
 ├─ cfg_filetypes: Filetype aliases
 ├─ cfg_cmds: Commands
-├─ cfg_autocmds: Autocomands
-├─ cfg_keymaps: General keymaps
+├─ cfg_autocmds: Autocommands
+├─ cfg_keymaps: Base keymaps
 └─ cfg_lazy: Plugin manager
    ├─ cfg_lazy_guess_indent: Detect tabstop and shiftwidth automatically
-   ├─ cfg_lazy_surround: Delete, change and add such surroundings in pairs
+   ├─ cfg_lazy_surround: Delete, change and add surroundings in pairs
    ├─ cfg_lazy_comment: Toggles linewise and blockwise comments
    ├─ cfg_lazy_colorizer: Color highlighter
    ├─ cfg_lazy_lualine: Statusline
@@ -34,17 +33,7 @@ npx @johnnymorganz/stylua-bin ./init.lua
    └─ cfg_lazy_desolate: Not-so-colorful colorscheme
 ]]
 
---[[ cfg_leader: Leader keys ]]
-
-local leader = ' '
-vim.g.mapleader = leader
-vim.g.maplocalleader = leader
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
 --[[ cfg_options: See `:help vim.o` ]]
-
--- Disable Intro (:intro)
-vim.opt.shortmess:append 'I'
 
 -- Raise a dialog asking if you wish to save the current file(s)
 vim.o.confirm = true
@@ -109,6 +98,9 @@ vim.o.completeopt = 'menuone,noselect,fuzzy'
 -- Keeps the same screen lines in all split windows
 vim.o.splitkeep = 'screen'
 
+-- Disable Intro (:intro)
+vim.opt.shortmess:append 'I'
+
 -- Netrw settings
 vim.g.netrw_sort_sequence = '[\\/]$,*'
 
@@ -135,7 +127,7 @@ vim.api.nvim_create_user_command('WipeUI', function()
   end
 end, { desc = 'Clear search highlight, cmdline, and popups' })
 
---[[ cfg_autocmds: Autocomands ]]
+--[[ cfg_autocmds: Autocommands ]]
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -167,7 +159,12 @@ vim.api.nvim_create_autocmd('InsertLeave', {
   command = 'silent !xkb-switch -s us',
 })
 
---[[ cfg_keymaps: General keymaps ]]
+--[[ cfg_keymaps: Base keymaps ]]
+
+local leader = ' '
+vim.g.mapleader = leader
+vim.g.maplocalleader = leader
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
