@@ -41,11 +41,6 @@
   transition: none;
 }
 
-/* Normal tabs container */
-#normal-tabs-container {
-  padding-bottom: 5em;
-}
-
 /* Tabs */
 
 tab-item,
