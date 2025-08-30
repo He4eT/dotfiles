@@ -406,7 +406,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>:', fzf.command_history, { desc = 'fzf: command history [:]' })
 
       -- LSP
-      vim.keymap.set('n', '<leader>gd', fzf.lsp_definitions, { desc = 'LSP: [g]oto [d]efinition list' })
+      vim.keymap.set('n', 'gd', fzf.lsp_definitions, { desc = 'LSP: [g]oto [d]efinition list' })
       vim.keymap.set('n', '<leader>gr', fzf.lsp_references, { desc = 'LSP: [g]oto [r]eference list' })
     end,
   },
@@ -474,8 +474,8 @@ require('lazy').setup({
           map('<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame')
           map('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction', { 'n', 'x' })
 
-          map('gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
           map('gD', vim.lsp.buf.type_definition, '[g]oto type [D]efinition')
+          map('<leader>gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
           map('<leader>gD', vim.lsp.buf.declaration, '[g]oto [D]eclaration')
 
           map('<leader>ea', vim.lsp.buf.add_workspace_folder, 'workspac[e]: [a]dd folder')
