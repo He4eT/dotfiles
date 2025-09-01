@@ -48,18 +48,15 @@ vim.o.winborder = 'solid'
 -- Hide mode in cmd
 vim.o.showmode = false
 
--- Set highlight on search
-vim.o.hlsearch = true
-
 -- Make line numbers default
-vim.wo.number = true
+vim.o.number = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
 vim.o.mousemodel = 'extend'
 
 -- Enable break indent
-vim.o.breakindent = false
+vim.o.breakindent = true
 
 -- Disable line wrapping
 vim.o.wrap = false
@@ -74,7 +71,7 @@ vim.o.startofline = true
 vim.o.cursorline = true
 
 -- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
+vim.o.signcolumn = 'yes'
 
 -- Hide tildes on unused lines
 vim.o.fillchars = 'eob: '
