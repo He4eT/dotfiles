@@ -27,7 +27,7 @@
   --toolbar-start-end-padding: 0;
 }
 
-#main-window:not([privatebrowsingmode="temporary"]) #urlbar-background {
+.urlbar-background {
   border-color: ThreeDShadow !important;
   background-color: Field !important;
 }
