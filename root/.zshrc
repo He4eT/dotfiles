@@ -65,7 +65,7 @@ alias :notimestamps='omz theme use custom-minimal'
 
 # Apps
 
-alias gzdoom='cd /home/odd/.var/app/org.zdoom.GZDoom/.config/gzdoom/iwads \
+alias gzdoom='cd /home/odd/.var/app/org.zdoom.GZDoom/.config/gzdoom/ \
   && flatpak run org.zdoom.GZDoom'
 alias ncdu='ncdu --color off'
 alias lynx='WWW_HOME=https://duckduckgo.com \
