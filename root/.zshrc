@@ -80,6 +80,7 @@ NMTUI_COLORS='
 '
 alias nmtui='NEWT_COLORS="$NMTUI_COLORS" nmtui'
 alias nmtui-connect='NEWT_COLORS="$NMTUI_COLORS" nmtui-connect'
+alias wifi-password='nmcli device wifi show-password'
 
 ## Git
 
