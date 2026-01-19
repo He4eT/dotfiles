@@ -68,6 +68,11 @@ tab-item-substance {
   font-weight: bold;
 }
 
+.tab.active .highlighter {
+  width: 5px;
+  background: var(--tab-highlighted-glow);
+}
+
 .tab .label {
   margin-left: 0.4em;
   line-height: var(--tab-size);
