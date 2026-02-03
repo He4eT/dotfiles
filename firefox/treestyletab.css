@@ -59,20 +59,6 @@ tab-item-substance {
   margin-top: -1px;
 }
 
-.tab:hover > tab-item-substance,
-.tab.active > tab-item-substance {
-  background: var(--face-highlight-more-lighter);
-}
-
-.tab.active > tab-item-substance {
-  font-weight: bold;
-}
-
-.tab.active .highlighter {
-  width: 5px;
-  background: var(--tab-highlighted-glow);
-}
-
 .tab .label {
   margin-left: 0.4em;
   line-height: var(--tab-size);
@@ -91,4 +77,18 @@ tab-item tab-favicon * {
 .highlighter::before {
   margin-top: 0px;
   margin-bottom: 0px;
+}
+
+.tab:hover > tab-item-substance,
+.tab.active > tab-item-substance {
+  background: var(--face-highlight-more-lighter);
+}
+
+.tab.active > tab-item-substance {
+  font-weight: bold;
+}
+
+.tab.active .highlighter {
+  width: 5px;
+  background: var(--tab-highlighted-glow);
 }
