@@ -66,9 +66,10 @@ alias :notimestamps='omz theme use custom-minimal'
 # Apps
 
 alias gzdoom='flatpak run --filesystem=home org.zdoom.GZDoom'
-alias ncdu='ncdu --color off'
 alias lynx='WWW_HOME=https://duckduckgo.com \
   lynx -accept_all_cookies -nocolor -nopause -show_cursor:true -tna -vikeys'
+alias ncdu='ncdu --color off'
+alias ranger='source ranger'
 
 # Aliases for nmtui @see https://lemmy.world/post/17689127
 
