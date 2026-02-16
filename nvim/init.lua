@@ -256,7 +256,7 @@ require('lazy').setup({
   },
   --[[ cfg_lazy_leap: Leap motion plugin ]]
   {
-    'ggandor/leap.nvim',
+    url = "https://codeberg.org/andyg/leap.nvim",
     dependencies = {
       'tpope/vim-repeat',
     },
