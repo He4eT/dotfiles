@@ -1,5 +1,15 @@
+/* Border Radius */
+
 * {
   border-radius: 0 !important;
+}
+
+:root {
+  --tab-border-radius: 0 !important;
+}
+
+menupopup, panel {
+  --panel-border-radius: 0 !important;
 }
 
 /* Tabbar */
