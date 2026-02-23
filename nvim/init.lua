@@ -256,7 +256,7 @@ require('lazy').setup({
   },
   --[[ cfg_lazy_leap: Leap motion plugin ]]
   {
-    url = "https://codeberg.org/andyg/leap.nvim",
+    url = 'https://codeberg.org/andyg/leap.nvim',
     dependencies = {
       'tpope/vim-repeat',
     },
@@ -265,11 +265,11 @@ require('lazy').setup({
       leap.opts.highlight_unlabeled_phase_one_targets = true
       leap.opts.safe_labels = {}
 
-      vim.keymap.set({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
-      vim.keymap.set({'n', 'x', 'o'}, 'S',  '<Plug>(leap-backward)')
-      vim.keymap.set({'x', 'o'}, 'x', '<Plug>(leap-forward-till)')
-      vim.keymap.set({'x', 'o'}, 'X', '<Plug>(leap-backward-till)')
-      vim.keymap.set({'n'}, 'gs', '<Plug>(leap-from-window)')
+      vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap-forward)')
+      vim.keymap.set({ 'n', 'x', 'o' }, 'S', '<Plug>(leap-backward)')
+      vim.keymap.set({ 'x', 'o' }, 'x', '<Plug>(leap-forward-till)')
+      vim.keymap.set({ 'x', 'o' }, 'X', '<Plug>(leap-backward-till)')
+      vim.keymap.set({ 'n' }, 'gs', '<Plug>(leap-from-window)')
     end,
   },
   --[[ cfg_lazy_cmp: Autocompletion ]]
