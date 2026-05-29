@@ -359,6 +359,7 @@ require('lazy').setup({
             .. ' --line-number'
             .. ' --max-columns=512'
             .. ' --smart-case'
+            .. ' --hidden'
             .. ' --vimgrep',
           file_ignore_patterns = {
             '^node_modules/',
