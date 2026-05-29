@@ -2,9 +2,8 @@
 
 ## Bootstrap
 
-1. `git clone https://github.com/He4eT/dotfiles.git ~/dotfiles`
-1. Run `./installPackages.sh`
-1. Run `./apply.sh`
+1. `sudo dnf install git`
+1. `git clone --recurse-submodules git@github.com:He4eT/dotfiles.git ~/dotfiles`
 1. Install [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh#basic-installation)
 
 ## GTK
@@ -16,13 +15,6 @@
     QT_QPA_PLATFORMTHEME=qt5ct
     XDG_CURRENT_DESKTOP=gnome
     ```
-
-## git
-
-1. `git config --global core.pager 'less -S'`
-1. `git config --global pull.rebase true`
-1. `git config user.email 'email'`
-1. `git config user.name 'name'`
 
 ## Telegram
 
