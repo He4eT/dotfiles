@@ -63,7 +63,6 @@ install_i3: install_base install_gui
 		xdotool \
 		xdpyinfo \
 		xev \
-		xkb-switch \
 		xkill \
 		xprop
 
