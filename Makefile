@@ -53,7 +53,6 @@ install_i3: install_base install_gui
 		dunst \
 		gpick \
 		i3 \
-		lxappearance \
 		picom \
 		polybar \
 		rofi \
