@@ -7,6 +7,7 @@ install_base:
 		cloc \
 		cmatrix \
 		fastfetch \
+		fzf \
 		git \
 		git-lfs \
 		htop \
