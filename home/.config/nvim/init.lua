@@ -616,7 +616,6 @@ require('lazy').setup({
   },
 }, {
   -- lazy.nvim options
-  lockfile = '~/dotfiles/nvim/lazy-lock.json',
   ui = {
     backdrop = 100,
     border = 'solid',
