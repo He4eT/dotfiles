@@ -65,7 +65,11 @@ install_i3: install_base install_gui
 		xkill \
 		xprop
 
-apply_configs:
+remove_default_configs:
+	rm -f ~/.zshrc
+	rm -f ~/.config/i3/config
+
+apply_configs: remove_default_configs
 	stow -Rvt ~ home
 
 desktop_i3: install_i3 apply_configs
