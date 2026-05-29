@@ -2,9 +2,11 @@
 
 ## Bootstrap
 
+1. Setup SSH keys
 1. `sudo dnf install git`
 1. `git clone --recurse-submodules git@github.com:He4eT/dotfiles.git ~/dotfiles`
 1. Install [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh#basic-installation)
+1. `make desktop_i3`
 
 ## GTK
 
