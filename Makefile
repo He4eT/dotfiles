@@ -68,7 +68,7 @@ install_i3: install_base install_gui
 
 remove_default_configs:
 	rm -f ~/.zshrc
-	rm -f ~/.config/i3/config
+	rm -fr ~/.config/i3/
 
 apply_configs: remove_default_configs
 	stow -Rvt ~ home
