@@ -66,5 +66,13 @@
 
 """ Copy'n'paste
 
-  nnoremap <silent><leader>y :call system('xclip -i -selection clipboard', @@)<cr>
-  vnoremap <silent><leader>y y:call system('xclip -i -selection clipboard', @@)<cr>
+  function! PushToClipboard()
+    if !empty($WAYLAND_DISPLAY)
+      call system('wl-copy', @")
+    else
+      call system('xclip -i -selection clipboard', @")
+    endif
+  endfunction
+
+  nnoremap <silent><leader>y :call PushToClipboard()<CR>
+  vnoremap <silent><leader>y y:call PushToClipboard()<CR>
