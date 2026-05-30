@@ -1,29 +1,3 @@
-""" Common
-
-  set encoding=utf-8
-  set nocompatible
-  set mouse=a
-  set scrolloff=0
-
-  set number
-  set fillchars=eob:\  " No more ~
-
-  set nowrap
-  set autoindent
-  set expandtab
-  set smarttab
-  set tabstop=2
-  set shiftwidth=2
-
-  let mapleader = ' '
-  set ttimeoutlen=10
-
-  nnoremap <SPACE> <Nop>
-
-  nnoremap <Esc> :nohl<CR>
-
-  filetype plugin indent on
-
 """ Plugins
   " :PlugInstall
   if empty(glob('~/.vim/autoload/plug.vim'))
@@ -36,7 +10,25 @@
     Plug 'widatama/vim-phoenix'
   call plug#end()
  
+""" Common
+
+  set mouse=a
+  set nowrap
+  set autoindent
+  set expandtab
+  set tabstop=2
+  set shiftwidth=2
+
+  filetype plugin indent on
+
+  let mapleader = ' '
+  nnoremap <SPACE> <Nop>
+  nnoremap <silent> <Esc> :nohlsearch<CR>
+
 """ Appearance
+
+  set number
+  set fillchars=eob:\ "
 
   colorscheme phoenix
   PhoenixOrange
@@ -49,33 +41,28 @@
 
 """ Statusline
 
-  hi StatusLine ctermbg=none ctermfg=white cterm=bold
-
   set noshowmode
   set laststatus=2
 
+  hi StatusLine ctermbg=none ctermfg=white cterm=bold
+  hi StatusLineDim ctermbg=none ctermfg=gray cterm=bold
+
   set statusline=
   set statusline+=%#StatusLine#
-  set statusline+=%{mode()}
-  set statusline+=\ " Space
-
-  set statusline+=%#LineNr#
-  set statusline+=%y
-
-  set statusline+=%#StatusLine#
+  set statusline+=[%{mode()}]
   set statusline+=\ %f
   set statusline+=\ %m
 
   set statusline+=%=
 
-  set statusline+=%#LineNr#
-  set statusline+=%{&fileformat}
+  set statusline+=%#StatusLineDim#
   set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+  set statusline+=\ %{&fileformat}
+  set statusline+=\ %y
 
   set statusline+=%#StatusLine#
-  set statusline+=\ %l:%c
   set statusline+=\ %p%%
-
+  set statusline+=\ %l:%c
 
 """ Copy'n'paste
 
