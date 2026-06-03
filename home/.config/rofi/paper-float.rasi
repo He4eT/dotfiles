@@ -16,7 +16,7 @@
 #window {
     border: @border-width;
     width: 800px;
-    height: 477px;
+    height: 466px;
 }
 
 #inputbar {
