@@ -329,13 +329,14 @@ require('lazy').setup({
           backdrop = 100,
           border = 'single',
           fullscreen = true,
+          ---@diagnostic disable-next-line: missing-fields
           preview = {
             border = 'single',
           },
           previewers = {
             builtin = {
               syntax = true,
-              syntax_limit_b = 1024 * 64, -- syntax limit (bytes), 0=nolimit
+              syntax_limit_b = 1024 * 64,
             },
           },
         },
