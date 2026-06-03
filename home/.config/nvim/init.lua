@@ -546,55 +546,23 @@ require('lazy').setup({
   --[[ cfg_lazy_treesitter: Highlight, edit, and navigate code ]]
   {
     'nvim-treesitter/nvim-treesitter',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-    },
     build = ':TSUpdate',
     config = function()
-      require('nvim-treesitter.configs').setup {
-        --[[ cfg_lazy_treesitter_langs ]]
-        ensure_installed = {
-          'vim',
-          'vimdoc',
-          'lua',
-          'javascript',
-          'typescript',
-          'tsx',
-          'vue',
-          'html',
-          'css',
-          'scss',
-        },
-        auto_install = true,
-        highlight = { enable = true },
-        indent = { enable = true },
-
-        --[[ cfg_lazy_treesitter_keymaps ]]
-
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = '<c-space>',
-            node_incremental = '<c-space>',
-            node_decremental = '<M-space>',
-            scope_incremental = '<c-s>',
-          },
-        },
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-              ['aa'] = '@parameter.outer',
-              ['ia'] = '@parameter.inner',
-              ['af'] = '@function.outer',
-              ['if'] = '@function.inner',
-              ['ac'] = '@class.outer',
-              ['ic'] = '@class.inner',
-            },
-          },
-        },
+      require('nvim-treesitter').setup()
+      --[[ cfg_lazy_treesitter_langs ]]
+      local ensure_installed = {
+        'vim',
+        'vimdoc',
+        'lua',
+        'javascript',
+        'typescript',
+        'tsx',
+        'vue',
+        'html',
+        'css',
+        'scss',
       }
+      require('nvim-treesitter').install(ensure_installed)
     end,
   },
   --[[ cfg_lazy_onedark: Colorscheme inspired by Atom ]]
