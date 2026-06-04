@@ -172,10 +172,10 @@ vim.keymap.set('n', '<leader>t', ':vs<CR><C-w>w:terminal<CR>i', { silent = true,
 vim.keymap.set('t', ';;', '<C-\\><C-n>', { silent = true, desc = 'Escape terminal mode' })
 
 -- Window managment
-vim.keymap.set('n', '<leader>q', ':bp|bd#<CR>', { desc = 'Close current buffer' })
+vim.keymap.set('n', '<leader>q', ':bp|bd#<CR>', { silent = true, desc = 'Close current buffer' })
 vim.keymap.set('n', '<leader>w', '<C-w>', { remap = true, desc = 'Alias for Ctrl + w' })
 vim.keymap.set('n', '<leader>k', '<C-w>w', { remap = true, desc = 'Jump to the next window' })
-vim.keymap.set('n', '<leader>K', ':vs<CR><C-w>w', { desc = 'Split window to the right' })
+vim.keymap.set('n', '<leader>K', ':vs<CR><C-w>w', { silent = true, desc = 'Split window to the right' })
 
 -- Navigation
 vim.keymap.set('n', '<leader>h', '<C-o>', { desc = 'Back' })
