@@ -35,6 +35,9 @@ npx @johnnymorganz/stylua-bin ./init.lua
 
 --[[ cfg_options: See `:help vim.o` ]]
 
+-- Enable faster startup by caching compiled Lua modules
+vim.loader.enable()
+
 -- Raise a dialog asking if you wish to save the current file(s)
 vim.o.confirm = true
 
